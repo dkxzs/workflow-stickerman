@@ -1,0 +1,1475 @@
+{
+  "project_id": "video-001",
+  "title": "Why You Keep Checking Your Phone (Even When There's Nothing New)",
+  "resolution": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30
+  },
+  "global_settings": {
+    "background_color": "#F7F5F0",
+    "primary_line_color": "#212529",
+    "font_family": "Arial, Helvetica, sans-serif"
+  },
+  "scenes": [
+    {
+      "scene_id": "SCENE_001",
+      "narration_text": "You unlock your phone.",
+      "estimated_duration_sec": 2.2,
+      "visual": {
+        "description": "Stickman stands on the left at x=0.25 holding a smartphone. Screen illuminates with bright phone glow. Desk edge and room horizon line visible. UI badge displays 'PHONE UNLOCK'.",
+        "stickman_pose": "idle_neutral",
+        "action": "unlock_phone_tap",
+        "expression": "neutral_curious",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "smartphone_held",
+          "phone_glow",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": "phone_unlock",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.23,
+      "audio_file": "audio_scenes/SCENE_001.mp3"
+    },
+    {
+      "scene_id": "SCENE_002",
+      "narration_text": "No messages.",
+      "estimated_duration_sec": 2.0,
+      "visual": {
+        "description": "Camera zooms in slightly. Stickman at x=0.25 looks down at phone. On right side (x=0.70), UI card pops in with clear text '0 MESSAGES' and empty inbox icon. Desk edge in background.",
+        "stickman_pose": "thinking",
+        "action": "inspect_inbox_empty",
+        "expression": "flat_skeptical",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "smartphone_held",
+          "card_zero_messages",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 1.99,
+      "audio_file": "audio_scenes/SCENE_002.mp3"
+    },
+    {
+      "scene_id": "SCENE_003",
+      "narration_text": "No notifications.",
+      "estimated_duration_sec": 2.3,
+      "visual": {
+        "description": "Stickman stays at x=0.25. On the right, a bell icon appears with a crimson slash and prominent keyword 'NO NOTIFS'. Desk edge remains visible.",
+        "stickman_pose": "thinking",
+        "action": "stare_empty_notification_tray",
+        "expression": "mild_disappointment",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "smartphone_held",
+          "badge_no_notifs",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946"
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.35,
+      "audio_file": "audio_scenes/SCENE_003.mp3"
+    },
+    {
+      "scene_id": "SCENE_004",
+      "narration_text": "Nothing.",
+      "estimated_duration_sec": 1.9,
+      "visual": {
+        "description": "Close-up. Stickman at x=0.25 stares blankly with deadpan eyes. A bold gray label 'NOTHING' hovers over the blank glowing phone screen. Window silhouette visible in background.",
+        "stickman_pose": "idle_neutral",
+        "action": "deadpan_stare_screen",
+        "expression": "deadpan_blank",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "smartphone_blank",
+          "label_nothing",
+          "window_silhouette",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "close_up",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#212529"
+      },
+      "audio": {
+        "sfx": null,
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 1.87,
+      "audio_file": "audio_scenes/SCENE_004.mp3"
+    },
+    {
+      "scene_id": "SCENE_005",
+      "narration_text": "You lock it.",
+      "estimated_duration_sec": 1.9,
+      "visual": {
+        "description": "Stickman at x=0.25 clicks phone side button. Screen snaps black with card 'SCREEN LOCKED'. Desk edge and room horizon line visible.",
+        "stickman_pose": "idle_neutral",
+        "action": "lock_phone_click",
+        "expression": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "smartphone_off",
+          "card_screen_locked",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": "phone_lock",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 1.87,
+      "audio_file": "audio_scenes/SCENE_005.mp3"
+    },
+    {
+      "scene_id": "SCENE_006",
+      "narration_text": "Five seconds later...",
+      "estimated_duration_sec": 2.3,
+      "visual": {
+        "description": "Stickman stands at x=0.25 tapping foot. On the right, a stylized countdown clock prop animates rapidly with text '5 SECONDS'. Desk edge in background.",
+        "stickman_pose": "thinking",
+        "action": "wait_impatiently",
+        "expression": "bored_waiting",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "clock_countdown",
+          "badge_5_seconds",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703"
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.28,
+      "audio_file": "audio_scenes/SCENE_006.mp3"
+    },
+    {
+      "scene_id": "SCENE_007",
+      "narration_text": "you unlock it again.",
+      "estimated_duration_sec": 2.1,
+      "visual": {
+        "description": "Stickman at x=0.25 snaps phone up; bright screen phone glow illuminates character. Badge displays 'RE-OPENED'. Desk edge in background.",
+        "stickman_pose": "idle_neutral",
+        "action": "rapid_relock_unlock",
+        "expression": "wide_eyed_expectant",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "smartphone_glow",
+          "phone_glow",
+          "badge_reopened",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703"
+      },
+      "audio": {
+        "sfx": "phone_unlock",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.14,
+      "audio_file": "audio_scenes/SCENE_007.mp3"
+    },
+    {
+      "scene_id": "SCENE_008",
+      "narration_text": "Congratulations.",
+      "estimated_duration_sec": 2.2,
+      "visual": {
+        "description": "Stickman stands at x=0.75 looking directly at camera with sarcastic smirk, clapping slowly. Confetti ribbon hangs frozen on left with label 'GREAT JOB'. Desk edge in background.",
+        "stickman_pose": "celebrate_win",
+        "action": "sarcastic_slow_clap",
+        "expression": "sarcastic_smirk",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "badge_great_job",
+          "sarcastic_confetti",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703"
+      },
+      "audio": {
+        "sfx": "dry_clap",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.21,
+      "audio_file": "audio_scenes/SCENE_008.mp3"
+    },
+    {
+      "scene_id": "SCENE_009",
+      "narration_text": "You just checked absolutely nothing.",
+      "estimated_duration_sec": 2.9,
+      "visual": {
+        "description": "Camera shake punchline. Stickman at x=0.25 points dramatically to a giant floating red badge on right displaying '0 NEW UPDATES'. Desk edge and window silhouette.",
+        "stickman_pose": "pointing_target",
+        "action": "point_to_empty_badge",
+        "expression": "deadpan_disbelief",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "badge_zero_updates",
+          "desk_edge",
+          "window_silhouette",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "close_up",
+          "movement": "shake"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946"
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.9,
+      "audio_file": "audio_scenes/SCENE_009.mp3"
+    },
+    {
+      "scene_id": "SCENE_010",
+      "narration_text": "So why do we keep doing this?",
+      "estimated_duration_sec": 2.6,
+      "visual": {
+        "description": "Stickman at x=0.25 scratches chin in thinking pose. On right side, a large stylized question mark floats with keyword 'WHY REPEAT?'. Floor horizon line in background.",
+        "stickman_pose": "thinking",
+        "action": "chin_scratch_questioning",
+        "expression": "puzzled_curiosity",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "floating_question_mark",
+          "card_why_repeat",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.62,
+      "audio_file": "audio_scenes/SCENE_010.mp3"
+    },
+    {
+      "scene_id": "SCENE_011",
+      "narration_text": "Your brain learns that checking your phone",
+      "estimated_duration_sec": 3.0,
+      "visual": {
+        "description": "Stickman at x=0.25 points toward an elegant minimalist 2D brain vector diagram on the right (x=0.70). Brain diagram features neural pathway label 'DOPAMINE LOOP'. Desk edge visible.",
+        "stickman_pose": "pointing_target",
+        "action": "present_brain_diagram",
+        "expression": "explaining_engaged",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "minimalist_brain_vector",
+          "label_dopamine_loop",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": "ding",
+        "bgm_mood": "upbeat"
+      },
+      "actual_duration_sec": 3.05,
+      "audio_file": "audio_scenes/SCENE_011.mp3"
+    },
+    {
+      "scene_id": "SCENE_012",
+      "narration_text": "might bring something interesting.",
+      "estimated_duration_sec": 2.6,
+      "visual": {
+        "description": "Brain vector diagram lights up with a warm gold glow. Stickman at x=0.25 looks up as a glowing idea lightbulb and badge 'POTENTIAL REWARD' pop in on the right.",
+        "stickman_pose": "idea_lightbulb",
+        "action": "gesture_reward_glow",
+        "expression": "enthusiastic",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "lightbulb_glow",
+          "badge_potential_reward",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      },
+      "actual_duration_sec": 2.59,
+      "audio_file": "audio_scenes/SCENE_012.mp3"
+    },
+    {
+      "scene_id": "SCENE_013",
+      "narration_text": "A message.",
+      "estimated_duration_sec": 1.9,
+      "visual": {
+        "description": "Stickman at x=0.25 gestures to a bright blue chat bubble popping up on the right with keyword 'NEW MESSAGE' and 3 preview dots. Desk edge in background.",
+        "stickman_pose": "pointing_target",
+        "action": "present_message_card",
+        "expression": "pleasant_smile",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "card_new_message",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      },
+      "actual_duration_sec": 1.87,
+      "audio_file": "audio_scenes/SCENE_013.mp3"
+    },
+    {
+      "scene_id": "SCENE_014",
+      "narration_text": "A funny video.",
+      "estimated_duration_sec": 2.0,
+      "visual": {
+        "description": "Stickman at x=0.25 smiles broadly. Next card pops in on the right: a video player frame with a play button and label 'FUNNY VIDEO'. Horizon line visible.",
+        "stickman_pose": "idle_neutral",
+        "action": "chuckle_and_point",
+        "expression": "laughing_smile",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "card_funny_video",
+          "play_icon",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      },
+      "actual_duration_sec": 2.04,
+      "audio_file": "audio_scenes/SCENE_014.mp3"
+    },
+    {
+      "scene_id": "SCENE_015",
+      "narration_text": "Some unexpected news.",
+      "estimated_duration_sec": 2.5,
+      "visual": {
+        "description": "Third card pops in with exclamation accent and headline label 'FRESH NEWS'. Stickman at x=0.25 raises eyebrows with curiosity. Desk edge visible.",
+        "stickman_pose": "thinking",
+        "action": "eyebrow_raise_curious",
+        "expression": "surprised_interest",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "card_fresh_news",
+          "exclamation_badge",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      },
+      "actual_duration_sec": 2.54,
+      "audio_file": "audio_scenes/SCENE_015.mp3"
+    },
+    {
+      "scene_id": "SCENE_016",
+      "narration_text": "And because you never know when something will appear,",
+      "estimated_duration_sec": 3.3,
+      "visual": {
+        "description": "Stickman shifts to x=0.25. On the right side, an animated rolling slot-machine tumbler spins between empty symbols and star icons, labeled 'UNPREDICTABLE TIMING'.",
+        "stickman_pose": "thinking",
+        "action": "watch_spinning_tumbler",
+        "expression": "intrigued",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "slot_tumbler_card",
+          "label_unpredictable",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703"
+      },
+      "audio": {
+        "sfx": "slot_lever",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 3.34,
+      "audio_file": "audio_scenes/SCENE_016.mp3"
+    },
+    {
+      "scene_id": "SCENE_017",
+      "narration_text": "checking becomes a habit.",
+      "estimated_duration_sec": 2.4,
+      "visual": {
+        "description": "On the right, a circular loop arrow connects 'CUE -> ACTION -> REWARD' with keyword 'HABIT LOOP'. Stickman at x=0.25 nods in understanding. Desk edge in background.",
+        "stickman_pose": "pointing_target",
+        "action": "trace_habit_loop",
+        "expression": "knowing_nod",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "diagram_habit_loop",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.35,
+      "audio_file": "audio_scenes/SCENE_017.mp3"
+    },
+    {
+      "scene_id": "SCENE_018",
+      "narration_text": "Sometimes you get a reward.",
+      "estimated_duration_sec": 2.5,
+      "visual": {
+        "description": "Stickman at x=0.25 smiles. A green card slides in on the right with a gold star and clear bold keyword 'WIN REWARD'. Desk edge visible.",
+        "stickman_pose": "celebrate_win",
+        "action": "celebrate_reward_card",
+        "expression": "happy_smile",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "card_win_reward",
+          "gold_star",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "ding",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.52,
+      "audio_file": "audio_scenes/SCENE_018.mp3"
+    },
+    {
+      "scene_id": "SCENE_019",
+      "narration_text": "Sometimes you get nothing.",
+      "estimated_duration_sec": 2.4,
+      "visual": {
+        "description": "Beside the green card, a dark grey card drops in with a simple red cross and keyword 'ZERO REWARD'. Stickman drops his arms, sighing. Desk edge visible.",
+        "stickman_pose": "idle_neutral",
+        "action": "shrug_disappointment",
+        "expression": "disappointed_sigh",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "card_zero_reward",
+          "grey_cross",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946"
+      },
+      "audio": {
+        "sfx": "thud",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.38,
+      "audio_file": "audio_scenes/SCENE_019.mp3"
+    },
+    {
+      "scene_id": "SCENE_020",
+      "narration_text": "But that tiny possibility",
+      "estimated_duration_sec": 2.6,
+      "visual": {
+        "description": "The green card pulses with gold light. A glowing percentage badge '1% CHANCE' hovers above it. Stickman at x=0.25 leans in with fascinated eyes.",
+        "stickman_pose": "thinking",
+        "action": "lean_in_fascinated",
+        "expression": "hypnotic_curiosity",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "badge_one_percent",
+          "gold_sparkle",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      },
+      "actual_duration_sec": 2.64,
+      "audio_file": "audio_scenes/SCENE_020.mp3"
+    },
+    {
+      "scene_id": "SCENE_021",
+      "narration_text": "keeps pulling you back.",
+      "estimated_duration_sec": 2.2,
+      "visual": {
+        "description": "A stylized red magnet prop on the right pulls dynamic magnetic force lines toward Stickman. Stickman at x=0.25 leans involuntarily to the right with surprised eyes.",
+        "stickman_pose": "stressed_headache",
+        "action": "pulled_by_magnet",
+        "expression": "surprised_pull",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "magnet_prop",
+          "magnetic_field_lines",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946"
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      },
+      "actual_duration_sec": 2.23,
+      "audio_file": "audio_scenes/SCENE_021.mp3"
+    },
+    {
+      "scene_id": "SCENE_022",
+      "narration_text": "Eventually,",
+      "estimated_duration_sec": 1.9,
+      "visual": {
+        "description": "Wide establishing shot. Stickman sits at a clean wooden desk silhouette at x=0.25 under a window silhouette with gentle sunlight. Horizon line grounds the room.",
+        "stickman_pose": "idle_neutral",
+        "action": "sit_at_desk_calm",
+        "expression": "calm_neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_silhouette",
+          "window_silhouette",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "wide",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": null,
+        "bgm_mood": "calm"
+      },
+      "actual_duration_sec": 1.87,
+      "audio_file": "audio_scenes/SCENE_022.mp3"
+    },
+    {
+      "scene_id": "SCENE_023",
+      "narration_text": "you don't even need a notification.",
+      "estimated_duration_sec": 2.7,
+      "visual": {
+        "description": "Camera moves to medium. On the right (x=0.75), a bell icon floats with a soft gray cross-out badge displaying 'ZERO PINGS'. Stickman at x=0.25 rests chin in hand.",
+        "stickman_pose": "thinking",
+        "action": "rest_chin_idle",
+        "expression": "drifting_thought",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "badge_zero_pings",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "calm"
+      },
+      "actual_duration_sec": 2.69,
+      "audio_file": "audio_scenes/SCENE_023.mp3"
+    },
+    {
+      "scene_id": "SCENE_024",
+      "narration_text": "A quiet moment, a little boredom,",
+      "estimated_duration_sec": 3.0,
+      "visual": {
+        "description": "Subtle thought cloud overhead with keyword 'A LITTLE BORED'. Stickman taps finger on desk edge at x=0.25. Phone rests innocently on the right side of desk.",
+        "stickman_pose": "idle_neutral",
+        "action": "tap_desk_bored",
+        "expression": "bored_stare",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "thought_bubble_bored",
+          "smartphone_desk",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703"
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      },
+      "actual_duration_sec": 3.02,
+      "audio_file": "audio_scenes/SCENE_024.mp3"
+    },
+    {
+      "scene_id": "SCENE_025",
+      "narration_text": "and suddenly your hand is reaching for your phone.",
+      "estimated_duration_sec": 3.5,
+      "visual": {
+        "description": "Motion line speed streaks! Stickman's arm extends reflexively toward the phone on the desk. Phone screen emits a soft phone glow. Desk edge visible.",
+        "stickman_pose": "running_hurry",
+        "action": "reflexive_arm_reach",
+        "expression": "compulsive_reach",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "speed_streaks",
+          "smartphone_glow",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946"
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      },
+      "actual_duration_sec": 3.46,
+      "audio_file": "audio_scenes/SCENE_025.mp3"
+    },
+    {
+      "scene_id": "SCENE_026",
+      "narration_text": "Your brain basically says:",
+      "estimated_duration_sec": 2.6,
+      "visual": {
+        "description": "Stickman at x=0.25 points up to a cartoon speech bubble sprouting from head labeled 'INTERNAL DIALOGUE'. Desk edge and room horizon line visible.",
+        "stickman_pose": "pointing_target",
+        "action": "point_to_brain_speech_bubble",
+        "expression": "smirking_knowing",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "brain_speech_bubble",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.64,
+      "audio_file": "audio_scenes/SCENE_026.mp3"
+    },
+    {
+      "scene_id": "SCENE_027",
+      "narration_text": "\"Let's see if the internet has changed",
+      "estimated_duration_sec": 3.0,
+      "visual": {
+        "description": "Stickman holds phone at x=0.25. On the right, a stylized 2D globe wireframe vector spins with keyword 'INTERNET FEED'. Room horizon line in background.",
+        "stickman_pose": "thinking",
+        "action": "inspect_spinning_feed",
+        "expression": "curious_squint",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "smartphone_held",
+          "spinning_globe_vector",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.95,
+      "audio_file": "audio_scenes/SCENE_027.mp3"
+    },
+    {
+      "scene_id": "SCENE_028",
+      "narration_text": "in the last twelve seconds.\"",
+      "estimated_duration_sec": 2.6,
+      "visual": {
+        "description": "Close-up. Stickman's eyes widen with comedic shock. Giant digital stopwatch badge on right displays '12 SECONDS' with tiny question marks. Desk edge visible.",
+        "stickman_pose": "shocked_fall",
+        "action": "eyes_wide_stopwatch",
+        "expression": "shocked_disbelief",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "badge_12_seconds",
+          "question_marks",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "close_up",
+          "movement": "shake"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946"
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.64,
+      "audio_file": "audio_scenes/SCENE_028.mp3"
+    },
+    {
+      "scene_id": "SCENE_029",
+      "narration_text": "The trick isn't necessarily",
+      "estimated_duration_sec": 2.6,
+      "visual": {
+        "description": "Stickman stands upright at x=0.25, raising a firm hand in a calm 'halt' gesture. Desk edge and wall shadow ground the character.",
+        "stickman_pose": "idle_neutral",
+        "action": "halt_hand_gesture",
+        "expression": "calm_authoritative",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": null,
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.57,
+      "audio_file": "audio_scenes/SCENE_029.mp3"
+    },
+    {
+      "scene_id": "SCENE_030",
+      "narration_text": "to throw your phone into the ocean.",
+      "estimated_duration_sec": 2.8,
+      "visual": {
+        "description": "Humorous visual on right side: a stylized wave icon with a phone splashing into water, stamped with a bold red circle-backslash 'NO OCEANS'. Stickman at x=0.25 shakes head.",
+        "stickman_pose": "idle_neutral",
+        "action": "shake_head_smiling",
+        "expression": "amused_smile",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "card_ocean_splash",
+          "stamp_no_oceans",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946"
+      },
+      "audio": {
+        "sfx": "water_splash",
+        "bgm_mood": "curious"
+      },
+      "actual_duration_sec": 2.81,
+      "audio_file": "audio_scenes/SCENE_030.mp3"
+    },
+    {
+      "scene_id": "SCENE_031",
+      "narration_text": "Start by turning off",
+      "estimated_duration_sec": 2.4,
+      "visual": {
+        "description": "Stickman at x=0.25 reaches toward a modern clean UI settings card that slides in from right. Card displays icon of a phone settings gear. Desk edge visible.",
+        "stickman_pose": "pointing_target",
+        "action": "reach_settings_toggle",
+        "expression": "focused_directing",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "card_settings_menu",
+          "gear_icon",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "upbeat"
+      },
+      "actual_duration_sec": 2.42,
+      "audio_file": "audio_scenes/SCENE_031.mp3"
+    },
+    {
+      "scene_id": "SCENE_032",
+      "narration_text": "non-essential notifications",
+      "estimated_duration_sec": 2.8,
+      "visual": {
+        "description": "On the right (x=0.70), UI toggle switch animates from ON to OFF with a crisp green/gray flip and label 'NOTIFS OFF'. Stickman at x=0.25 smiles approvingly. Desk edge visible.",
+        "stickman_pose": "idea_lightbulb",
+        "action": "toggle_switch_off",
+        "expression": "pleased_approval",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "card_toggle_switch",
+          "badge_notifs_off",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "toggle_click",
+        "bgm_mood": "upbeat"
+      },
+      "actual_duration_sec": 2.78,
+      "audio_file": "audio_scenes/SCENE_032.mp3"
+    },
+    {
+      "scene_id": "SCENE_033",
+      "narration_text": "and checking messages at specific times.",
+      "estimated_duration_sec": 3.4,
+      "visual": {
+        "description": "Next to the card, a wall clock prop appears with prominent green scheduled time blocks and badge 'SET SCHEDULE'. Stickman at x=0.25 points to the schedule.",
+        "stickman_pose": "pointing_target",
+        "action": "point_to_scheduled_clock",
+        "expression": "confident",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "clock_schedule_card",
+          "badge_set_schedule",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "ding",
+        "bgm_mood": "upbeat"
+      },
+      "actual_duration_sec": 3.41,
+      "audio_file": "audio_scenes/SCENE_033.mp3"
+    },
+    {
+      "scene_id": "SCENE_034",
+      "narration_text": "One study found",
+      "estimated_duration_sec": 2.2,
+      "visual": {
+        "description": "Stickman at x=0.25 presents a neat academic citation badge on the right displaying '2019 STUDY' and a clean research paper outline. Horizon line grounds the scene.",
+        "stickman_pose": "pointing_target",
+        "action": "present_study_card",
+        "expression": "scholarly_confident",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "badge_2019_study",
+          "paper_document_prop",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      },
+      "actual_duration_sec": 2.23,
+      "audio_file": "audio_scenes/SCENE_034.mp3"
+    },
+    {
+      "scene_id": "SCENE_035",
+      "narration_text": "that grouping notifications",
+      "estimated_duration_sec": 2.7,
+      "visual": {
+        "description": "Floating notification pings gather smoothly and compress into a single organized container labeled 'BATCH SYSTEM'. Stickman at x=0.25 watches with satisfaction.",
+        "stickman_pose": "idle_neutral",
+        "action": "watch_batch_compression",
+        "expression": "satisfied_nod",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "card_batch_system",
+          "compression_arrows",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "upbeat"
+      },
+      "actual_duration_sec": 2.71,
+      "audio_file": "audio_scenes/SCENE_035.mp3"
+    },
+    {
+      "scene_id": "SCENE_036",
+      "narration_text": "into three daily batches",
+      "estimated_duration_sec": 2.6,
+      "visual": {
+        "description": "Three neat geometric boxes pop in horizontally across the right zone (x=0.55 to 0.90): 'BATCH 9 AM', 'BATCH 1 PM', 'BATCH 6 PM'. Stickman at x=0.25 gestures across all three.",
+        "stickman_pose": "pointing_target",
+        "action": "gesture_three_boxes",
+        "expression": "confident_presentation",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "box_batch_9am",
+          "box_batch_1pm",
+          "box_batch_6pm",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "wide",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "pop_pop_pop",
+        "bgm_mood": "upbeat"
+      },
+      "actual_duration_sec": 2.64,
+      "audio_file": "audio_scenes/SCENE_036.mp3"
+    },
+    {
+      "scene_id": "SCENE_037",
+      "narration_text": "helped participants feel more focused",
+      "estimated_duration_sec": 3.1,
+      "visual": {
+        "description": "Stickman at x=0.25 stands upright with upright posture. On the right, a target bullseye graphic appears with keyword 'DEEP FOCUS' and an upward trend arrow.",
+        "stickman_pose": "celebrate_win",
+        "action": "deep_breath_focused",
+        "expression": "calm_clarity",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "target_deep_focus",
+          "trend_arrow_up",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "ding",
+        "bgm_mood": "triumphant"
+      },
+      "actual_duration_sec": 3.05,
+      "audio_file": "audio_scenes/SCENE_037.mp3"
+    },
+    {
+      "scene_id": "SCENE_038",
+      "narration_text": "and in control.",
+      "estimated_duration_sec": 2.0,
+      "visual": {
+        "description": "Beside the target, a badge displays 'IN CONTROL' with a solid teal checkmark. Stickman at x=0.25 crosses arms with confident smile. Horizon line grounds the room.",
+        "stickman_pose": "celebrate_win",
+        "action": "cross_arms_confident",
+        "expression": "proud_smile",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "badge_in_control",
+          "teal_checkmark",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "triumphant"
+      },
+      "actual_duration_sec": 1.99,
+      "audio_file": "audio_scenes/SCENE_038.mp3"
+    },
+    {
+      "scene_id": "SCENE_039",
+      "narration_text": "Because sometimes,",
+      "estimated_duration_sec": 2.1,
+      "visual": {
+        "description": "Camera pulls back smoothly to a wide shot. Stickman at x=0.25 stands calmly next to a clean minimalist desk silhouette under a soft window frame silhouette.",
+        "stickman_pose": "idle_neutral",
+        "action": "stand_peaceful_desk",
+        "expression": "gentle_smile",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_silhouette",
+          "window_silhouette",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "wide",
+          "movement": "zoom_out"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": null,
+        "bgm_mood": "calm"
+      },
+      "actual_duration_sec": 2.14,
+      "audio_file": "audio_scenes/SCENE_039.mp3"
+    },
+    {
+      "scene_id": "SCENE_040",
+      "narration_text": "the most interesting thing",
+      "estimated_duration_sec": 2.3,
+      "visual": {
+        "description": "Camera frames stickman at x=0.25 looking toward a smartphone placed neatly face-down on the wooden desk edge at x=0.70. Subtle phone glow aura radiates around it.",
+        "stickman_pose": "thinking",
+        "action": "glance_at_face_down_phone",
+        "expression": "reflective_peace",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "smartphone_face_down",
+          "phone_glow",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703"
+      },
+      "audio": {
+        "sfx": null,
+        "bgm_mood": "calm"
+      },
+      "actual_duration_sec": 2.33,
+      "audio_file": "audio_scenes/SCENE_040.mp3"
+    },
+    {
+      "scene_id": "SCENE_041",
+      "narration_text": "your phone can show you...",
+      "estimated_duration_sec": 2.4,
+      "visual": {
+        "description": "Stickman at x=0.25 turns head to face the viewer. Floating minimalist card on right displays keyword 'QUIET PHONE' with soft glowing outlines.",
+        "stickman_pose": "idle_neutral",
+        "action": "face_viewer_calm",
+        "expression": "warm_sincere",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "card_quiet_phone",
+          "desk_edge",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "subtle_chime",
+        "bgm_mood": "triumphant"
+      },
+      "actual_duration_sec": 2.35,
+      "audio_file": "audio_scenes/SCENE_041.mp3"
+    },
+    {
+      "scene_id": "SCENE_042",
+      "narration_text": "is a screen you haven't opened.",
+      "estimated_duration_sec": 2.6,
+      "visual": {
+        "description": "Closing shot. Stickman at x=0.75 smiles warmly with arms relaxed. On the left (x=0.25), the face-down phone rests calmly on desk edge with clean badge 'SCREEN UNOPENED'. Room horizon line grounds scene.",
+        "stickman_pose": "celebrate_win",
+        "action": "peaceful_warm_smile",
+        "expression": "content_peace",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "smartphone_face_down",
+          "badge_screen_unopened",
+          "desk_edge",
+          "window_silhouette",
+          "horizon_line"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "calm_chime",
+        "bgm_mood": "triumphant"
+      },
+      "actual_duration_sec": 2.59,
+      "audio_file": "audio_scenes/SCENE_042.mp3"
+    }
+  ]
+}

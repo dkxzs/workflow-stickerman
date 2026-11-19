@@ -1,0 +1,243 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StoryboardSchema",
+  "description": "Schema chuẩn xác thực cấu trúc phân cảnh của YouTube Content Engine",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "pattern": "^video-[0-9]{3,}$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "resolution": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "enum": [
+            1920,
+            1080,
+            3840
+          ]
+        },
+        "height": {
+          "type": "integer",
+          "enum": [
+            1080,
+            1920,
+            2160
+          ]
+        },
+        "fps": {
+          "type": "integer",
+          "enum": [
+            30,
+            60
+          ]
+        }
+      },
+      "required": [
+        "width",
+        "height",
+        "fps"
+      ]
+    },
+    "global_settings": {
+      "type": "object",
+      "properties": {
+        "background_color": {
+          "type": "string"
+        },
+        "primary_line_color": {
+          "type": "string"
+        },
+        "font_family": {
+          "type": "string"
+        }
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scene_id": {
+            "type": "string",
+            "pattern": "^SCENE_[0-9]{3,}[A-Z]?$"
+          },
+          "narration_text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "estimated_duration_sec": {
+            "type": "number",
+            "minimum": 0.5
+          },
+          "actual_duration_sec": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "audio_file": {
+            "type": "string"
+          },
+          "visual": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "stickman_pose": {
+                "type": "string",
+                "enum": [
+                  "idle_neutral",
+                  "thinking",
+                  "idea_lightbulb",
+                  "stressed_headache",
+                  "running_hurry",
+                  "pointing_target",
+                  "shocked_fall",
+                  "celebrate_win"
+                ]
+              },
+              "action": {
+                "type": "string"
+              },
+              "expression": {
+                "type": "string"
+              },
+              "position": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0
+                  },
+                  "anchor": {
+                    "type": "string",
+                    "enum": [
+                      "top_left",
+                      "top_center",
+                      "top_right",
+                      "center_left",
+                      "center",
+                      "center_right",
+                      "bottom_left",
+                      "bottom_center",
+                      "bottom_right"
+                    ]
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "anchor"
+                ]
+              },
+              "props": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "background": {
+                "type": "string"
+              },
+              "camera": {
+                "type": "object",
+                "properties": {
+                  "framing": {
+                    "type": "string",
+                    "enum": [
+                      "wide",
+                      "medium",
+                      "close_up"
+                    ]
+                  },
+                  "movement": {
+                    "type": "string",
+                    "enum": [
+                      "static",
+                      "zoom_in",
+                      "zoom_out",
+                      "pan_left",
+                      "pan_right",
+                      "shake"
+                    ]
+                  }
+                },
+                "required": [
+                  "framing",
+                  "movement"
+                ]
+              },
+              "transition": {
+                "type": "string"
+              },
+              "accent_color_focus": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "stickman_pose",
+              "action",
+              "camera",
+              "position"
+            ]
+          },
+          "audio": {
+            "type": "object",
+            "properties": {
+              "sfx": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "bgm_mood": {
+                "type": "string",
+                "enum": [
+                  "tense",
+                  "curious",
+                  "upbeat",
+                  "calm",
+                  "dramatic",
+                  "triumphant"
+                ]
+              }
+            },
+            "required": [
+              "bgm_mood"
+            ]
+          }
+        },
+        "required": [
+          "scene_id",
+          "narration_text",
+          "estimated_duration_sec",
+          "actual_duration_sec",
+          "visual",
+          "audio"
+        ]
+      }
+    }
+  },
+  "required": [
+    "project_id",
+    "title",
+    "resolution",
+    "scenes"
+  ]
+}

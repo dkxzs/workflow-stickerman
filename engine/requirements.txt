@@ -1,0 +1,25 @@
+# ==============================================================================
+# YouTube Content Engine - Dependencies
+#
+# LƯU Ý QUAN TRỌNG:
+# 1. Các thư viện dưới đây CHƯA ĐƯỢC CÀI ĐẶT.
+# 2. Đây chỉ là danh sách dự kiến tham khảo phục vụ giai đoạn phát triển Engine tiếp theo.
+# ==============================================================================
+
+# -- Text-to-Speech (Dự kiến) --
+# edge-tts>=6.1.0
+# gTTS>=2.5.0
+
+# -- Xử lý âm thanh & Video (Dự kiến) --
+# moviepy>=1.0.3
+# pydub>=0.25.1
+# numpy>=1.24.0
+
+# -- Xử lý đồ họa & Vector (Dự kiến) --
+# Pillow>=10.0.0
+# svgwrite>=1.4.3
+# cairoSVG>=2.7.0
+
+# -- Tiện ích & Xác thực (Dự kiến) --
+# jsonschema>=4.20.0
+# python-dotenv>=1.0.0
