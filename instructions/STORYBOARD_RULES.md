@@ -38,6 +38,19 @@ Every visual element, character pose, camera movement, and prop must serve the n
 
 ### 2.2 Explain, Demonstrate, and Reinforce
 Visuals should not merely decorate the screen; they must add cognitive clarity:
+
+### 2.3 Strict Physical Coherence & Environmental Context (Quy Tắc Bối Cảnh & Tính Nhất Quán Vật Lý Tuyệt Đối)
+Mọi phân cảnh phải tuân thủ nghiêm ngặt tính logic thực tế và ăn khớp 100% với kịch bản:
+1. **Bối cảnh môi trường xác thực (Environmental Staging)**:
+   - Nếu kịch bản nói về ở nhà / làm việc: Phải có đường nét căn phòng (tường, khung cửa sổ có ánh sáng, mặt bàn làm việc, ghế ngồi). CẤM vẽ nhân vật lơ lửng trong không gian trống.
+   - Nếu kịch bản nói về leo núi, đi bộ, chạy xe: Phải có cảnh vật tương ứng (dãy núi, con đường, hàng cây, bầu trời).
+2. **Vị trí vật lý của đồ vật (Physical Object Placement)**:
+   - Các đồ vật như cốc nước, máy tính, điện thoại, sách vở phải nằm ĐÀNG HOÀNG TRÊN MẶT BÀN (Tabletop).
+   - **CẤM TUYỆT ĐỐI**: Để cốc nước hay điện thoại nằm dưới sàn nhà/dưới chân nhân vật một cách phi lý.
+3. **Tính liên tục của đạo cụ (Object Continuity & No Duplication)**:
+   - **Không nhân đôi đạo cụ**: Nếu nhân vật đang cầm điện thoại trên tay thì trên mặt bàn KHÔNG ĐƯỢC có chiếc điện thoại thứ 2.
+   - **Không biến mất đột ngột**: Nếu cảnh trước nhân vật đang cầm điện thoại, cảnh sau vẫn phải tiếp tục cầm hoặc có động tác hạ tay đặt xuống bàn. Cấm để đạo cụ bốc hơi vô cớ giữa các giây.
+   - **Căn chỉnh UI/Icon chuẩn xác**: Mọi biểu tượng trong Information Card phải căn chính xác 100% vào tâm hình tròn chứa nó, không được lệch góc hay đè chữ.
 - **Explain**: Clarify unfamiliar relationships or abstract systems (e.g., displaying cause-and-effect flowcharts or side-by-side scale comparisons).
 - **Demonstrate**: Show the Stickman character performing an action or testing a scenario described by the narrator.
 - **Reinforce**: Punctuate emotional beats, surprising facts, or punchlines with synchronized character reactions and sound effects.
@@ -68,6 +81,19 @@ All storyboards must strictly enforce four core production rules to guarantee hi
 2. **Spatial Safe Zones**: Whenever UI cards, charts, or props appear, the stickman must shift to `x = 25%` (`x = 0.25`, left) or `x = 75%` (`x = 0.75`, right), reserving the remaining 55% of the frame for visual elements. Never overlap any prop or card over the character's head.
 3. **Meaningful Keywords Over Placeholder Lines**: All UI cards, charts, and labels must display concise, readable keywords (1–3 words) instead of meaningless horizontal placeholder bars.
 4. **Minimalist Environmental Depth**: Every scene must include at least one subtle background prop (desk edge, window frame, phone screen glow, floor horizon line) rendered on a warm off-white textured background (`#F7F5F0`) rather than pure `#FFFFFF`.
+
+### 2.8 Meticulous Character Acting Beats & Micro-Expressions (Diễn xuất & Sắc thái biểu cảm)
+Nhân vật người que phải được thiết kế như một diễn viên thực thụ, truyền tải được trọn vẹn cảm xúc và tâm lý của người xem:
+1. **Hành động vi mô liên kết tự nhiên (Chained Micro-Actions)**:
+   - Khi gặp một tình huống tâm lý (ví dụ: cảm giác trống rỗng khi check điện thoại):
+     - **Beat 1 (Mong chờ)**: Nhìn chăm chú vào màn hình sáng.
+     - **Beat 2 (Thất vọng)**: Màn hình tắt ngúm / thông báo trống rỗng -> mắt cụp xuống hoặc chớp mắt thất thần.
+     - **Beat 3 (Đặt đạo cụ)**: Đặt điện thoại ngay ngắn xuống mặt bàn (không vứt bừa bãi hay để biến mất).
+     - **Beat 4 (Suy tư/Trầm ngâm)**: Chống tay vào cằm, nghiêng đầu hoặc nhắm mắt thở dài suy ngẫm về cuộc đời / công việc.
+     - **Beat 5 (Tái nghiện/Vòng lặp)**: Sau một thoáng ngẫm nghĩ, lại không kìm được mà vươn tay chộp lấy điện thoại kiểm tra lần nữa.
+2. **Chi tiết hóa từng ly từng tí trong Storyboard**:
+   - Khi mô tả `pose` và `visual_description`, không bao giờ ghi chung chung như "stickman stands" hay "stickman sits".
+   - Phải mô tả chính xác: vị trí hai tay, trạng thái đôi mắt (mở to, nhắm, squint, liếc), miệng (mỉm cười, há hốc, bĩu môi, đường thẳng deadpan), và tương tác vật lý với đạo cụ trên bàn.
 
 ---
 

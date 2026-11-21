@@ -5,9 +5,15 @@ __pycache__/
 *.pytest_cache/
 
 # Environments
+node_modules/
 .venv/
 venv/
 env/
+
+# Temp render scenes
+projects/*/video_scenes_*/
+projects/*/temp_*/
+projects/b5_test/
 ENV/
 
 # Large External Reference Repositories

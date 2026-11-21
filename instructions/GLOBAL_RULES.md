@@ -49,6 +49,14 @@ Every video should satisfy the following:
 5. It maintains logical transitions.
 6. It uses examples that help viewers understand the subject.
 7. It does not exaggerate claims or misrepresent evidence.
+8. **Physical Continuity & Contextual Logic**: Bối cảnh và hành động phải tỉ mỉ, ăn khớp chặt chẽ với lời nói (ở trong phòng thì phải có hình thù căn phòng, bàn ghế đàng hoàng; đồ vật phải nằm trên bàn, không vứt dưới đất; đạo cụ trên tay không được nhân đôi hay tự biến mất). Mọi chi tiết hình ảnh phải được tạo thật kỹ lưỡng.
+9. **Meticulous Execution & Zero Tolerance for Sloppiness (Tỉ mỉ tuyệt đối, cấm làm ẩu)**:
+   - Làm video YouTube chuyên nghiệp để cạnh tranh và kiếm tiền đòi hỏi sự chỉn chu cao nhất ở từng bước nhỏ nhất. Tuyệt đối không vẽ qua loa, méo mó, hoặc ghép các hình khối tạm bợ (như máy tính méo mó, tỷ lệ sai lệch, góc nhìn vô lý).
+   - Mọi đạo cụ (máy tính, bàn phím, ghế xoay, cốc nước, điện thoại) đều phải có tỷ lệ chuẩn xác, logic góc nhìn nhất quán và vị trí sắp đặt tự nhiên.
+10. **Rich Character Acting & Nuanced Micro-Expressions (Biểu cảm sắc thái & Diễn xuất có hồn)**:
+   - Nhân vật người que không chỉ đứng yên hoặc đổi tư thế giật cục, mà phải có **diễn biến tâm lý và các hành động vi mô (micro-actions)** chân thực:
+     - *Ví dụ mẫu*: Khi xem điện thoại không thấy thông báo -> hạ tay đặt điện thoại ngay ngắn xuống mặt bàn -> chống tay vào cằm, nghiêng đầu, nheo mắt hoặc nhắm mắt thở dài suy tư -> một lúc sau không kìm được lại với tay cầm điện thoại lên check tiếp (chuỗi tâm lý gây đồng cảm và hài hước châm biếm).
+   - Kịch bản và storyboard phải quy định chi tiết từng nhịp diễn (acting beat): ánh mắt nhìn về đâu, biểu cảm lông mày/miệng, cánh tay tì vào đâu, nhịp thở và trạng thái cảm xúc.
 
 ## 5. FACTUAL ACCURACY
 

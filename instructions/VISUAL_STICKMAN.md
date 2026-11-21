@@ -44,13 +44,16 @@ The Stickman character is implemented via high-resolution character packages fro
            [ Grounded on room horizon plane ]
 ```
 
-### 2.2 Approved Puppet Actions
-The character puppet responds to 5 canonical kinetic actions:
+### 2.2 Approved Puppet Actions & Emotional Expressions
+The character puppet responds to canonical kinetic actions and nuanced acting beats:
 - `rest`: Relaxed stance, subtle idle breathing, hands resting naturally at side or waist.
 - `reach`: Deliberate forward reaching arm movement toward a prop or card using planar IK.
 - `offer`: Presenting an item or gesturing outwards toward a keyword card.
 - `receive`: Grasping or interacting with a received object.
 - `retract`: Withdrawing hand back to neutral after interaction.
+- `chin_on_hand_thoughtful`: Khuỷu tay tì lên mặt bàn, bàn tay chống cằm, đầu hơi nghiêng, mắt nhắm nhẹ hoặc nheo lại suy tư trầm ngâm (thể hiện sự chán chường, triết lý hoặc khoảng lặng nội tâm trước khi tiếp tục hành động).
+- `hold_phone_anticipation`: Hai tay cầm điện thoại trước ngực, mắt mở to kỳ vọng ánh sáng thông báo.
+- `deadpan_sigh`: Nhìn chằm chằm vào khoảng không, thở dài buông xuôi sau khi nhận ra không có gì mới.
 
 ---
 
