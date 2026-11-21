@@ -65,7 +65,8 @@
         "properties": {
           "scene_id": {
             "type": "string",
-            "pattern": "^SCENE_[0-9]{3,}[A-Z]?$"
+            "pattern": "^SCENE_[0-9]{3,}(_?[A-Z])?$",
+            "description": "SCENE_001 ... or sub-shots SCENE_005_A / SCENE_005A"
           },
           "narration_text": {
             "type": "string",
@@ -187,6 +188,74 @@
                 "type": [
                   "string",
                   "null"
+                ]
+              },
+              "mood": {
+                "type": "string",
+                "enum": [
+                  "neutral",
+                  "eager",
+                  "happy",
+                  "flat",
+                  "deadpan",
+                  "sad"
+                ],
+                "description": "Face mood. If omitted the renderer guesses it from `expression`."
+              },
+              "card": {
+                "type": "object",
+                "description": "Info card shown beside the character (1-3 word title).",
+                "properties": {
+                  "icon": {
+                    "type": "string",
+                    "enum": [
+                      "lightbulb",
+                      "brain",
+                      "clock",
+                      "bell_off",
+                      "lock",
+                      "phone",
+                      "mail_empty",
+                      "check",
+                      "cross",
+                      "question",
+                      "warning",
+                      "chart_up",
+                      "chart_down",
+                      "coin",
+                      "heart"
+                    ]
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 28
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "maxLength": 36
+                  }
+                },
+                "required": [
+                  "title"
+                ]
+              },
+              "header": {
+                "type": "object",
+                "description": "Optional headline at the top of the frame (use on the first scene of a section).",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 32
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "title"
                 ]
               }
             },

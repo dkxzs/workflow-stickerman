@@ -1,0 +1,359 @@
+{
+  "project_id": "video-900",
+  "title": "Why We Procrastinate (storyboard example)",
+  "resolution": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30
+  },
+  "global_settings": {
+    "background_color": "#F7F5F0",
+    "primary_line_color": "#212529",
+    "font_family": "Arial, Helvetica, sans-serif"
+  },
+  "scenes": [
+    {
+      "scene_id": "SCENE_001",
+      "narration_text": "You have one important task due tomorrow.",
+      "estimated_duration_sec": 2.9,
+      "actual_duration_sec": 2.9,
+      "audio_file": "audio_scenes/SCENE_001.mp3",
+      "visual": {
+        "description": "Hero stands left at the desk. Card on the right warns about the deadline.",
+        "stickman_pose": "idle_neutral",
+        "action": "look_at_task",
+        "expression": "neutral_calm",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_edge"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "card": {
+          "icon": "warning",
+          "title": "DUE TOMORROW",
+          "subtitle": "ONE BIG TASK"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "PROCRASTINATION",
+          "subtitle": "WHY WE KEEP DELAYING"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_002",
+      "narration_text": "But somehow, you start cleaning your desk.",
+      "estimated_duration_sec": 3.0,
+      "actual_duration_sec": 3.0,
+      "audio_file": "audio_scenes/SCENE_002.mp3",
+      "visual": {
+        "description": "Hero rubs chin while a card shows the suspiciously clean desk.",
+        "stickman_pose": "thinking",
+        "action": "chin_scratch",
+        "expression": "sarcastic_smirk",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_edge"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "card": {
+          "icon": "check",
+          "title": "DESK CLEAN",
+          "subtitle": "VERY PRODUCTIVE"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_003",
+      "narration_text": "Your brain is avoiding the discomfort, not the task.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 3.3,
+      "audio_file": "audio_scenes/SCENE_003.mp3",
+      "visual": {
+        "description": "Hero points at the brain card on the right.",
+        "stickman_pose": "pointing_target",
+        "action": "present_brain_card",
+        "expression": "explaining_engaged",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_edge"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "card": {
+          "icon": "brain",
+          "title": "AVOIDING PAIN",
+          "subtitle": "NOT THE TASK"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557"
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_004",
+      "narration_text": "Short term relief feels amazing.",
+      "estimated_duration_sec": 2.4,
+      "actual_duration_sec": 2.4,
+      "audio_file": "audio_scenes/SCENE_004.mp3",
+      "visual": {
+        "description": "Hero cheers on the right; card appears on the left.",
+        "stickman_pose": "celebrate_win",
+        "action": "cheer",
+        "expression": "happy_smile",
+        "mood": "happy",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_edge"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "wide",
+          "movement": "static"
+        },
+        "card": {
+          "icon": "heart",
+          "title": "INSTANT RELIEF"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      }
+    },
+    {
+      "scene_id": "SCENE_005",
+      "narration_text": "Then the deadline gets closer.",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 2.6,
+      "audio_file": "audio_scenes/SCENE_005.mp3",
+      "visual": {
+        "description": "Close-up on the hero holding his head while the clock spins.",
+        "stickman_pose": "stressed_headache",
+        "action": "hold_head",
+        "expression": "worried",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_edge"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "close_up",
+          "movement": "shake"
+        },
+        "card": {
+          "icon": "clock",
+          "title": "DEADLINE",
+          "subtitle": "GETTING CLOSER"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946"
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_006",
+      "narration_text": "Suddenly it is almost midnight.",
+      "estimated_duration_sec": 2.5,
+      "actual_duration_sec": 2.5,
+      "audio_file": "audio_scenes/SCENE_006.mp3",
+      "visual": {
+        "description": "Hero leans back in shock; card on the left.",
+        "stickman_pose": "shocked_fall",
+        "action": "lean_back_shock",
+        "expression": "shocked_disbelief",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_edge"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "close_up",
+          "movement": "static"
+        },
+        "card": {
+          "icon": "question",
+          "title": "ALREADY 11 PM?"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946"
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_007",
+      "narration_text": "Panic turns into a sprint.",
+      "estimated_duration_sec": 2.4,
+      "actual_duration_sec": 2.4,
+      "audio_file": "audio_scenes/SCENE_007.mp3",
+      "visual": {
+        "description": "Hero sprints in place while a stress chart climbs.",
+        "stickman_pose": "running_hurry",
+        "action": "run_in_place",
+        "expression": "wide_eyed_expectant",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_edge"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "pan_right"
+        },
+        "card": {
+          "icon": "chart_up",
+          "title": "STRESS RISING"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946"
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_008",
+      "narration_text": "The fix is simple: start for just two minutes.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 3.2,
+      "audio_file": "audio_scenes/SCENE_008.mp3",
+      "visual": {
+        "description": "Hero has an idea; lightbulb card on the left.",
+        "stickman_pose": "idea_lightbulb",
+        "action": "raise_finger",
+        "expression": "intrigued",
+        "mood": "eager",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_edge"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_out"
+        },
+        "card": {
+          "icon": "lightbulb",
+          "title": "2 MINUTES",
+          "subtitle": "JUST START"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703"
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      }
+    },
+    {
+      "scene_id": "SCENE_009",
+      "narration_text": "Momentum does the rest.",
+      "estimated_duration_sec": 2.2,
+      "actual_duration_sec": 2.2,
+      "audio_file": "audio_scenes/SCENE_009.mp3",
+      "visual": {
+        "description": "Hero celebrates next to a big check mark.",
+        "stickman_pose": "celebrate_win",
+        "action": "cheer",
+        "expression": "proud_smile",
+        "mood": "happy",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_edge"
+        ],
+        "background": "warm_textured_canvas",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "card": {
+          "icon": "check",
+          "title": "DONE",
+          "subtitle": "MOMENTUM WINS"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F"
+      },
+      "audio": {
+        "sfx": "pop_pop_pop",
+        "bgm_mood": "triumphant"
+      }
+    }
+  ]
+}

@@ -16,6 +16,7 @@ _ref_director/
 # Intermediate project media files
 projects/**/video_scenes/*
 !projects/**/video_scenes/.gitkeep
+projects/**/video_scenes_preview_20s/*
 projects/**/output/*
 !projects/**/output/.gitkeep
 
@@ -24,6 +25,8 @@ test_*.png
 test_*.mp3
 inspect_*.png
 check_*.png
+PROJECT_BRIEF_FOR_CHATGPT.md
+
 
 # Environment variables & secrets
 .env

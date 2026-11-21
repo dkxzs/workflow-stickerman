@@ -39,12 +39,15 @@ youtube-content-engine/
 │   ├── 07-editing-mix.md         # Bước 7: Dựng video, hòa âm SFX/BGM & phụ đề
 │   └── 08-publishing.md          # Bước 8: Kiểm duyệt QA & xuất bản lên YouTube
 │
-├── engine/                       # Module code tự động hóa (Giai đoạn tiếp theo)
-│   ├── requirements.txt          # Danh sách thư viện dự kiến (chưa cài đặt)
-│   ├── config.py                 # File cấu hình toàn cục (placeholder)
-│   ├── tts_engine.py             # Xử lý text-to-speech (placeholder)
-│   ├── stickman_renderer.py      # Xử lý sinh hình ảnh/animation (placeholder)
-│   ├── audio_mixer.py            # Xử lý hòa trộn âm thanh (placeholder)
+├── engine/                       # Module code tự động hóa (đã chạy được)
+│   ├── requirements.txt          # Danh sách thư viện
+│   ├── config.py                 # File cấu hình toàn cục
+│   ├── vocab.py                  # DANH MỤC ĐÓNG: pose, mood, icon, camera, SFX mà engine hỗ trợ
+│   ├── icons.py                  # Thư viện icon vẽ bằng code cho card
+│   ├── storyboard_validator.py   # Kiểm tra storyboard (Gate 4)
+│   ├── tts_engine.py             # Xử lý text-to-speech
+│   ├── stickman_renderer.py      # Render nhân vật, card, camera; contact sheet; xem thử 20 giây
+│   ├── audio_mixer.py            # Xử lý hòa trộn âm thanh
 │   ├── utils/                    # Các module tiện ích bổ trợ
 │   └── base_assets/              # Kho tài nguyên gốc
 │       ├── poses/                # Tư thế nhân vật mẫu
@@ -54,6 +57,7 @@ youtube-content-engine/
 ├── templates/                    # Biểu mẫu chuẩn hóa
 │   ├── script-template.md        # Mẫu kịch bản chi tiết
 │   ├── storyboard-schema.json    # JSON Schema xác thực cấu trúc phân cảnh
+│   ├── storyboard-example.json   # Storyboard mẫu 9 cảnh, đủ trường, chạy được
 │   └── metadata-template.md      # Mẫu tiêu đề, mô tả, tags, chapters YouTube
 │
 ├── projects/                     # Không gian thực thi từng video cụ thể
@@ -67,10 +71,23 @@ youtube-content-engine/
 │       └── qa_report.md          # Báo cáo đánh giá chất lượng video
 │
 └── tests/                        # Kiểm thử tự động cho Engine
-    ├── test_tts.py               # Kiểm thử TTS engine (placeholder)
-    ├── test_renderer.py          # Kiểm thử Stickman renderer (placeholder)
-    └── test_audio_mixer.py       # Kiểm thử Audio mixer (placeholder)
+    ├── test_tts.py               # Kiểm thử TTS engine
+    ├── test_renderer.py          # Kiểm thử Stickman renderer
+    ├── test_vocab_validator.py   # Kiểm thử danh mục, validator, camera, contact sheet
+    └── test_audio_mixer.py       # Kiểm thử Audio mixer
 ```
+
+### Chạy nhanh bước hình ảnh
+
+```bash
+python -m engine.vocab                                   # xem các giá trị hợp lệ (đưa cho AI đọc)
+python -m engine.storyboard_validator projects/video-001/03_storyboard.json
+python engine/stickman_renderer.py --storyboard templates/storyboard-example.json --contact-sheet out/sheet.png
+python engine/stickman_renderer.py --storyboard <storyboard> --output-dir <dir> --preview-seconds 20   # bản xem thử 20 giây
+python -m pytest -q
+```
+
+Nguyên tắc: AI **chọn** giá trị trong `engine/vocab.py`, engine **vẽ**. Chi tiết ở `workflows/06-visual-render.md`.
 
 ---
 

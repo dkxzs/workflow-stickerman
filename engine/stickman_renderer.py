@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 STICKMAN RENDERER — CRAZYMEI SOLO CHARACTER ENGINE (TIER A+)
+- Data-driven: reads pose / mood / position / camera / card / header from the storyboard
+  (allowed values: engine/vocab.py). The hand-written choreography for SCENE_001-006 only
+  runs in legacy mode (default for project video-001), so new projects are not polluted by it.
 - Balanced 16:9 Solo Composition:
   * Top Header: Centered headline with hand-drawn red wavy underline
   * Center-Left (x~0.28): Solo Hero stickman with full dynamic kinematics
@@ -20,6 +23,7 @@ import argparse
 import json
 import math
 import os
+import re
 import sys
 import time
 import numpy as np
@@ -33,6 +37,13 @@ try:
     import imageio
 except ImportError:
     imageio = None
+
+try:
+    from engine.vocab import POSES, MOODS, EXPRESSION_KEYWORDS
+    from engine.icons import draw_icon
+except ImportError:  # executed as `python engine/stickman_renderer.py`
+    from vocab import POSES, MOODS, EXPRESSION_KEYWORDS
+    from icons import draw_icon
 
 # Canvas constants
 CANVAS_WIDTH = 1920
@@ -147,6 +158,96 @@ def draw_lightbulb(draw_ctx, cx, cy, s):
         draw_ctx.line([(x0, y0), (x1, y1)], fill=COLOR_GOLD, width=int(4 * s))
 
 
+# --------------------------------------------------------------------------
+# Data-driven rig tables & helpers (allowed names live in engine/vocab.py)
+# --------------------------------------------------------------------------
+# Angles are screen-space degrees: 0 = right, 90 = down, 180 = left, -90 = up.
+POSE_RIGS = {
+    "idle_neutral":      dict(la=135, lb=95,  ra=28, rb=-35, look=(0.70, 0.25),  mood="neutral", lean=2.0),
+    "pointing_target":   dict(la=135, lb=95,  ra=15, rb=8,   look=(0.85, 0.20),  mood="eager",   lean=4.0),
+    "thinking":          dict(la=135, lb=95,  ra=8,  rb=-153, look=(0.60, -0.40), mood="neutral", lean=2.0),   # hand on chin
+    "celebrate_win":     dict(la=-140, lb=-105, ra=-40, rb=-75, look=(0.50, -0.30), mood="happy",  lean=-3.0),  # arms up in a V
+    "idea_lightbulb":    dict(la=135, lb=95,  ra=-25, rb=-95, look=(0.70, -0.35), mood="eager",   lean=2.0),   # finger up
+    "stressed_headache": dict(la=180, lb=-71, ra=0,  rb=-109, look=(0.0, 0.40),   mood="sad",     lean=8.0,   sweat=True),  # hands at temples
+    "shocked_fall":      dict(la=-160, lb=-130, ra=-20, rb=-50, look=(0.30, 0.0),  mood="deadpan", lean=-15.0, shock=True),  # hands flung up
+    "running_hurry":     dict(la=25,  lb=-45, ra=150, rb=105, look=(0.90, 0.10), mood="eager",   lean=16.0,  sweat=True, stride=True),
+}
+
+FRAMING_ZOOM = {"wide": 1.0, "medium": 1.08, "close_up": 1.35}
+
+
+def resolve_mood(visual: dict, rig_mood: str, pose: str, legacy: bool = False) -> str:
+    """Explicit `visual.mood` wins; otherwise map keywords of `visual.expression`; else the pose default."""
+    explicit = visual.get("mood")
+    if explicit in MOODS:
+        return explicit
+    expr = str(visual.get("expression") or "").lower()
+    if legacy:  # exact behaviour of the original renderer
+        return "eager" if (pose == "idle_neutral" and "curious" in expr) else rig_mood
+    for keys, mood in EXPRESSION_KEYWORDS:
+        if any(k in expr for k in keys):
+            return mood
+    return rig_mood
+
+
+def hex_to_rgba(value, default=None):
+    """'#E63946' -> (230, 57, 70, 255). Returns `default` for anything invalid."""
+    if isinstance(value, str) and re.fullmatch(r"#[0-9a-fA-F]{6}", value.strip()):
+        v = value.strip().lstrip("#")
+        return (int(v[0:2], 16), int(v[2:4], 16), int(v[4:6], 16), 255)
+    return default
+
+
+def camera_box(camera: dict, f: int, total_frames: int, focus_xy, card_cx=None):
+    """
+    Crop box (in supersampled canvas pixels) for the virtual camera.
+    framing: wide 1.0x, medium 1.08x, close_up 1.35x (centred on the hero's head).
+    movement: static / zoom_in / zoom_out / pan_left / pan_right / shake.
+    When a card is on screen (card_cx given) close_up becomes a softer 1.18x two-shot centred between
+    hero and card, so the card is never cropped out of frame.
+    """
+    camera = camera or {}
+    framing = camera.get("framing", "wide")  # no camera info -> no zoom
+    move = camera.get("movement", "static")
+    zoom = FRAMING_ZOOM.get(framing, 1.0)
+    p = f / float(max(1, total_frames - 1))
+    ease = p * p * (3.0 - 2.0 * p)
+
+    cx, cy = SW / 2.0, SH / 2.0
+    if framing == "close_up" and card_cx is not None:
+        zoom = 1.18
+        cx = (focus_xy[0] + card_cx) / 2.0
+        cy = 0.6 * focus_xy[1] + 0.4 * cy
+    elif framing == "close_up":
+        cx = 0.85 * focus_xy[0] + 0.15 * cx
+        cy = 0.85 * focus_xy[1] + 0.15 * cy
+
+    if move == "zoom_in":
+        zoom += 0.15 * ease
+    elif move == "zoom_out":
+        zoom = max(1.0, zoom + 0.15 - 0.15 * ease)
+    elif move in ("pan_left", "pan_right"):
+        zoom = max(zoom, 1.10)
+        span = 0.03 * SW
+        cx += (span - 2 * span * ease) if move == "pan_left" else (-span + 2 * span * ease)
+    elif move == "shake":
+        zoom = max(zoom, 1.04)
+        amp = 12.0 * math.exp(-f / 6.0)  # ~6px at 1080p, decays over ~10 frames
+        cx += amp * math.sin(f * 2.3)
+        cy += amp * 0.6 * math.cos(f * 2.9)
+
+    w, h = SW / zoom, SH / zoom
+    left = min(max(cx - w / 2.0, 0.0), SW - w)
+    top = min(max(cy - h / 2.0, 0.0), SH - h)
+    return (left, top, left + w, top + h)
+
+
+def apply_camera(canvas, camera: dict, f: int, total_frames: int, focus_xy, card_cx=None):
+    """Crop the supersampled canvas with the camera box and downscale to 1080p."""
+    box = camera_box(camera, f, total_frames, focus_xy, card_cx)
+    return canvas.resize((CANVAS_WIDTH, CANVAS_HEIGHT), Image.Resampling.LANCZOS, box=box)
+
+
 class StickmanActor:
     """
     Modular Stickman Actor supporting:
@@ -195,11 +296,15 @@ class StickmanActor:
     def render(self, draw_ctx, hip_x, hip_y, lean_deg=0.0, head_tilt=0.0,
                la=135, lb=95, ra=28, rb=-35, mood="eager", look=(0.7, 0.3),
                blink=0.0, mouth_open=0.0, slouch=0.0, desk_y=None,
-               has_sweat=False, has_shock=False):
+               has_sweat=False, has_shock=False, stride=0.0):
         """
         Renders stickman with dynamic spine lean, slouch, and articulated limbs.
+        `stride` (-1..1) scissors the legs for running. When facing left (-1) the arm
+        angles are mirrored so poses written for a right-facing hero still read correctly.
         Returns: (hand_l, hand_r, (head_x, head_y), (foot_l, foot_r))
         """
+        if self.facing < 0:
+            la, lb, ra, rb = 180 - la, 180 - lb, 180 - ra, 180 - rb
         # Spine kinematics with lean and slouch
         lean_rad = math.radians(lean_deg * self.facing)
         spine_len = (128 - slouch * 24) * self.s
@@ -217,8 +322,9 @@ class StickmanActor:
         hy = neck_y - math.cos(head_rad) * head_dist
 
         # 1. Legs with dynamic forward brace & feet contact shadows
-        leg_l_angle = 115 - lean_deg * 0.4
-        leg_r_angle = 65 + lean_deg * 0.4
+        lean_eff = lean_deg * self.facing
+        leg_l_angle = 115 - lean_eff * 0.4 - stride * 35
+        leg_r_angle = 65 + lean_eff * 0.4 + stride * 35
         knee_l, foot_l = self.draw_limb(draw_ctx, (hip_x, hip_y), leg_l_angle, 95, 78, 78, self.body_stroke)
         knee_r, foot_r = self.draw_limb(draw_ctx, (hip_x, hip_y), leg_r_angle, 85, 78, 78, self.body_stroke)
 
@@ -326,6 +432,9 @@ class B5CrazyMeiEngine:
             font_sans = os.path.join(REF_ASSETS, "fonts", "NotoSans.ttf")
 
         head_font_path = font_black if os.path.exists(font_black) else font_anton if os.path.exists(font_anton) else None
+        self.head_font_path = head_font_path
+        self.sans_font_path = font_sans if os.path.exists(font_sans) else head_font_path
+        self._font_cache = {}
 
         if head_font_path and os.path.exists(head_font_path):
             self.font_hero = ImageFont.truetype(head_font_path, int(64 * SS_SCALE))
@@ -374,15 +483,17 @@ class B5CrazyMeiEngine:
         return base, desk_y
 
     def draw_top_header(self, draw_ctx, headline: str, subline: str = None):
-        """Renders bold headline keyword with hand-drawn red wavy underline, centered."""
+        """Renders bold headline keyword with hand-drawn red wavy underline, centered (auto-shrinks long text)."""
         cx = SW // 2
         hy = int(SH * 0.09)
-        draw_ctx.text((cx, hy), headline, fill=COLOR_INK, font=self.font_hero, anchor="mm")
-        under_w = int(len(headline) * 38 * SS_SCALE)
+        font = self.fit_font(draw_ctx, headline, int(SW * 0.80), 64 * SS_SCALE)
+        draw_ctx.text((cx, hy), headline, fill=COLOR_INK, font=font, anchor="mm")
+        under_w = int(draw_ctx.textlength(headline, font=font)) + int(60 * SS_SCALE)
         draw_wavy_underline(draw_ctx, cx, hy + int(50 * SS_SCALE), under_w, amp=int(7 * SS_SCALE), wave_len=int(24 * SS_SCALE), line_w=int(6 * SS_SCALE))
 
         if subline:
-            draw_ctx.text((cx, hy + int(86 * SS_SCALE)), subline, fill=COLOR_MUTED, font=self.font_small, anchor="mm")
+            sub_font = self.fit_font(draw_ctx, subline, int(SW * 0.70), 28 * SS_SCALE, path=self.sans_font_path)
+            draw_ctx.text((cx, hy + int(86 * SS_SCALE)), subline, fill=COLOR_MUTED, font=sub_font, anchor="mm")
 
     def draw_phone(self, draw_ctx, x, y, state: str, s: float, flat_ratio: float = 0.0, desk_y: int = None):
         """
@@ -436,6 +547,77 @@ class B5CrazyMeiEngine:
                         fill=(205, 210, 218, 255),
                         width=int(4 * SS_SCALE)
                     )
+
+    def fit_font(self, draw_ctx, text: str, max_w: int, start_px: int, path: str = None):
+        """Largest font (<= start_px) whose rendered `text` fits in max_w pixels."""
+        path = path or self.head_font_path
+        if not path:
+            return self.font_badge
+        px = int(start_px)
+        floor_px = int(14 * SS_SCALE)
+        while True:
+            key = (path, px)
+            font = self._font_cache.get(key)
+            if font is None:
+                font = ImageFont.truetype(path, px)
+                self._font_cache[key] = font
+            if px <= floor_px or draw_ctx.textlength(text, font=font) <= max_w:
+                return font
+            px = int(px * 0.92)
+
+    def draw_custom_card(self, canvas, card: dict, card_cx: int, card_cy: int, f: int,
+                         fps: int = DEFAULT_FPS, accent=None):
+        """
+        Storyboard-driven info card: {"icon": <vocab.ICONS>, "title": "1-3 WORDS", "subtitle": "optional"}.
+        Pops in with an elastic bounce (0 -> 1.12 -> 1.0) like the art-direction spec.
+        """
+        t = f / float(fps)
+        pt = t - 0.12
+        if pt <= 0:
+            return
+        if pt < 0.18:
+            scale = 1.12 * (pt / 0.18)
+        elif pt < 0.25:
+            scale = 1.12 - 0.12 * ((pt - 0.18) / 0.07)
+        else:
+            scale = 1.0
+        scale = max(0.03, scale)
+
+        cw, ch = int(560 * SS_SCALE), int(340 * SS_SCALE)
+        margin = int(30 * SS_SCALE)
+        layer = Image.new("RGBA", (cw + 2 * margin, ch + 2 * margin), (0, 0, 0, 0))
+        d = ImageDraw.Draw(layer)
+        lcx, lcy = layer.width // 2, layer.height // 2
+        d.rounded_rectangle(
+            [lcx - cw // 2, lcy - ch // 2, lcx + cw // 2, lcy + ch // 2],
+            radius=int(26 * SS_SCALE), fill=COLOR_CARD_BG, outline=COLOR_CARD_BORDER, width=int(5 * SS_SCALE),
+        )
+
+        title = str(card.get("title", "")).upper().strip()
+        subtitle = str(card.get("subtitle", "")).upper().strip()
+        icon = card.get("icon")
+        max_w = cw - int(70 * SS_SCALE)
+        title_color = accent or COLOR_INK
+
+        if icon:
+            draw_icon(icon, d, lcx, lcy - int(66 * SS_SCALE), SS_SCALE, t=t, font=self.font_hero)
+            title_y = lcy + int(50 * SS_SCALE)
+            sub_y = lcy + int(110 * SS_SCALE)
+        else:
+            title_y = lcy - int(10 * SS_SCALE)
+            sub_y = lcy + int(60 * SS_SCALE)
+
+        if title:
+            tf = self.fit_font(d, title, max_w, 64 * SS_SCALE)
+            d.text((lcx, title_y), title, fill=title_color, font=tf, anchor="mm")
+        if subtitle:
+            sf = self.fit_font(d, subtitle, max_w, 28 * SS_SCALE, path=self.sans_font_path)
+            d.text((lcx, sub_y), subtitle, fill=COLOR_MUTED, font=sf, anchor="mm")
+
+        if abs(scale - 1.0) > 1e-3:
+            layer = layer.resize((max(1, int(layer.width * scale)), max(1, int(layer.height * scale))),
+                                 Image.Resampling.LANCZOS)
+        canvas.alpha_composite(layer, dest=(int(card_cx - layer.width // 2), int(card_cy - layer.height // 2)))
 
     def draw_scene_info_card(self, draw_ctx, scene: dict, f: int, total_frames: int):
         """
@@ -594,31 +776,53 @@ class B5CrazyMeiEngine:
             draw_ctx.text((card_cx, card_cy + int(40 * SS_SCALE)), main_line, fill=COLOR_INK, font=self.font_title, anchor="mm")
             draw_ctx.text((card_cx, card_cy + int(96 * SS_SCALE)), sub_line, fill=COLOR_MUTED, font=self.font_sub, anchor="mm")
 
-    def render_scene(self, scene: dict, output_path: str, fps: int = DEFAULT_FPS):
+    def render_scene(self, scene: dict, output_path: str, fps: int = DEFAULT_FPS,
+                     legacy: bool = False, only_frames=None, frame_callback=None):
         """
-        Renders Solo Character Scene across 16:9 frame:
-        - Hero Actor (Center-Left x=0.28)
-        - Info Card & Props (Center-Right x=0.68)
-        - Top Header (Center x=0.50)
+        Renders one scene to an MP4 (or, with `only_frames`, hands individual frames to
+        `frame_callback(frame_index, PIL.Image)` without writing a video — used for contact sheets).
+
+        legacy=True  : original look of video-001 (hero at x=0.28, hand-written choreography and
+                       cards for SCENE_001-006, headline/subline derived from narration).
+        legacy=False : fully storyboard-driven — hero at visual.position.x (mirrored when on the right),
+                       header from visual.header, card from visual.card, mood from visual.mood.
+        The virtual camera (visual.camera) is applied only in non-legacy mode, so video-001 renders exactly as before.
         """
-        os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+        if output_path:
+            os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
         duration_sec = scene.get("actual_duration_sec") or scene.get("estimated_duration_sec") or 2.5
         total_frames = max(1, int(round(duration_sec * fps)))
         scene_id = scene.get("scene_id", "SCENE_001")
+        choreo = scene_id if legacy else ""  # hand-written SCENE_001-006 choreography: legacy only
         visual = scene.get("visual", {})
         pose_name = visual.get("stickman_pose", "idle_neutral")
         action = visual.get("action", "")
+        props = [str(p) for p in (visual.get("props") or [])]
 
-        hero = StickmanActor("hero", scale=1.35 * SS_SCALE, facing=1)
+        hero_x_frac = 0.28
+        facing = 1
+        if not legacy:
+            pos = visual.get("position") or {}
+            try:
+                hero_x_frac = min(0.85, max(0.15, float(pos.get("x", 0.25))))
+            except (TypeError, ValueError):
+                hero_x_frac = 0.25
+            facing = 1 if hero_x_frac <= 0.5 else -1
+        hero = StickmanActor("hero", scale=1.35 * SS_SCALE, facing=facing)
 
         desk_y = int(SH * 0.77)
-        hero_hip_x = int(SW * 0.28)
+        hero_hip_x = int(SW * hero_x_frac)
         hero_base_hip_y = desk_y - int(150 * hero.s)
+        focus_xy = (hero_hip_x, hero_base_hip_y - int(190 * hero.s))  # head, for close_up framing
 
-        table_phone_x = hero_hip_x + int(190 * hero.s)
+        table_phone_x = hero_hip_x + int(190 * hero.s) * facing
         table_phone_y = desk_y - int(17 * SS_SCALE)
 
-        # Header Titles
+        card_cx = int(SW * (0.70 if facing == 1 else 0.30))
+        card_cy = int(SH * 0.44)
+        accent = hex_to_rgba(visual.get("accent_color_focus"))
+
+        # Header titles
         header_map = {
             "SCENE_001": ("THE REFLEX", "AUTOMATIC CHECK"),
             "SCENE_002": ("THE EXPECTATION", "CHECKING INBOX"),
@@ -627,28 +831,38 @@ class B5CrazyMeiEngine:
             "SCENE_005": ("THE RESET", "LOCK AND PUT DOWN"),
             "SCENE_006": ("THE RELAPSE", "FIVE SECONDS LATER"),
         }
-        if scene_id in header_map:
-            headline, subline = header_map[scene_id]
-        else:
+        header = visual.get("header") or {}
+        if header.get("title"):
+            headline, subline = str(header["title"]).upper(), (str(header.get("subtitle", "")).upper() or None)
+        elif choreo in header_map:
+            headline, subline = header_map[choreo]
+        elif legacy:
             words = scene.get("narration_text", "").split()
             headline = " ".join(words[:3]).upper() if words else "WHY WE DO IT"
             subline = "DOPAMINE HABIT LOOP"
+        else:
+            headline, subline = None, None  # no header unless the storyboard asks for one
 
-        writer = imageio.get_writer(
-            output_path,
-            fps=fps,
-            codec="libx264",
-            pixelformat="yuv420p",
-            macro_block_size=None,
-        )
+        writer = None
+        if only_frames is None:
+            writer = imageio.get_writer(
+                output_path,
+                fps=fps,
+                codec="libx264",
+                pixelformat="yuv420p",
+                macro_block_size=None,
+            )
+        frame_indices = [min(max(0, int(i)), total_frames - 1) for i in only_frames] if only_frames is not None \
+            else range(total_frames)
 
         try:
-            for f in range(total_frames):
+            for f in frame_indices:
                 canvas, d_y = self.create_base_canvas(f=f)
                 draw = ImageDraw.Draw(canvas)
 
                 # 1. Top Header with red wavy underline
-                self.draw_top_header(draw, headline, subline)
+                if headline:
+                    self.draw_top_header(draw, headline, subline)
 
                 # 2. Respiration & Blink Cycles
                 breath = math.sin(f * 0.16) * (2.8 * SS_SCALE)
@@ -662,7 +876,7 @@ class B5CrazyMeiEngine:
                 has_sweat = False
                 has_shock = False
 
-                if scene_id == "SCENE_001":
+                if choreo == "SCENE_001":
                     lift_prog = min(1.0, max(0.0, (f - 14) / 22.0))
                     lift_eased = 1.0 - math.pow(1.0 - lift_prog, 3)
 
@@ -689,7 +903,7 @@ class B5CrazyMeiEngine:
                     phone_state = "unlocked" if f >= 36 else "off"
                     self.draw_phone(draw, px, py, phone_state, hero.s, flat_ratio=flat_ratio, desk_y=d_y)
 
-                elif scene_id == "SCENE_002":
+                elif choreo == "SCENE_002":
                     hand_l, hand_r, head_h, feet_h = hero.render(
                         draw, hero_hip_x, hero_hip_y, lean_deg=7.0, head_tilt=8.0,
                         la=135, lb=90, ra=28, rb=-35, mood="flat", look=(0.75, 0.50),
@@ -699,7 +913,7 @@ class B5CrazyMeiEngine:
                     py = hand_r[1] - int(34 * SS_SCALE)
                     self.draw_phone(draw, px, py, "empty", hero.s, flat_ratio=0.0, desk_y=d_y)
 
-                elif scene_id == "SCENE_003":
+                elif choreo == "SCENE_003":
                     has_sweat = True
                     has_shock = (18 <= f <= 34)
                     hand_l, hand_r, head_h, feet_h = hero.render(
@@ -712,7 +926,7 @@ class B5CrazyMeiEngine:
                     py = hand_r[1] - int(34 * SS_SCALE)
                     self.draw_phone(draw, px, py, "dim", hero.s, flat_ratio=0.0, desk_y=d_y)
 
-                elif scene_id == "SCENE_004":
+                elif choreo == "SCENE_004":
                     has_sweat = (f % 40 < 25)
                     hand_l, hand_r, head_h, feet_h = hero.render(
                         draw, hero_hip_x, hero_hip_y, lean_deg=0.0, head_tilt=0.0,
@@ -724,7 +938,7 @@ class B5CrazyMeiEngine:
                     py = hand_r[1] + int(20 * SS_SCALE)
                     self.draw_phone(draw, px, py, "dim", hero.s, flat_ratio=0.0, desk_y=d_y)
 
-                elif scene_id == "SCENE_005":
+                elif choreo == "SCENE_005":
                     put_prog = min(1.0, max(0.0, (f - 14) / 24.0))
                     put_eased = 1.0 - math.pow(1.0 - put_prog, 3)
 
@@ -751,7 +965,7 @@ class B5CrazyMeiEngine:
                         impact_prog = 1.0 - (f - 34) / 12.0
                         draw_impact_lines(draw, table_phone_x, table_phone_y - int(10 * SS_SCALE), SS_SCALE, impact_prog)
 
-                elif scene_id == "SCENE_006":
+                elif choreo == "SCENE_006":
                     reach_prog = min(1.0, max(0.0, (f - 24) / 36.0))
                     reach_eased = reach_prog * reach_prog
 
@@ -771,107 +985,146 @@ class B5CrazyMeiEngine:
                     self.draw_phone(draw, table_phone_x, table_phone_y, "locked", hero.s, flat_ratio=1.0, desk_y=d_y)
 
                 else:
-                    # Universal Rig Dispatcher for Scenes 7-42 based on pose & action
-                    if pose_name == "pointing_target":
-                        # Pointing arm to right card
-                        la, lb = 135, 95
-                        ra, rb = 15, 8
-                        look = (0.85, 0.20)
-                        mood = "eager"
-                        lean_deg = 4.0
-                    elif pose_name == "thinking":
-                        # Hand on chin
-                        la, lb = 135, 95
-                        ra, rb = 65, -60
-                        look = (0.60, -0.40)
-                        mood = "neutral"
-                        lean_deg = 2.0
-                    elif pose_name == "celebrate_win":
-                        # Both hands raised
-                        la, lb = 165, 145
-                        ra, rb = 15, 35
-                        look = (0.50, -0.30)
-                        mood = "happy"
-                        lean_deg = -3.0
-                    elif pose_name == "idea_lightbulb":
-                        # Index finger up
-                        la, lb = 135, 95
-                        ra, rb = 35, -90
-                        look = (0.70, -0.35)
-                        mood = "eager"
-                        lean_deg = 2.0
-                    elif pose_name == "stressed_headache":
-                        # Both hands to temples
-                        la, lb = 165, 140
-                        ra, rb = 15, 40
-                        look = (0.0, 0.40)
-                        mood = "sad"
-                        lean_deg = 8.0
-                        has_sweat = True
-                    elif pose_name == "shocked_fall":
-                        # Leaning back flailing
-                        la, lb = 185, 160
-                        ra, rb = 35, -10
-                        look = (0.30, 0.0)
-                        mood = "deadpan"
-                        lean_deg = -15.0
-                        has_shock = True
-                    else:  # idle_neutral or default
-                        la, lb = 135, 95
-                        ra, rb = 28, -35
-                        look = (0.70, 0.25)
-                        mood = "eager" if "curious" in visual.get("expression", "") else "neutral"
-                        lean_deg = 2.0
+                    # Generic rig dispatcher: any scene not covered by the legacy choreography
+                    rig = POSE_RIGS.get(pose_name, POSE_RIGS["idle_neutral"])
+                    la, lb, ra, rb = rig["la"], rig["lb"], rig["ra"], rig["rb"]
+                    look = rig["look"]
+                    lean_deg = rig["lean"]
+                    mood = resolve_mood(visual, rig["mood"], pose_name, legacy)
+                    has_sweat = bool(rig.get("sweat"))
+                    has_shock = bool(rig.get("shock"))
+                    stride = math.sin(f * 0.55) if rig.get("stride") else 0.0
 
                     hand_l, hand_r, head_h, feet_h = hero.render(
                         draw, hero_hip_x, hero_hip_y, lean_deg=lean_deg, head_tilt=math.sin(f * 0.1) * 2.0,
                         la=la, lb=lb, ra=ra, rb=rb, mood=mood, look=look,
                         blink=blink, mouth_open=talk_amp, desk_y=d_y,
-                        has_sweat=has_sweat, has_shock=has_shock
+                        has_sweat=has_sweat, has_shock=has_shock, stride=stride
                     )
-                    # Phone on table
-                    self.draw_phone(draw, table_phone_x, table_phone_y, "locked", hero.s, flat_ratio=1.0, desk_y=d_y)
+                    # Phone on the desk: always in legacy mode, otherwise only when a prop asks for it
+                    if legacy or any("phone" in p for p in props):
+                        self.draw_phone(draw, table_phone_x, table_phone_y, "locked", hero.s, flat_ratio=1.0, desk_y=d_y)
 
-                # 4. Render Rich Visual Info Card (Center-Right x=0.68)
-                self.draw_scene_info_card(draw, scene, f, total_frames)
+                # 4. Info card: storyboard `visual.card` wins; legacy mode falls back to the old cards
+                if visual.get("card"):
+                    self.draw_custom_card(canvas, visual["card"], card_cx, card_cy, f, fps, accent=accent)
+                elif legacy:
+                    self.draw_scene_info_card(draw, scene, f, total_frames)
 
-                # 5. Antialiasing Downscale (2x SS -> 1080p razor sharp)
-                frame_1080p = canvas.resize((CANVAS_WIDTH, CANVAS_HEIGHT), Image.Resampling.LANCZOS)
-                writer.append_data(np.array(frame_1080p.convert("RGB")))
+                # 5. Virtual camera + antialiasing downscale (2x supersampled -> 1080p)
+                frame_1080p = apply_camera(canvas, None if legacy else visual.get("camera"), f, total_frames, focus_xy,
+                                     card_cx if (visual.get("card") or legacy) else None).convert("RGB")
+                if frame_callback is not None:
+                    frame_callback(f, frame_1080p)
+                if writer is not None:
+                    writer.append_data(np.array(frame_1080p))
 
         finally:
-            writer.close()
+            if writer is not None:
+                writer.close()
 
 
-def render_storyboard(storyboard_path: str, video_dir: str, limit: int = None):
+def scene_duration(scene: dict) -> float:
+    return scene.get("actual_duration_sec") or scene.get("estimated_duration_sec") or 2.5
+
+
+def resolve_legacy(data: dict, legacy=None) -> bool:
+    """Legacy mode is automatic for the original demo project (video-001) unless overridden."""
+    if legacy is None:
+        return data.get("project_id") == "video-001"
+    return bool(legacy)
+
+
+def select_scenes(scenes: list, limit: int = None, preview_seconds: float = None) -> list:
+    """First N scenes, or the first scenes that add up to `preview_seconds` (the 'first 20 seconds' gate)."""
+    if preview_seconds is not None:
+        picked, total = [], 0.0
+        for s in scenes:
+            picked.append(s)
+            total += scene_duration(s)
+            if total >= preview_seconds:
+                break
+        scenes = picked
+    if limit is not None:
+        scenes = scenes[:limit]
+    return scenes
+
+
+def render_storyboard(storyboard_path: str, video_dir: str, limit: int = None,
+                      legacy: bool = None, preview_seconds: float = None):
     """Render storyboard scenes using CrazyMei Solo Character Rig."""
     engine = B5CrazyMeiEngine()
     with open(storyboard_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    scenes = data.get("scenes", [])
-    if limit is not None:
-        scenes = scenes[:limit]
+    legacy = resolve_legacy(data, legacy)
+    scenes = select_scenes(data.get("scenes", []), limit, preview_seconds)
 
     os.makedirs(video_dir, exist_ok=True)
-    print(f"[CrazyMei Solo Engine] Rendering {len(scenes)} scenes to {video_dir}...")
+    print(f"[CrazyMei Solo Engine] Rendering {len(scenes)} scenes to {video_dir} (legacy={legacy})...")
     start_all = time.time()
 
     for idx, scene in enumerate(scenes, 1):
         scene_id = scene["scene_id"]
         out_mp4 = os.path.join(video_dir, f"{scene_id}.mp4")
         t0 = time.time()
-        engine.render_scene(scene, out_mp4)
-        dur = scene.get("actual_duration_sec") or scene.get("estimated_duration_sec") or 0.0
-        print(f"  [{idx}/{len(scenes)}] Rendered {scene_id}.mp4 ({dur:.2f}s) in {time.time() - t0:.2f}s")
+        engine.render_scene(scene, out_mp4, legacy=legacy)
+        print(f"  [{idx}/{len(scenes)}] Rendered {scene_id}.mp4 ({scene_duration(scene):.2f}s) in {time.time() - t0:.2f}s")
 
     elapsed_all = time.time() - start_all
     print(f"[CrazyMei Solo Engine] Completed {len(scenes)} scenes in {elapsed_all:.2f} seconds.")
+    return scenes
+
+
+def render_contact_sheet(storyboard_path: str, out_png: str, limit: int = None, legacy: bool = None,
+                         preview_seconds: float = None, cols: int = 4, thumb_w: int = 480):
+    """
+    One PNG with a mid-scene frame of every selected scene (+ scene id / pose / camera label).
+    Takes seconds, needs no audio — the fastest way for a human or a vision model to review the look.
+    """
+    engine = B5CrazyMeiEngine()
+    with open(storyboard_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    legacy = resolve_legacy(data, legacy)
+    scenes = select_scenes(data.get("scenes", []), limit, preview_seconds)
+    if not scenes:
+        raise ValueError("No scenes to render a contact sheet for.")
+
+    thumb_h = thumb_w * 9 // 16
+    pad, label_h = 8, 22
+    rows = (len(scenes) + cols - 1) // cols
+    sheet = Image.new("RGB", (cols * (thumb_w + pad) + pad, rows * (thumb_h + label_h + pad) + pad), (255, 255, 255))
+    d = ImageDraw.Draw(sheet)
+
+    for i, scene in enumerate(scenes):
+        total = max(1, int(round(scene_duration(scene) * DEFAULT_FPS)))
+        grabbed = {}
+        engine.render_scene(scene, None, legacy=legacy, only_frames=[int(total * 0.6)],
+                            frame_callback=lambda fi, im, g=grabbed: g.setdefault("im", im))
+        thumb = grabbed["im"].resize((thumb_w, thumb_h), Image.Resampling.LANCZOS)
+        x = pad + (i % cols) * (thumb_w + pad)
+        y = pad + (i // cols) * (thumb_h + label_h + pad)
+        sheet.paste(thumb, (x, y + label_h))
+        vis = scene.get("visual", {})
+        cam = vis.get("camera", {})
+        label = f"{scene['scene_id']} | {vis.get('stickman_pose', '?')} | {cam.get('framing', '?')}/{cam.get('movement', '?')}"
+        d.text((x, y + 5), label, fill=(0, 0, 0))
+
+    os.makedirs(os.path.dirname(os.path.abspath(out_png)), exist_ok=True)
+    sheet.save(out_png)
+    print(f"[CrazyMei Solo Engine] Contact sheet ({len(scenes)} scenes) -> {out_png}")
+    return out_png
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="CrazyMei Solo Stickman Renderer")
     parser.add_argument("--limit", type=int, default=None, help="Limit number of scenes to render")
+    parser.add_argument("--preview-seconds", type=float, default=None,
+                        help="Render only the first scenes adding up to N seconds (e.g. 20 for the approval gate)")
+    parser.add_argument("--contact-sheet", type=str, default=None,
+                        help="Write a one-image contact sheet to this PNG path instead of rendering videos")
+    parser.add_argument("--legacy", action=argparse.BooleanOptionalAction, default=None,
+                        help="Force/disable legacy video-001 choreography (default: auto by project_id)")
     parser.add_argument("--storyboard", type=str, default=None, help="Storyboard JSON path")
     parser.add_argument("--output-dir", type=str, default=None, help="Video scenes output directory")
     args = parser.parse_args()
@@ -879,4 +1132,9 @@ if __name__ == "__main__":
     sb_path = args.storyboard or os.path.join(BASE_DIR, "projects", "video-001", "03_storyboard.json")
     v_dir = args.output_dir or os.path.join(BASE_DIR, "projects", "video-001", "video_scenes")
 
-    render_storyboard(sb_path, v_dir, limit=args.limit)
+    if args.contact_sheet:
+        render_contact_sheet(sb_path, args.contact_sheet, limit=args.limit, legacy=args.legacy,
+                             preview_seconds=args.preview_seconds)
+    else:
+        render_storyboard(sb_path, v_dir, limit=args.limit, legacy=args.legacy,
+                          preview_seconds=args.preview_seconds)

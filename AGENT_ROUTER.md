@@ -190,7 +190,9 @@ The narrator should sound intelligent, approachable, confident, and entertaining
 ## 8. PRODUCTION WORKFLOW CONTROL & FILE STORAGE
 
 Follow the production stages in order:
-`Research → [Gate 1] → Concept → [Gate 2] → Script → [Gate 3] → Storyboard → [Gate 4] → Audio → Visual Rendering → Editing → Quality Assurance → Publishing Preparation → [Gate 5].`
+`Research → [Gate 1] → Concept → [Gate 2] → Script → [Gate 3] → Storyboard → [Gate 4] → Audio → Visual Rendering (contact sheet → [Gate 4B] → full render) → Editing → Quality Assurance → Publishing Preparation → [Gate 5].`
+
+**Visuals are chosen, not drawn.** The agent never draws images itself. It picks poses, moods, icons, camera moves and SFX from the closed lists in `engine/vocab.py` (print them with `python -m engine.vocab`), and the renderer in `engine/` draws them. This keeps the look consistent even with a weaker model.
 
 Do not automatically proceed to the next stage when the current stage requires user approval.
 The user has final authority over major creative and strategic decisions.
@@ -246,5 +248,6 @@ Never guarantee views, subscribers, revenue, or monetization approval.
    - **Gate 1 (Research Approval)**: User signs off on validated niche and specific topic in `01_research.md`.
    - **Gate 2 (Concept Approval)**: User signs off on Concept angle, 3 working titles, and Thumbnail concept; `AGENT-02-CONCEPT` records the approved choice under `## Approved Concept` inside `01_research.md`.
    - **Gate 3 (Script Freeze)**: User signs off on `02_script.md` before storyboarding begins.
-   - **Gate 4 (Technical Validation)**: `03_storyboard.json` strictly validates against `templates/storyboard-schema.json` before batch rendering.
+   - **Gate 4 (Technical Validation)**: `python -m engine.storyboard_validator projects/<project_id>/03_storyboard.json` must report `0 error(s)` (schema + engine vocabulary) before any rendering.
+   - **Gate 4B (Preview Approval)**: after the contact sheet looks right, render only the first 20 seconds (`--preview-seconds 20`), mix it with audio, and get user approval before rendering the whole video. See `workflows/06-visual-render.md`.
    - **Gate 5 (Publication Readiness)**: `qa_report.md` passes all criteria with zero unresolved copyright or quality flags before publishing.
