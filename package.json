@@ -1,0 +1,27 @@
+{
+  "name": "youtube-content-engine",
+  "version": "1.0.0",
+  "description": "Hệ thống bán tự động hỗ trợ sản xuất nội dung video YouTube chuẩn hóa (Stickman / 2D Minimalist Animation), tối ưu cho quy trình phối hợp giữa các AI Agent và nhà sáng tạo nội dung.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkxzs/workflow-stickerman.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dkxzs/workflow-stickerman/issues"
+  },
+  "homepage": "https://github.com/dkxzs/workflow-stickerman#readme",
+  "dependencies": {
+    "@napi-rs/canvas": "^1.2.0",
+    "sharp": "^0.35.5"
+  }
+}
