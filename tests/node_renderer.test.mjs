@@ -96,3 +96,39 @@ test('iconSVG supports all 15 vocab icons plus fallback and renders non-empty PN
     assert.ok(png.length > 0, `PNG for icon "${name}" should be non-empty`);
   }
 });
+
+test('header renders only from visual.header and 110-char caption fits <= 2 lines within 90% width', async () => {
+  const sceneWithHeader = structuredClone(exampleStoryboard.scenes[0]);
+  const svgWithHeader = renderSceneFrameSVG(sceneWithHeader, 5, 60, 30);
+  assert.ok(svgWithHeader.includes('id="top_header"'), 'Should render top_header when visual.header exists');
+  assert.ok(svgWithHeader.includes('PROCRASTINATION'), 'Should render visual.header.title');
+  assert.ok(svgWithHeader.includes('WHY WE KEEP DELAYING'), 'Should render visual.header.subtitle');
+
+  const sceneNoHeader = structuredClone(exampleStoryboard.scenes[1]);
+  assert.ok(!sceneNoHeader.visual.header, 'Example scene 2 has no visual.header');
+  const svgNoHeader = renderSceneFrameSVG(sceneNoHeader, 5, 60, 30);
+  assert.ok(!svgNoHeader.includes('id="top_header"'), 'Should omit top_header when visual.header is absent');
+
+  // 110-character narration test
+  const longText = 'This is a deliberately long narration sentence with exactly one hundred and ten characters to test caption wrap.';
+  assert.ok(longText.length >= 110, `Expected >= 110 chars, got ${longText.length}`);
+
+  const longScene = structuredClone(sceneNoHeader);
+  longScene.narration_text = longText;
+  const svgLong = renderSceneFrameSVG(longScene, 5, 60, 30);
+
+  const captionMatch = svgLong.match(/<g id="bottom_caption">[\s\S]*?<text[^>]*font-size="(\d+)"[^>]*>([\s\S]*?)<\/text>/);
+  assert.ok(captionMatch, 'bottom_caption text element should exist');
+  const fontSize = parseInt(captionMatch[1], 10);
+  const tspans = [...captionMatch[2].matchAll(/<tspan[^>]*>([\s\S]*?)<\/tspan>/g)].map(m => m[1]);
+
+  assert.ok(tspans.length >= 1 && tspans.length <= 2, `Caption must have 1-2 lines, got ${tspans.length}`);
+  const maxSafeW = 0.90 * 1920;
+  for (const line of tspans) {
+    const estWidth = line.length * fontSize * 0.62;
+    assert.ok(estWidth <= maxSafeW, `Line "${line}" (${line.length} chars * ${fontSize}px) est width ${estWidth} > ${maxSafeW}`);
+  }
+
+  const png = await sharp(Buffer.from(svgLong)).png().toBuffer();
+  assert.ok(png.length > 1000, 'Long caption SVG should convert to PNG cleanly');
+});

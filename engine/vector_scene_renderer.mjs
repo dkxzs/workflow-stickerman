@@ -81,6 +81,99 @@ export function renderCard(card, cx, cy, accent) {
 }
 
 /**
+ * Render top section header from visual.header {title, subtitle}. Returns '' when absent.
+ */
+export function renderHeader(header) {
+  const title = String(header?.title ?? '').trim().toUpperCase();
+  if (!title) return '';
+  const subtitle = String(header?.subtitle ?? '').trim().toUpperCase();
+  const maxW = 0.80 * W;
+
+  const titleSize = Math.max(20, Math.min(52, Math.floor(maxW / Math.max(1, title.length * 0.65))));
+  const estTitleW = title.length * titleSize * 0.62;
+  const titleAttr = estTitleW > maxW
+    ? ` textLength="${maxW}" lengthAdjust="spacingAndGlyphs"`
+    : '';
+  const underlineW = Math.min(maxW, Math.max(160, estTitleW + 40));
+
+  let subSVG = '';
+  if (subtitle) {
+    const subSize = Math.max(14, Math.min(22, Math.floor(maxW / Math.max(1, subtitle.length * 0.62))));
+    const subAttr = subtitle.length * subSize * 0.62 > maxW
+      ? ` textLength="${maxW}" lengthAdjust="spacingAndGlyphs"`
+      : '';
+    subSVG = `<text y="52" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="${subSize}" fill="${MUTED}" letter-spacing="2"${subAttr}>${esc(subtitle)}</text>`;
+  }
+
+  return `
+    <g id="top_header" transform="translate(${W / 2}, 92)">
+      <text text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="${titleSize}" fill="${INK}" letter-spacing="2"${titleAttr}>${esc(title)}</text>
+      ${getWavyLine(0, 18, underlineW)}
+      ${subSVG}
+    </g>
+  `;
+}
+
+/**
+ * Wrap text into at most 2 lines (~40 chars each) for bottom caption.
+ */
+export function wrapCaptionLines(text, maxChars = 40) {
+  const clean = String(text ?? '').trim().replace(/\s+/g, ' ');
+  if (!clean) return [];
+  if (clean.length <= maxChars) return [clean];
+
+  const words = clean.split(' ');
+  const lines = [];
+  let current = '';
+
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    const candidate = current ? `${current} ${word}` : word;
+    if (candidate.length <= maxChars || !current) {
+      current = candidate;
+    } else if (lines.length === 0) {
+      lines.push(current);
+      current = word;
+    } else {
+      // Already on line 2; append remaining words if they fit, otherwise truncate cleanly
+      const rest = [current, ...words.slice(i)].join(' ');
+      if (rest.length <= maxChars + 8) {
+        current = rest;
+      } else {
+        current = rest.slice(0, maxChars + 5).trimEnd() + '...';
+      }
+      break;
+    }
+  }
+  if (current) lines.push(current);
+  return lines.slice(0, 2);
+}
+
+/**
+ * Render bottom caption (white text, dark outline) inside 90% safe width, max 2 lines.
+ */
+export function renderCaption(narrationText) {
+  const lines = wrapCaptionLines(narrationText, 40);
+  if (lines.length === 0) return '';
+
+  const maxSafeW = 0.90 * W;
+  const maxLen = Math.max(...lines.map(l => l.length));
+  const fontSize = Math.max(20, Math.min(36, Math.floor(maxSafeW / Math.max(1, maxLen * 0.62))));
+  const lineHeight = Math.round(fontSize * 1.28);
+  const startY = lines.length === 2 ? 975 : 1005;
+
+  const tspans = lines
+    .map((line, idx) => `<tspan x="${W / 2}" dy="${idx === 0 ? 0 : lineHeight}">${esc(line)}</tspan>`)
+    .join('');
+
+  return `
+    <g id="bottom_caption">
+      <text x="${W / 2}" y="${startY}" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="${fontSize}" fill="#ffffff" stroke="${INK}" stroke-width="8" stroke-linejoin="round" paint-order="stroke fill">${tspans}</text>
+    </g>
+  `;
+}
+
+/**
  * Determine background type and detail level based on scene metadata.
  */
 function determineBackground(scene) {
@@ -341,13 +434,11 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
     <!-- 4. RIGHT SIDE INFO CARD / DIAGRAMS -->
     ${extraPropsSVG}
 
-    <!-- 5. TOP HEADLINE (Subtle subtitle) -->
-    <g transform="translate(${W / 2}, 110)">
-      <text text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="42" fill="${INK}" letter-spacing="2">
-        ${esc((scene.narration_text || "").toUpperCase())}
-      </text>
-      ${getWavyLine(0, 16, Math.min(650, (scene.narration_text || "").length * 18))}
-    </g>
+    <!-- 5. TOP HEADER (from visual.header only) -->
+    ${renderHeader(scene.visual?.header)}
+
+    <!-- 6. BOTTOM CAPTION (from narration_text, max 2 lines) -->
+    ${renderCaption(scene.narration_text)}
   </svg>
   `;
 }
