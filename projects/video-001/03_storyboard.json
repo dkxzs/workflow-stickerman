@@ -38,7 +38,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#1D3557"
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "phone",
+          "title": "PHONE UNLOCK",
+          "subtitle": "ACTIVE FOCUS"
+        }
       },
       "audio": {
         "sfx": "phone_unlock",
@@ -73,7 +78,12 @@
           "movement": "zoom_in"
         },
         "transition": "cut",
-        "accent_color_focus": "#1D3557"
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "mail_empty",
+          "title": "0 MESSAGES",
+          "subtitle": "INBOX EMPTY"
+        }
       },
       "audio": {
         "sfx": "pop",
@@ -108,7 +118,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#E63946"
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "bell_off",
+          "title": "NO NOTIFS",
+          "subtitle": "ALL QUIET"
+        }
       },
       "audio": {
         "sfx": "subtle_click",
@@ -143,7 +158,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#212529"
+        "accent_color_focus": "#212529",
+        "card": {
+          "icon": "cross",
+          "title": "NOTHING",
+          "subtitle": "BLANK SCREEN"
+        }
       },
       "audio": {
         "sfx": null,
@@ -178,7 +198,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#1D3557"
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "lock",
+          "title": "SCREEN LOCKED",
+          "subtitle": "CLICK"
+        }
       },
       "audio": {
         "sfx": "phone_lock",
@@ -213,7 +238,12 @@
           "movement": "zoom_in"
         },
         "transition": "cut",
-        "accent_color_focus": "#FFB703"
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "clock",
+          "title": "5 SECONDS",
+          "subtitle": "LATER"
+        }
       },
       "audio": {
         "sfx": "clock_tick",
@@ -249,7 +279,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#FFB703"
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "phone",
+          "title": "RE-OPENED",
+          "subtitle": "CHECKING AGAIN"
+        }
       },
       "audio": {
         "sfx": "phone_unlock",
@@ -284,7 +319,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#FFB703"
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "check",
+          "title": "GREAT JOB",
+          "subtitle": "CONGRATULATIONS"
+        }
       },
       "audio": {
         "sfx": "dry_clap",
@@ -319,7 +359,12 @@
           "movement": "shake"
         },
         "transition": "cut",
-        "accent_color_focus": "#E63946"
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "0 NEW UPDATES",
+          "subtitle": "NOTHING CHANGED"
+        }
       },
       "audio": {
         "sfx": "record_scratch",
@@ -353,7 +398,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#1D3557"
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "question",
+          "title": "WHY REPEAT?",
+          "subtitle": "THE SUBCONSCIOUS HABIT"
+        }
       },
       "audio": {
         "sfx": "whoosh",
@@ -388,7 +438,12 @@
           "movement": "zoom_in"
         },
         "transition": "cut",
-        "accent_color_focus": "#1D3557"
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "brain",
+          "title": "DOPAMINE LOOP",
+          "subtitle": "VARIABLE REWARDS"
+        }
       },
       "audio": {
         "sfx": "ding",
@@ -423,7 +478,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#FFB703"
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "lightbulb",
+          "title": "POTENTIAL REWARD",
+          "subtitle": "THE SLOT MACHINE EFFECT"
+        }
       },
       "audio": {
         "sfx": "pop",
@@ -457,7 +517,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#1D3557"
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "mail_empty",
+          "title": "NEW MESSAGE",
+          "subtitle": "POSSIBLE REWARD"
+        }
       },
       "audio": {
         "sfx": "pop",
@@ -492,7 +557,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#2A9D8F"
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "heart",
+          "title": "FUNNY VIDEO",
+          "subtitle": "QUICK DOPAMINE"
+        }
       },
       "audio": {
         "sfx": "pop",
@@ -527,7 +597,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#FFB703"
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "warning",
+          "title": "FRESH NEWS",
+          "subtitle": "UNEXPECTED UPDATE"
+        }
       },
       "audio": {
         "sfx": "pop",
@@ -561,7 +636,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#FFB703"
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "question",
+          "title": "UNPREDICTABLE",
+          "subtitle": "RANDOM TIMING"
+        }
       },
       "audio": {
         "sfx": "slot_lever",
@@ -595,7 +675,12 @@
           "movement": "zoom_in"
         },
         "transition": "cut",
-        "accent_color_focus": "#2A9D8F"
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "brain",
+          "title": "HABIT LOOP",
+          "subtitle": "CUE ACTION REWARD"
+        }
       },
       "audio": {
         "sfx": "whoosh",
@@ -630,7 +715,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#2A9D8F"
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "coin",
+          "title": "WIN REWARD",
+          "subtitle": "SOMETIMES A HIT"
+        }
       },
       "audio": {
         "sfx": "ding",
@@ -665,7 +755,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#E63946"
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "ZERO REWARD",
+          "subtitle": "SOMETIMES NOTHING"
+        }
       },
       "audio": {
         "sfx": "thud",
@@ -700,7 +795,12 @@
           "movement": "zoom_in"
         },
         "transition": "cut",
-        "accent_color_focus": "#FFB703"
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "chart_up",
+          "title": "1% CHANCE",
+          "subtitle": "TINY POSSIBILITY"
+        }
       },
       "audio": {
         "sfx": "pop",
@@ -735,7 +835,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#E63946"
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "MAGNETIC PULL",
+          "subtitle": "PULLING YOU BACK"
+        }
       },
       "audio": {
         "sfx": "whoosh",
@@ -803,7 +908,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#1D3557"
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "bell_off",
+          "title": "ZERO PINGS",
+          "subtitle": "NO TRIGGER NEEDED"
+        }
       },
       "audio": {
         "sfx": "pop",
@@ -838,7 +948,12 @@
           "movement": "zoom_in"
         },
         "transition": "cut",
-        "accent_color_focus": "#FFB703"
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "clock",
+          "title": "A LITTLE BORED",
+          "subtitle": "QUIET MOMENT"
+        }
       },
       "audio": {
         "sfx": "clock_tick",
@@ -873,7 +988,12 @@
           "movement": "zoom_in"
         },
         "transition": "cut",
-        "accent_color_focus": "#E63946"
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "phone",
+          "title": "AUTO REACH",
+          "subtitle": "REFLEX HABIT"
+        }
       },
       "audio": {
         "sfx": "whoosh",
@@ -907,7 +1027,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#1D3557"
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "brain",
+          "title": "BRAIN SAYS",
+          "subtitle": "INTERNAL DIALOGUE"
+        }
       },
       "audio": {
         "sfx": "pop",
@@ -941,7 +1066,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#1D3557"
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "question",
+          "title": "INTERNET FEED",
+          "subtitle": "WHAT CHANGED?"
+        }
       },
       "audio": {
         "sfx": "subtle_click",
@@ -976,7 +1106,12 @@
           "movement": "shake"
         },
         "transition": "cut",
-        "accent_color_focus": "#E63946"
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "clock",
+          "title": "12 SECONDS",
+          "subtitle": "JUST CHECKED"
+        }
       },
       "audio": {
         "sfx": "record_scratch",
@@ -1043,7 +1178,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#E63946"
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "NO OCEANS",
+          "subtitle": "KEEP YOUR PHONE"
+        }
       },
       "audio": {
         "sfx": "water_splash",
@@ -1078,7 +1218,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#2A9D8F"
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "phone",
+          "title": "SETTINGS",
+          "subtitle": "TAKE CONTROL"
+        }
       },
       "audio": {
         "sfx": "whoosh",
@@ -1113,7 +1258,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#2A9D8F"
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "bell_off",
+          "title": "NOTIFS OFF",
+          "subtitle": "NON-ESSENTIAL"
+        }
       },
       "audio": {
         "sfx": "toggle_click",
@@ -1148,7 +1298,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#2A9D8F"
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "clock",
+          "title": "SET SCHEDULE",
+          "subtitle": "SPECIFIC TIMES"
+        }
       },
       "audio": {
         "sfx": "ding",
@@ -1182,7 +1337,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#1D3557"
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "check",
+          "title": "2019 STUDY",
+          "subtitle": "RESEARCH FINDING"
+        }
       },
       "audio": {
         "sfx": "pop",
@@ -1217,7 +1377,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#2A9D8F"
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "mail_empty",
+          "title": "BATCH SYSTEM",
+          "subtitle": "GROUPED ALERTS"
+        }
       },
       "audio": {
         "sfx": "whoosh",
@@ -1253,7 +1418,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#2A9D8F"
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "clock",
+          "title": "3 BATCHES",
+          "subtitle": "9AM 1PM 6PM"
+        }
       },
       "audio": {
         "sfx": "pop_pop_pop",
@@ -1288,7 +1458,12 @@
           "movement": "zoom_in"
         },
         "transition": "cut",
-        "accent_color_focus": "#2A9D8F"
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "chart_up",
+          "title": "DEEP FOCUS",
+          "subtitle": "MORE FOCUSED"
+        }
       },
       "audio": {
         "sfx": "ding",
@@ -1323,7 +1498,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#2A9D8F"
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "check",
+          "title": "IN CONTROL",
+          "subtitle": "CALM CLARITY"
+        }
       },
       "audio": {
         "sfx": "pop",
@@ -1392,7 +1572,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#FFB703"
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "phone",
+          "title": "FACE DOWN",
+          "subtitle": "RESTING QUIETLY"
+        }
       },
       "audio": {
         "sfx": null,
@@ -1426,7 +1611,12 @@
           "movement": "zoom_in"
         },
         "transition": "cut",
-        "accent_color_focus": "#2A9D8F"
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "phone",
+          "title": "QUIET PHONE",
+          "subtitle": "PEACE OF MIND"
+        }
       },
       "audio": {
         "sfx": "subtle_chime",
@@ -1462,7 +1652,12 @@
           "movement": "static"
         },
         "transition": "cut",
-        "accent_color_focus": "#2A9D8F"
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "lock",
+          "title": "SCREEN UNOPENED",
+          "subtitle": "REAL FREEDOM"
+        }
       },
       "audio": {
         "sfx": "calm_chime",

@@ -16,6 +16,15 @@ const H = 1080;
 const FLOOR_Y = 900;
 const DESK_TOP_Y = 660;
 
+// Helper for XML/SVG escaping
+export function esc(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 // Helper for wavy underline
 export function getWavyLine(cx, y, width, color = RED) {
   let d = `M ${cx - width / 2} ${y}`;
@@ -29,6 +38,185 @@ export function getWavyLine(cx, y, width, color = RED) {
     d += ` Q ${x1} ${y1} ${x2} ${y2}`;
   }
   return `<path d="${d}" fill="none" stroke="${color}" stroke-width="5" stroke-linecap="round"/>`;
+}
+
+/**
+ * Render vector icon matching engine/icons.py (15 vocab.ICONS + generic fallback).
+ */
+export function renderIconSVG(name) {
+  switch (name) {
+    case 'lightbulb':
+      return `
+        <g>
+          <circle cx="0" cy="-10" r="32" fill="${GOLD}" stroke="${INK}" stroke-width="4"/>
+          <rect x="-13" y="20" width="26" height="20" rx="3" fill="${MUTED}" stroke="${INK}" stroke-width="3"/>
+          <line x1="-35" y1="-30" x2="-47" y2="-37" stroke="${GOLD}" stroke-width="5" stroke-linecap="round"/>
+          <line x1="-20" y1="-45" x2="-27" y2="-57" stroke="${GOLD}" stroke-width="5" stroke-linecap="round"/>
+          <line x1="0" y1="-50" x2="0" y2="-64" stroke="${GOLD}" stroke-width="5" stroke-linecap="round"/>
+          <line x1="20" y1="-45" x2="27" y2="-57" stroke="${GOLD}" stroke-width="5" stroke-linecap="round"/>
+          <line x1="35" y1="-30" x2="47" y2="-37" stroke="${GOLD}" stroke-width="5" stroke-linecap="round"/>
+        </g>`;
+    case 'brain':
+      return `
+        <g>
+          <ellipse cx="-25" cy="0" rx="27" ry="34" fill="#ffe6eb" stroke="${RED}" stroke-width="4"/>
+          <ellipse cx="25" cy="0" rx="27" ry="34" fill="#ffe6eb" stroke="${RED}" stroke-width="4"/>
+          <line x1="0" y1="-30" x2="0" y2="30" stroke="${RED}" stroke-width="3"/>
+          <path d="M -38 -14 Q -26 -24 -14 -14" fill="none" stroke="${RED}" stroke-width="3" stroke-linecap="round"/>
+          <path d="M 14 -14 Q 26 -24 38 -14" fill="none" stroke="${RED}" stroke-width="3" stroke-linecap="round"/>
+          <path d="M -36 12 Q -24 24 -12 12" fill="none" stroke="${RED}" stroke-width="3" stroke-linecap="round"/>
+          <path d="M 12 12 Q 24 24 36 12" fill="none" stroke="${RED}" stroke-width="3" stroke-linecap="round"/>
+          <line x1="4" y1="34" x2="10" y2="50" stroke="${RED}" stroke-width="6" stroke-linecap="round"/>
+        </g>`;
+    case 'clock':
+      return `
+        <g>
+          <circle cx="0" cy="0" r="46" fill="${WHITE}" stroke="${INK}" stroke-width="6"/>
+          <line x1="0" y1="-36" x2="0" y2="-43" stroke="${INK}" stroke-width="3"/>
+          <line x1="36" y1="0" x2="43" y2="0" stroke="${INK}" stroke-width="3"/>
+          <line x1="0" y1="36" x2="0" y2="43" stroke="${INK}" stroke-width="3"/>
+          <line x1="-36" y1="0" x2="-43" y2="0" stroke="${INK}" stroke-width="3"/>
+          <line x1="0" y1="0" x2="11" y2="-19" stroke="${INK}" stroke-width="6" stroke-linecap="round"/>
+          <line x1="0" y1="0" x2="28" y2="14" stroke="${RED}" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="0" cy="0" r="5" fill="${INK}"/>
+        </g>`;
+    case 'bell_off':
+      return `
+        <g>
+          <path d="M -40 -12 A 40 40 0 0 1 40 -12 L 48 30 L -48 30 Z" fill="none" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+          <line x1="-52" y1="30" x2="52" y2="30" stroke="${INK}" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="0" cy="38" r="9" fill="${INK}"/>
+          <line x1="-56" y1="-50" x2="56" y2="50" stroke="${RED}" stroke-width="8" stroke-linecap="round"/>
+        </g>`;
+    case 'lock':
+      return `
+        <g>
+          <path d="M -24 -8 L -24 -34 A 24 28 0 0 1 24 -34 L 24 -8" fill="none" stroke="${INK}" stroke-width="8" stroke-linecap="round"/>
+          <rect x="-40" y="-12" width="80" height="56" rx="10" fill="${INK}"/>
+          <circle cx="0" cy="13" r="7" fill="${WHITE}"/>
+          <polygon points="-5,16 5,16 8,34 -8,34" fill="${WHITE}"/>
+        </g>`;
+    case 'phone':
+      return `
+        <g>
+          <rect x="-30" y="-52" width="60" height="104" rx="12" fill="${INK}"/>
+          <rect x="-25" y="-44" width="50" height="80" rx="8" fill="#f8fafc"/>
+          <circle cx="0" cy="-11" r="13" fill="${BLUE}"/>
+          <circle cx="0" cy="45" r="4" fill="${WHITE}"/>
+        </g>`;
+    case 'mail_empty':
+      return `
+        <g>
+          <rect x="-52" y="-34" width="104" height="68" fill="${WHITE}" stroke="${MUTED}" stroke-width="6"/>
+          <polyline points="-52,-34 0,6 52,-34" fill="none" stroke="${MUTED}" stroke-width="6" stroke-linejoin="round"/>
+        </g>`;
+    case 'check':
+      return `
+        <g>
+          <circle cx="0" cy="0" r="46" fill="${TEAL}"/>
+          <polyline points="-20,2 -6,18 24,-16" fill="none" stroke="${WHITE}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>`;
+    case 'cross':
+      return `
+        <g>
+          <circle cx="0" cy="0" r="46" fill="${RED}"/>
+          <line x1="-18" y1="-18" x2="18" y2="18" stroke="${WHITE}" stroke-width="10" stroke-linecap="round"/>
+          <line x1="18" y1="-18" x2="-18" y2="18" stroke="${WHITE}" stroke-width="10" stroke-linecap="round"/>
+        </g>`;
+    case 'question':
+      return `
+        <g>
+          <circle cx="0" cy="0" r="46" fill="${BLUE}"/>
+          <text x="0" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="62" fill="${WHITE}">?</text>
+        </g>`;
+    case 'warning':
+      return `
+        <g>
+          <polygon points="0,-50 -54,42 54,42" fill="${GOLD}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+          <line x1="0" y1="-14" x2="0" y2="10" stroke="${INK}" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="0" cy="23" r="5" fill="${INK}"/>
+        </g>`;
+    case 'chart_up':
+      return `
+        <g>
+          <line x1="-52" y1="44" x2="54" y2="44" stroke="${MUTED}" stroke-width="5" stroke-linecap="round"/>
+          <rect x="-47" y="24" width="22" height="20" fill="${TEAL}"/>
+          <rect x="-11" y="8" width="22" height="36" fill="${TEAL}"/>
+          <rect x="25" y="-10" width="22" height="54" fill="${TEAL}"/>
+          <polyline points="-44,-22 -6,-34 12,-30 46,-58" fill="none" stroke="${INK}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon points="46,-58 26,-56 44,-38" fill="${INK}"/>
+        </g>`;
+    case 'chart_down':
+      return `
+        <g>
+          <line x1="-52" y1="44" x2="54" y2="44" stroke="${MUTED}" stroke-width="5" stroke-linecap="round"/>
+          <rect x="-47" y="-10" width="22" height="54" fill="${RED}"/>
+          <rect x="-11" y="8" width="22" height="36" fill="${RED}"/>
+          <rect x="25" y="24" width="22" height="20" fill="${RED}"/>
+          <polyline points="-44,-58 -6,-32 12,-44 46,-18" fill="none" stroke="${INK}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon points="46,-18 26,-20 42,-38" fill="${INK}"/>
+        </g>`;
+    case 'coin':
+      return `
+        <g>
+          <circle cx="0" cy="0" r="44" fill="${GOLD}" stroke="${INK}" stroke-width="5"/>
+          <circle cx="0" cy="0" r="32" fill="none" stroke="#c88c00" stroke-width="3"/>
+          <text x="0" y="18" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="50" fill="${INK}">$</text>
+        </g>`;
+    case 'heart':
+      return `
+        <g>
+          <circle cx="-23" cy="-15" r="25" fill="${RED}"/>
+          <circle cx="23" cy="-15" r="25" fill="${RED}"/>
+          <polygon points="-46,-4 46,-4 0,50" fill="${RED}"/>
+        </g>`;
+    default:
+      return `
+        <g>
+          <circle cx="0" cy="0" r="40" fill="#ebf2ff" stroke="${BLUE}" stroke-width="4"/>
+          <line x1="0" y1="-20" x2="0" y2="4" stroke="${BLUE}" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="0" cy="17" r="5" fill="${BLUE}"/>
+        </g>`;
+  }
+}
+
+/**
+ * Render storyboard info card at (cx, cy). Returns empty string when card is absent.
+ */
+export function renderCard(card, cx, cy, accent) {
+  if (!card) return '';
+  const cardW = 440;
+  const cardH = 260;
+  const maxTextW = 380;
+
+  const rawTitle = String(card.title ?? '').trim().toUpperCase();
+  const rawSub = String(card.subtitle ?? '').trim().toUpperCase();
+  const icon = card.icon;
+  const titleColor = esc(accent || INK);
+
+  // Auto-shrink font size to fit inside 440px card width (380px inner margin)
+  const titleSize = Math.max(16, Math.min(30, Math.floor(maxTextW / Math.max(1, rawTitle.length * 0.65))));
+  const subSize = Math.max(11, Math.min(16, Math.floor(maxTextW / Math.max(1, rawSub.length * 0.65))));
+
+  const titleAttr = rawTitle.length * titleSize * 0.62 > maxTextW
+    ? ` textLength="${maxTextW}" lengthAdjust="spacingAndGlyphs"`
+    : '';
+  const subAttr = rawSub.length * subSize * 0.62 > maxTextW
+    ? ` textLength="${maxTextW}" lengthAdjust="spacingAndGlyphs"`
+    : '';
+
+  const iconSVG = icon ? `<g transform="translate(0, -42)">${renderIconSVG(icon)}</g>` : '';
+  const titleY = icon ? 58 : 4;
+  const subY = icon ? 92 : 42;
+
+  return `
+    <g id="info_card" transform="translate(${cx}, ${cy})" filter="url(#cardShadow)">
+      <rect x="${-cardW / 2}" y="${-cardH / 2}" width="${cardW}" height="${cardH}" rx="22" fill="#ffffff" stroke="#d2cdc6" stroke-width="3"/>
+      ${iconSVG}
+      ${rawTitle ? `<text x="0" y="${titleY}" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="${titleSize}" fill="${titleColor}" letter-spacing="1"${titleAttr}>${esc(rawTitle)}</text>` : ''}
+      ${rawSub ? `<text x="0" y="${subY}" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="${subSize}" fill="${MUTED}" letter-spacing="2"${subAttr}>${esc(rawSub)}</text>` : ''}
+    </g>
+  `;
 }
 
 /**
@@ -88,7 +276,9 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
 
   // Character staging
   const pos = scene.visual?.position || { x: 0.25, y: 0.82 };
-  const heroX = pos.x ? pos.x * W : (pos.anchor === "bottom_right" ? 1420 : 490);
+  const posX = pos.x !== undefined ? pos.x : (pos.anchor === "bottom_right" ? 1420 / W : 0.25);
+  const heroX = posX * W;
+  const dir = heroX < W / 2 ? 1 : -1;
   const hipY = 630 + breath * 0.3;
   const shoulderX = heroX;
   const shoulderY = 410;
@@ -202,27 +392,27 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
 
   // ARM POSES
   if (actionName.includes("chin_scratch") || poseName.includes("thinking") || poseName.includes("chin_on_hand")) {
-    // Thoughtful pose: Right arm bent with hand cupping chin, Left arm crossing chest
+    // Thoughtful pose: Lead arm bent with hand cupping chin, Rear arm crossing chest
     armsSVG = `
-      <path d="M ${shoulderX - 22} ${shoulderY + 10} Q ${heroX - 50} ${shoulderY + 80} ${heroX - 10} ${shoulderY + 120}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <path d="M ${shoulderX + 22} ${shoulderY + 10} Q ${heroX + 60} ${shoulderY + 70} ${heroX + 16} ${headY + 36}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <circle cx="${heroX + 16}" cy="${headY + 36}" r="8" fill="${INK}"/>
+      <path d="M ${shoulderX - 22 * dir} ${shoulderY + 10} Q ${heroX - 50 * dir} ${shoulderY + 80} ${heroX - 10 * dir} ${shoulderY + 120}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <path d="M ${shoulderX + 22 * dir} ${shoulderY + 10} Q ${heroX + 60 * dir} ${shoulderY + 70} ${heroX + 16 * dir} ${headY + 36}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <circle cx="${heroX + 16 * dir}" cy="${headY + 36}" r="8" fill="${INK}"/>
     `;
   } else if (actionName.includes("slow_clap") || poseName.includes("celebrate_win")) {
     // Sarcastic slow clapping: Hands meeting together in front of chest
     const clapCycle = Math.sin(t * 8) * 12;
     armsSVG = `
-      <path d="M ${shoulderX - 22} ${shoulderY + 10} Q ${heroX - 40} ${shoulderY + 70} ${heroX - 8 + clapCycle} ${shoulderY + 100}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <path d="M ${shoulderX + 22} ${shoulderY + 10} Q ${heroX + 40} ${shoulderY + 70} ${heroX + 8 - clapCycle} ${shoulderY + 100}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <circle cx="${heroX - 8 + clapCycle}" cy="${shoulderY + 100}" r="8" fill="${INK}"/>
-      <circle cx="${heroX + 8 - clapCycle}" cy="${shoulderY + 100}" r="8" fill="${INK}"/>
+      <path d="M ${shoulderX - 22 * dir} ${shoulderY + 10} Q ${heroX - 40 * dir} ${shoulderY + 70} ${heroX + (-8 + clapCycle) * dir} ${shoulderY + 100}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <path d="M ${shoulderX + 22 * dir} ${shoulderY + 10} Q ${heroX + 40 * dir} ${shoulderY + 70} ${heroX + (8 - clapCycle) * dir} ${shoulderY + 100}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <circle cx="${heroX + (-8 + clapCycle) * dir}" cy="${shoulderY + 100}" r="8" fill="${INK}"/>
+      <circle cx="${heroX + (8 - clapCycle) * dir}" cy="${shoulderY + 100}" r="8" fill="${INK}"/>
     `;
   } else if (actionName.includes("point") || poseName.includes("pointing")) {
-    // Pointing rightward to diagram or card
+    // Pointing toward diagram or card
     armsSVG = `
-      <path d="M ${shoulderX - 22} ${shoulderY + 10} Q ${heroX - 45} ${shoulderY + 80} ${heroX - 30} ${shoulderY + 140}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <path d="M ${shoulderX + 22} ${shoulderY + 10} Q ${heroX + 100} ${shoulderY + 30} ${heroX + 220} ${shoulderY + 40}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <circle cx="${heroX + 225}" cy="${shoulderY + 40}" r="8" fill="${INK}"/>
+      <path d="M ${shoulderX - 22 * dir} ${shoulderY + 10} Q ${heroX - 45 * dir} ${shoulderY + 80} ${heroX - 30 * dir} ${shoulderY + 140}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <path d="M ${shoulderX + 22 * dir} ${shoulderY + 10} Q ${heroX + 100 * dir} ${shoulderY + 30} ${heroX + 220 * dir} ${shoulderY + 40}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <circle cx="${heroX + 225 * dir}" cy="${shoulderY + 40}" r="8" fill="${INK}"/>
     `;
   } else if (phoneInHand) {
     // Standard phone check
@@ -232,8 +422,8 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
     const screenColor = phoneGlow ? BLUE : '#333538';
 
     armsSVG = `
-      <path d="M ${shoulderX - 22} ${shoulderY + 10} Q ${heroX - 55} ${shoulderY + 80} ${phoneX - 18} ${phoneY + 25}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <path d="M ${shoulderX + 22} ${shoulderY + 10} Q ${heroX + 55} ${shoulderY + 80} ${phoneX + 18} ${phoneY + 25}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <path d="M ${shoulderX - 22 * dir} ${shoulderY + 10} Q ${heroX - 55 * dir} ${shoulderY + 80} ${phoneX - 18 * dir} ${phoneY + 25}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <path d="M ${shoulderX + 22 * dir} ${shoulderY + 10} Q ${heroX + 55 * dir} ${shoulderY + 80} ${phoneX + 18 * dir} ${phoneY + 25}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
       <rect x="${phoneX - 22}" y="${phoneY - 15}" width="44" height="78" rx="8" fill="#18191c" stroke="${INK}" stroke-width="5"/>
       <rect x="${phoneX - 16}" y="${phoneY - 7}" width="32" height="60" rx="4" fill="${screenColor}"/>
       ${phoneGlow ? `<rect x="${phoneX - 14}" y="${phoneY + 32}" width="28" height="6" rx="2" fill="#ffffff" opacity="0.8"/>` : ''}
@@ -241,72 +431,15 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
   } else {
     // Hands resting naturally
     armsSVG = `
-      <path d="M ${shoulderX - 22} ${shoulderY + 10} Q ${heroX - 45} ${shoulderY + 90} ${heroX - 35} ${shoulderY + 150}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <path d="M ${shoulderX + 22} ${shoulderY + 10} Q ${heroX + 45} ${shoulderY + 90} ${heroX + 35} ${shoulderY + 150}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <path d="M ${shoulderX - 22 * dir} ${shoulderY + 10} Q ${heroX - 45 * dir} ${shoulderY + 90} ${heroX - 35 * dir} ${shoulderY + 150}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <path d="M ${shoulderX + 22 * dir} ${shoulderY + 10} Q ${heroX + 45 * dir} ${shoulderY + 90} ${heroX + 35 * dir} ${shoulderY + 150}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
     `;
   }
 
-  // DIAGRAM / PROPS OVERLAY
-  if (desc.includes("brain") || (scene.visual?.props || []).includes("minimalist_brain_vector")) {
-    // Minimalist Brain Vector Diagram with Dopamine Loop
-    extraPropsSVG = `
-      <g transform="translate(1380, 480)" filter="url(#cardShadow)">
-        <rect x="-240" y="-150" width="480" height="300" rx="24" fill="#ffffff" stroke="#d2cdc6" stroke-width="3"/>
-        <!-- Brain Illustration -->
-        <g transform="translate(0, -35)">
-          <path d="M -70 10 C -100 -40 -60 -90 0 -90 C 60 -90 100 -40 70 10 C 60 40 30 60 0 60 C -30 60 -60 40 -70 10 Z" fill="#fee2e2" stroke="${RED}" stroke-width="5"/>
-          <path d="M 0 -85 L 0 55" stroke="${RED}" stroke-width="4" stroke-dasharray="6 4"/>
-          <path d="M -45 -30 Q -15 -10 -40 20" fill="none" stroke="${RED}" stroke-width="4"/>
-          <path d="M 45 -30 Q 15 -10 40 20" fill="none" stroke="${RED}" stroke-width="4"/>
-        </g>
-        <text y="70" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="30" fill="${INK}" letter-spacing="1">DOPAMINE LOOP</text>
-        <text y="105" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="16" fill="${TEAL}" letter-spacing="2">VARIABLE REWARDS</text>
-      </g>
-    `;
-  } else if (desc.includes("question") || (scene.visual?.props || []).includes("floating_question_mark")) {
-    extraPropsSVG = `
-      <g transform="translate(1380, 480)" filter="url(#cardShadow)">
-        <rect x="-240" y="-150" width="480" height="300" rx="24" fill="#ffffff" stroke="#d2cdc6" stroke-width="3"/>
-        <circle cx="0" cy="-40" r="55" fill="#eff6ff" stroke="${BLUE}" stroke-width="4"/>
-        <text x="0" y="-18" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="70" fill="${BLUE}">?</text>
-        <text y="70" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="32" fill="${INK}" letter-spacing="1">WHY REPEAT?</text>
-        <text y="105" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="16" fill="${MUTED}" letter-spacing="2">THE SUBCONSCIOUS HABIT</text>
-      </g>
-    `;
-  } else if (desc.includes("lightbulb") || (scene.visual?.props || []).includes("lightbulb_glow")) {
-    extraPropsSVG = `
-      <g transform="translate(1380, 480)" filter="url(#cardShadow)">
-        <rect x="-240" y="-150" width="480" height="300" rx="24" fill="#ffffff" stroke="#d2cdc6" stroke-width="3"/>
-        <!-- Lightbulb -->
-        <g transform="translate(0, -40)">
-          <circle cx="0" cy="-10" r="42" fill="${GOLD}" stroke="${INK}" stroke-width="4"/>
-          <rect x="-16" y="24" width="32" height="20" rx="3" fill="#cbd5e1" stroke="${INK}" stroke-width="3"/>
-          <line x1="-38" y1="-50" x2="-55" y2="-65" stroke="${GOLD}" stroke-width="5" stroke-linecap="round"/>
-          <line x1="0" y1="-65" x2="0" y2="-82" stroke="${GOLD}" stroke-width="5" stroke-linecap="round"/>
-          <line x1="38" y1="-50" x2="55" y2="-65" stroke="${GOLD}" stroke-width="5" stroke-linecap="round"/>
-        </g>
-        <text y="70" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="30" fill="${INK}" letter-spacing="1">POTENTIAL REWARD</text>
-        <text y="105" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="16" fill="${GOLD}" letter-spacing="2">THE SLOT MACHINE EFFECT</text>
-      </g>
-    `;
-  } else {
-    // Default Clean Info Card
-    const cardTitle = scene.visual?.headline || (scene.scene_id === "SCENE_001" ? "PHONE UNLOCK" : "ATTENTION HOOK");
-    const cardSub = scene.visual?.subline || "ACTIVE FOCUS";
-    extraPropsSVG = `
-      <g transform="translate(1420, 480)" filter="url(#cardShadow)">
-        <rect x="-220" y="-120" width="440" height="240" rx="20" fill="#ffffff" stroke="#d2cdc6" stroke-width="3"/>
-        <circle cx="0" cy="-35" r="42" fill="#f8f9fa" stroke="#e9ecef" stroke-width="2"/>
-        <g transform="translate(-20, -55)">
-          <svg viewBox="0 0 24 24" width="40" height="40">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="${TEAL}"/>
-          </svg>
-        </g>
-        <text y="45" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="28" fill="${INK}" letter-spacing="1">${cardTitle}</text>
-        <text y="76" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="${MUTED}" letter-spacing="2">${cardSub}</text>
-      </g>
-    `;
-  }
+  // STORYBOARD INFO CARD
+  const cardCx = posX <= 0.5 ? 0.72 * W : 0.28 * W;
+  const cardCy = 480;
+  extraPropsSVG = renderCard(scene.visual?.card, cardCx, cardCy, scene.visual?.accent_color_focus);
 
   // Compose Full SVG
   return `
@@ -350,7 +483,7 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
     <!-- 5. TOP HEADLINE (Subtle subtitle) -->
     <g transform="translate(${W / 2}, 110)">
       <text text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="42" fill="${INK}" letter-spacing="2">
-        ${(scene.narration_text || "").toUpperCase()}
+        ${esc((scene.narration_text || "").toUpperCase())}
       </text>
       ${getWavyLine(0, 16, Math.min(650, (scene.narration_text || "").length * 18))}
     </g>
