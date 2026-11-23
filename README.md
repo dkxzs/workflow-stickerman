@@ -84,7 +84,12 @@ python -m engine.vocab                                   # xem các giá trị h
 python -m engine.storyboard_validator projects/video-001/03_storyboard.json
 python engine/stickman_renderer.py --storyboard templates/storyboard-example.json --contact-sheet out/sheet.png
 python engine/stickman_renderer.py --storyboard <storyboard> --output-dir <dir> --preview-seconds 20   # bản xem thử 20 giây
-python -m pytest -q
+python -m pytest tests/ -q
+
+# Pipeline Node (auto_director): đặt FFMPEG_PATH nếu ffmpeg chưa có trong PATH
+FFMPEG_PATH=ffmpeg node engine/auto_director.mjs --project=video-001 --preview=3
+# Windows PowerShell (nếu dùng ffmpeg từ imageio-ffmpeg hoặc đường dẫn riêng):
+# $env:FFMPEG_PATH="C:\path\to\ffmpeg.exe"; node engine/auto_director.mjs --project=video-001 --preview=3
 ```
 
 Nguyên tắc: AI **chọn** giá trị trong `engine/vocab.py`, engine **vẽ**. Chi tiết ở `workflows/06-visual-render.md`.

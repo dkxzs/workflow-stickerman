@@ -5,10 +5,10 @@
 import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
-import { spawn } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
 import { renderSceneFrameSVG } from './vector_scene_renderer.mjs';
 
-const FFMPEG = "C:\\Users\\hadev\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v9.0.2.exe";
+const FFMPEG = process.env.FFMPEG_PATH || 'ffmpeg';
 const BASE_DIR = path.resolve('.');
 
 // Parse CLI flags
@@ -29,6 +29,22 @@ fs.mkdirSync(TEMP_SCENES_DIR, { recursive: true });
 
 if (!fs.existsSync(SB_PATH)) {
   console.error(`Storyboard not found at: ${SB_PATH}`);
+  process.exit(1);
+}
+
+// Validate storyboard before rendering
+const PYTHON = process.env.PYTHON_PATH || 'python';
+const valResult = spawnSync(PYTHON, ['-m', 'engine.storyboard_validator', SB_PATH], {
+  encoding: 'utf-8',
+});
+if (valResult.error) {
+  console.error(`Failed to run storyboard validator: ${valResult.error.message}`);
+  process.exit(1);
+}
+if (valResult.status !== 0) {
+  if (valResult.stdout) console.error(valResult.stdout);
+  if (valResult.stderr) console.error(valResult.stderr);
+  console.error(`Storyboard validation failed (exit code ${valResult.status}).`);
   process.exit(1);
 }
 

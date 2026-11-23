@@ -132,3 +132,34 @@ test('header renders only from visual.header and 110-char caption fits <= 2 line
   const png = await sharp(Buffer.from(svgLong)).png().toBuffer();
   assert.ok(png.length > 1000, 'Long caption SVG should convert to PNG cleanly');
 });
+
+test('background and phone placement come from visual.background and visual.props, not description', () => {
+  const baseScene = structuredClone(exampleStoryboard.scenes[1]);
+  baseScene.visual.stickman_pose = 'idle_neutral';
+  baseScene.visual.action = 'idle';
+  baseScene.visual.description = 'hospital doctor phone put it down resting on desk';
+
+  // Even though description mentions hospital & phone, background defaults to office and no phone is drawn
+  delete baseScene.visual.background;
+  baseScene.visual.props = [];
+  const svgDefault = renderSceneFrameSVG(baseScene, 5, 60, 30);
+  assert.ok(svgDefault.includes('Type: office'), `Expected office background, got: ${svgDefault.match(/Type: \w+/)?.[0]}`);
+  assert.ok(!svgDefault.includes('fill="#18191c"'), 'Should not draw phone in hand without phone_in_hand prop');
+  assert.ok(!svgDefault.includes('fill="#202124"'), 'Should not draw phone on desk without phone_on_desk prop');
+
+  // Explicit background = nature
+  baseScene.visual.background = 'nature';
+  const svgNature = renderSceneFrameSVG(baseScene, 5, 60, 30);
+  assert.ok(svgNature.includes('Type: nature'), 'Should use visual.background = nature');
+
+  // phone_in_hand prop
+  baseScene.visual.background = 'office';
+  baseScene.visual.props = ['phone_in_hand'];
+  const svgInHand = renderSceneFrameSVG(baseScene, 5, 60, 30);
+  assert.ok(svgInHand.includes('fill="#18191c"'), 'Should draw phone in hand when props includes phone_in_hand');
+
+  // phone_on_desk prop
+  baseScene.visual.props = ['phone_on_desk'];
+  const svgOnDesk = renderSceneFrameSVG(baseScene, 5, 60, 30);
+  assert.ok(svgOnDesk.includes('fill="#202124"'), 'Should draw phone on desk when props includes phone_on_desk');
+});

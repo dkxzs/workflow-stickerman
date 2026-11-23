@@ -30,7 +30,8 @@
           "smartphone_held",
           "phone_glow",
           "desk_edge",
-          "horizon_line"
+          "horizon_line",
+          "phone_in_hand"
         ],
         "background": "warm_textured_canvas",
         "camera": {
@@ -70,7 +71,8 @@
           "smartphone_held",
           "card_zero_messages",
           "desk_edge",
-          "horizon_line"
+          "horizon_line",
+          "phone_in_hand"
         ],
         "background": "warm_textured_canvas",
         "camera": {
@@ -110,7 +112,8 @@
           "smartphone_held",
           "badge_no_notifs",
           "desk_edge",
-          "horizon_line"
+          "horizon_line",
+          "phone_in_hand"
         ],
         "background": "warm_textured_canvas",
         "camera": {
@@ -150,7 +153,8 @@
           "smartphone_blank",
           "label_nothing",
           "window_silhouette",
-          "horizon_line"
+          "horizon_line",
+          "phone_in_hand"
         ],
         "background": "warm_textured_canvas",
         "camera": {
@@ -190,7 +194,8 @@
           "smartphone_off",
           "card_screen_locked",
           "desk_edge",
-          "horizon_line"
+          "horizon_line",
+          "phone_in_hand"
         ],
         "background": "warm_textured_canvas",
         "camera": {
@@ -271,7 +276,8 @@
           "phone_glow",
           "badge_reopened",
           "desk_edge",
-          "horizon_line"
+          "horizon_line",
+          "phone_in_hand"
         ],
         "background": "warm_textured_canvas",
         "camera": {
@@ -940,7 +946,8 @@
           "thought_bubble_bored",
           "smartphone_desk",
           "desk_edge",
-          "horizon_line"
+          "horizon_line",
+          "phone_on_desk"
         ],
         "background": "warm_textured_canvas",
         "camera": {
@@ -980,7 +987,8 @@
           "speed_streaks",
           "smartphone_glow",
           "desk_edge",
-          "horizon_line"
+          "horizon_line",
+          "phone_in_hand"
         ],
         "background": "warm_textured_canvas",
         "camera": {
@@ -1058,7 +1066,8 @@
         "props": [
           "smartphone_held",
           "spinning_globe_vector",
-          "horizon_line"
+          "horizon_line",
+          "phone_in_hand"
         ],
         "background": "warm_textured_canvas",
         "camera": {
@@ -1564,7 +1573,8 @@
           "smartphone_face_down",
           "phone_glow",
           "desk_edge",
-          "horizon_line"
+          "horizon_line",
+          "phone_on_desk"
         ],
         "background": "warm_textured_canvas",
         "camera": {
@@ -1644,7 +1654,8 @@
           "badge_screen_unopened",
           "desk_edge",
           "window_silhouette",
-          "horizon_line"
+          "horizon_line",
+          "phone_on_desk"
         ],
         "background": "warm_textured_canvas",
         "camera": {

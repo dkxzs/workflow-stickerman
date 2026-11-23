@@ -173,44 +173,24 @@ export function renderCaption(narrationText) {
   `;
 }
 
+const KNOWN_BACKGROUNDS = new Set([
+  'office', 'room', 'street', 'city', 'nature', 'park',
+  'hospital', 'clinic', 'classroom', 'school', 'water', 'ocean', 'lake',
+  'void', 'studio',
+]);
+
 /**
  * Determine background type and detail level based on scene metadata.
  */
 function determineBackground(scene) {
-  const desc = (scene.visual?.description || "").toLowerCase();
-  const props = (scene.visual?.props || []).join(" ").toLowerCase();
-  const bgField = (scene.visual?.background || "").toLowerCase();
+  const bgField = String(scene.visual?.background || '').trim().toLowerCase();
+  const type = KNOWN_BACKGROUNDS.has(bgField) ? bgField : 'office';
 
-  // Background environment type
-  let type = "office";
-  if (desc.includes("hospital") || desc.includes("clinic") || desc.includes("doctor")) {
-    type = "hospital";
-  } else if (desc.includes("street") || desc.includes("city") || desc.includes("outside") || desc.includes("road")) {
-    type = "street";
-  } else if (desc.includes("park") || desc.includes("tree") || desc.includes("nature") || desc.includes("hill")) {
-    type = "nature";
-  } else if (desc.includes("school") || desc.includes("class") || desc.includes("blackboard") || desc.includes("lecture")) {
-    type = "classroom";
-  } else if (desc.includes("water") || desc.includes("ocean") || desc.includes("sea") || desc.includes("lake") || desc.includes("swim")) {
-    type = "water";
-  } else if (desc.includes("brain") || desc.includes("void") || desc.includes("abstract") || desc.includes("metaphor") || bgField.includes("void")) {
-    type = "void";
-  } else {
-    type = "office";
-  }
-
-  // Level of detail: User rule: "những chỗ nào cần chi tiết thì phải chi tiết vào, những chỗ nào cần ít thì vẽ ít lại"
-  // High detail for hero physical scenes (office desk, detailed street, hospital)
-  // Low detail for quick metaphorical cuts, abstract diagrams, fast comparisons
-  let detail = "high";
-  if (type === "void") {
-    detail = "low";
-  } else if (desc.includes("brain") || desc.includes("diagram") || desc.includes("metaphor") || desc.includes("simple")) {
-    detail = "low";
-  } else if (scene.actual_duration_sec && scene.actual_duration_sec < 2.2 && !desc.includes("desk")) {
-    detail = "low"; // Fast transitional cuts keep background clean to focus on action
-  } else {
-    detail = "high"; // Hero scenes get rich architectural depth
+  let detail = 'high';
+  if (type === 'void' || type === 'studio') {
+    detail = 'low';
+  } else if (scene.actual_duration_sec && scene.actual_duration_sec < 2.2) {
+    detail = 'low';
   }
 
   return { type, detail };
@@ -246,7 +226,7 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
   // Pose interpretation
   const poseName = scene.visual?.stickman_pose || "idle_neutral";
   const actionName = scene.visual?.action || "";
-  const desc = (scene.visual?.description || "").toLowerCase();
+  const props = Array.isArray(scene.visual?.props) ? scene.visual.props : [];
 
   // Face & Expression logic
   const expr = (scene.visual?.expression || "neutral").toLowerCase();
@@ -312,10 +292,10 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
   let extraPropsSVG = "";
   let deskPropsSVG = "";
 
-  // Check if scene is at desk
-  const isDeskScene = bgType === "office" || desc.includes("desk") || desc.includes("phone");
-  const phoneOnDesk = desc.includes("put it down") || desc.includes("resting on desk") || desc.includes("12 seconds later");
-  const phoneInHand = !phoneOnDesk && (desc.includes("phone") || desc.includes("unlock") || desc.includes("notif"));
+  // Check if scene is at desk and phone placement from visual.props
+  const isDeskScene = bgType === "office" || bgType === "room" || props.includes("desk_edge") || props.includes("desk_silhouette") || props.includes("phone_on_desk");
+  const phoneOnDesk = props.includes("phone_on_desk");
+  const phoneInHand = !phoneOnDesk && props.includes("phone_in_hand");
 
   if (isDeskScene) {
     const mugX = 250;
@@ -372,7 +352,7 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
     // Standard phone check
     const phoneX = heroX;
     const phoneY = shoulderY + 130;
-    const phoneGlow = !desc.includes("void") && !desc.includes("deadpan");
+    const phoneGlow = props.includes("phone_glow") || props.includes("smartphone_glow");
     const screenColor = phoneGlow ? BLUE : '#333538';
 
     armsSVG = `
