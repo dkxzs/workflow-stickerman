@@ -40,19 +40,16 @@ youtube-content-engine/
 │   └── 08-publishing.md          # Bước 8: Kiểm duyệt QA & xuất bản lên YouTube
 │
 ├── engine/                       # Module code tự động hóa (đã chạy được)
-│   ├── requirements.txt          # Danh sách thư viện
-│   ├── config.py                 # File cấu hình toàn cục
+│   ├── auto_director.mjs         # [ĐƯỜNG CHÍNH] Điều phối render SVG -> PNG -> FFmpeg MP4
+│   ├── vector_scene_renderer.mjs # [ĐƯỜNG CHÍNH] Vẽ khung hình SVG 1080p từ dữ liệu storyboard
+│   ├── backgrounds.mjs           # Thư viện bối cảnh vector theo mức độ chi tiết (LOD)
+│   ├── icons.mjs                 # Thư viện 15 icon SVG cho thẻ thông tin (info card)
 │   ├── vocab.py                  # DANH MỤC ĐÓNG: pose, mood, icon, camera, SFX mà engine hỗ trợ
-│   ├── icons.py                  # Thư viện icon vẽ bằng code cho card
 │   ├── storyboard_validator.py   # Kiểm tra storyboard (Gate 4)
 │   ├── tts_engine.py             # Xử lý text-to-speech
-│   ├── stickman_renderer.py      # Render nhân vật, card, camera; contact sheet; xem thử 20 giây
-│   ├── audio_mixer.py            # Xử lý hòa trộn âm thanh
-│   ├── utils/                    # Các module tiện ích bổ trợ
-│   └── base_assets/              # Kho tài nguyên gốc
-│       ├── poses/                # Tư thế nhân vật mẫu
-│       ├── sfx/                  # Hiệu ứng âm thanh cơ bản
-│       └── bgm/                  # Nhạc nền miễn phí bản quyền
+│   ├── stickman_renderer.py      # [CHỈ DÙNG TẠO CONTACT SHEET] Renderer Python cũ (render video đã lỗi thời)
+│   ├── icons.py                  # Thư viện icon Pillow (dùng cho contact sheet Python)
+│   └── audio_mixer.py            # Xử lý hòa trộn âm thanh (Python cũ)
 │
 ├── templates/                    # Biểu mẫu chuẩn hóa
 │   ├── script-template.md        # Mẫu kịch bản chi tiết
@@ -77,19 +74,31 @@ youtube-content-engine/
     └── test_audio_mixer.py       # Kiểm thử Audio mixer
 ```
 
-### Chạy nhanh bước hình ảnh
+### Chạy nhanh bước hình ảnh (Engine Node là đường chính)
+
+- **Đường chính (Node SVG + Sharp + FFmpeg)**: dùng `engine/auto_director.mjs` để kiểm tra storyboard, vẽ từng frame SVG (`engine/vector_scene_renderer.mjs`), xuất PNG và ghép video MP4 kèm voiceover + nhạc nền.
+- **Python renderer (`engine/stickman_renderer.py`)**: chỉ dùng để tạo nhanh ảnh tĩnh **contact sheet** (`--contact-sheet`); phần render video MP4 bằng Python đã lỗi thời.
 
 ```bash
-python -m engine.vocab                                   # xem các giá trị hợp lệ (đưa cho AI đọc)
+# 1. Xem danh mục giá trị hợp lệ & kiểm tra storyboard
+python -m engine.vocab
 python -m engine.storyboard_validator projects/video-001/03_storyboard.json
-python engine/stickman_renderer.py --storyboard templates/storyboard-example.json --contact-sheet out/sheet.png
-python engine/stickman_renderer.py --storyboard <storyboard> --output-dir <dir> --preview-seconds 20   # bản xem thử 20 giây
-python -m pytest tests/ -q
 
-# Pipeline Node (auto_director): đặt FFMPEG_PATH nếu ffmpeg chưa có trong PATH
-FFMPEG_PATH=ffmpeg node engine/auto_director.mjs --project=video-001 --preview=3
+# 2. [ĐƯỜNG CHÍNH] Render bản xem thử 6 cảnh đầu hoặc toàn bộ video bằng Node
+node engine/auto_director.mjs --project=video-001 --preview=6
+node engine/auto_director.mjs --project=video-001
+
+# Đặt FFMPEG_PATH nếu ffmpeg chưa có trong PATH:
+FFMPEG_PATH=ffmpeg node engine/auto_director.mjs --project=video-001 --preview=6
 # Windows PowerShell (nếu dùng ffmpeg từ imageio-ffmpeg hoặc đường dẫn riêng):
-# $env:FFMPEG_PATH="C:\path\to\ffmpeg.exe"; node engine/auto_director.mjs --project=video-001 --preview=3
+# $env:FFMPEG_PATH="C:\path\to\ffmpeg.exe"; node engine/auto_director.mjs --project=video-001 --preview=6
+
+# 3. [TÙY CHỌN] Tạo nhanh contact sheet tĩnh bằng Python renderer
+python engine/stickman_renderer.py --storyboard templates/storyboard-example.json --contact-sheet out/sheet.png
+
+# 4. Chạy bộ kiểm thử tự động
+node --test tests/*.test.mjs
+python -m pytest tests/ -q
 ```
 
 Nguyên tắc: AI **chọn** giá trị trong `engine/vocab.py`, engine **vẽ**. Chi tiết ở `workflows/06-visual-render.md`.
