@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
-import { renderSceneFrameSVG, esc } from '../engine/vector_scene_renderer.mjs';
+import { renderSceneFrameSVG, esc, POSE_RIGS, easeOutBack } from '../engine/vector_scene_renderer.mjs';
 import { iconSVG } from '../engine/icons.mjs';
 
 const examplePath = path.resolve('templates/storyboard-example.json');
@@ -131,6 +131,55 @@ test('header renders only from visual.header and 110-char caption fits <= 2 line
 
   const png = await sharp(Buffer.from(svgLong)).png().toBuffer();
   assert.ok(png.length > 1000, 'Long caption SVG should convert to PNG cleanly');
+});
+
+test('POSE_RIGS: idle vs idea_lightbulb differ, f=0 equals prev pose, f=12 equals current, no NaN', () => {
+  assert.deepEqual(
+    Object.keys(POSE_RIGS).sort(),
+    ['celebrate_win', 'idea_lightbulb', 'idle_neutral', 'pointing_target', 'running_hurry', 'shocked_fall', 'stressed_headache', 'thinking'].sort()
+  );
+
+  const mk = (pose) => {
+    const s = structuredClone(exampleStoryboard.scenes[1]);
+    s.visual.stickman_pose = pose;
+    s.visual.props = [];
+    return s;
+  };
+  const idle = mk('idle_neutral');
+  const idea = mk('idea_lightbulb');
+  const arms = (svg) => svg.match(/<g id="arms">([\s\S]*?)<\/g>/)[1];
+
+  assert.notEqual(arms(renderSceneFrameSVG(idle, 20, 90, 30)), arms(renderSceneFrameSVG(idea, 20, 90, 30)));
+
+  // f=0: idea scene after idle scene looks exactly like idle
+  assert.equal(
+    arms(renderSceneFrameSVG(idea, 0, 90, 30, idle)),
+    arms(renderSceneFrameSVG(idle, 0, 90, 30))
+  );
+  // f=12 (0.4s): blend finished, equals current pose regardless of prevScene
+  assert.equal(
+    arms(renderSceneFrameSVG(idea, 12, 90, 30, idle)),
+    arms(renderSceneFrameSVG(idea, 12, 90, 30))
+  );
+  // unknown pose falls back to idle_neutral
+  const weird = mk('does_not_exist');
+  assert.equal(
+    arms(renderSceneFrameSVG(weird, 5, 90, 30)),
+    arms(renderSceneFrameSVG(idle, 5, 90, 30))
+  );
+
+  assert.ok(Math.abs(easeOutBack(0)) < 1e-9 && Math.abs(easeOutBack(1) - 1) < 1e-9);
+
+  for (const pose of Object.keys(POSE_RIGS)) {
+    for (const f of [0, 3, 6, 12, 40]) {
+      for (const x of [0.25, 0.75]) {
+        const s = mk(pose);
+        s.visual.position.x = x;
+        const svg = renderSceneFrameSVG(s, f, 90, 30, idle);
+        assert.ok(!/NaN|undefined|Infinity/.test(svg), `NaN/undefined in SVG for ${pose} f=${f} x=${x}`);
+      }
+    }
+  }
 });
 
 test('background and phone placement come from visual.background and visual.props, not description', () => {

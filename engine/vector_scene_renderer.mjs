@@ -197,12 +197,51 @@ function determineBackground(scene) {
 }
 
 /**
+ * Pose rig table (names match engine/vocab.py :: POSES).
+ * Hand/elbow offsets are (dx, dy) relative to the shoulder, written for a hero facing right
+ * (dir = 1); dx is multiplied by dir at render time. "l" = rear arm, "r" = front arm.
+ * lean = torso lean (degrees, + toward facing side), tilt = extra head tilt (degrees).
+ */
+export const POSE_RIGS = {
+  idle_neutral:      { lx: -35, ly: 150, lcx: -45, lcy: 90, rx: 35,  ry: 150, rcx: 45,  rcy: 90,  lean: 0,   tilt: 0 },
+  thinking:          { lx: -10, ly: 120, lcx: -50, lcy: 80, rx: 16,  ry: -40, rcx: 60,  rcy: 70,  lean: 2,   tilt: 6 },
+  idea_lightbulb:    { lx: -35, ly: 150, lcx: -45, lcy: 90, rx: 45,  ry: -150, rcx: 75, rcy: -30, lean: -2,  tilt: -4 },
+  stressed_headache: { lx: -50, ly: -70, lcx: -85, lcy: 20, rx: 50,  ry: -70, rcx: 85,  rcy: 20,  lean: 6,   tilt: 8 },
+  running_hurry:     { lx: -70, ly: 60,  lcx: -60, lcy: 10, rx: 80,  ry: 40,  rcx: 60,  rcy: 0,   lean: 12,  tilt: 4 },
+  pointing_target:   { lx: -30, ly: 140, lcx: -45, lcy: 80, rx: 220, ry: 40,  rcx: 100, rcy: 30,  lean: 4,   tilt: 0 },
+  shocked_fall:      { lx: -110, ly: -60, lcx: -80, lcy: 40, rx: 110, ry: -60, rcx: 80, rcy: 40,  lean: -10, tilt: -6 },
+  celebrate_win:     { lx: -90, ly: -120, lcx: -70, lcy: 0, rx: 90,  ry: -120, rcx: 70, rcy: 0,   lean: -3,  tilt: 0 },
+};
+
+export function easeOutBack(x) {
+  return 1 + 2.70158 * Math.pow(x - 1, 3) + 1.70158 * Math.pow(x - 1, 2);
+}
+
+function rigFor(scene) {
+  return POSE_RIGS[scene?.visual?.stickman_pose] || POSE_RIGS.idle_neutral;
+}
+
+const POSE_BLEND_SEC = 0.35;
+
+/**
+ * Pose values for time t: lerped from prevScene's pose to the current pose over the first 0.35s.
+ */
+export function resolvePose(scene, prevScene, t) {
+  const cur = rigFor(scene);
+  const prev = prevScene ? rigFor(prevScene) : cur;
+  const x = Math.min(1, Math.max(0, t / POSE_BLEND_SEC));
+  const e = easeOutBack(x);
+  const out = {};
+  for (const k of Object.keys(cur)) out[k] = prev[k] + (cur[k] - prev[k]) * e;
+  return out;
+}
+
+/**
  * Render complete 1080p SVG frame for a given scene at frame f.
  */
-export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
+export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30, prevScene = null) {
   const t = f / fps;
   const duration = totalFrames / fps;
-  const progress = totalFrames > 1 ? f / (totalFrames - 1) : 0;
   const breath = Math.sin(t * 3.5) * 3;
   const blink = (t % 3.2 > 3.05 && t % 3.2 < 3.2);
 
@@ -214,10 +253,18 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
   const heroX = posX * W;
   const dir = heroX < W / 2 ? 1 : -1;
   const hipY = 630 + breath * 0.3;
-  const shoulderX = heroX;
   const shoulderY = 410;
   const headRadius = 66;
-  const headY = shoulderY - headRadius - 10 + breath * 0.6;
+
+  // Pose (interpolated) + idle sway: torso sways, head follows ~3 frames later
+  const pose = resolvePose(scene, prevScene, t);
+  const sway = (ff) => Math.sin((ff / fps) * 2.2) * 1.5;
+  const torsoLean = pose.lean + sway(f);
+  const headLean = pose.lean + sway(f - 3) + pose.tilt;
+  const rad = (d) => (d * Math.PI) / 180;
+  const shoulderX = heroX + Math.sin(rad(torsoLean)) * (hipY - shoulderY) * dir;
+  const headX = shoulderX + Math.sin(rad(headLean)) * (headRadius + 10) * dir;
+  const headY = shoulderY - Math.cos(rad(headLean)) * (headRadius + 10) + breath * 0.6;
 
   // Mouth sync
   const isTalking = t < duration - 0.25;
@@ -236,54 +283,54 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
   if (expr.includes("deadpan") || expr.includes("disbelief")) {
     // Deadpan horizontal slit eyes, flat line mouth
     eyeSVG = `
-      <circle cx="${shoulderX - 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${shoulderX - 22}" cy="${headY - 6}" r="5" fill="${INK}"/>
-      <circle cx="${shoulderX + 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${shoulderX + 22}" cy="${headY - 6}" r="5" fill="${INK}"/>
-      <line x1="${shoulderX - 35}" y1="${headY - 26}" x2="${shoulderX - 10}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-      <line x1="${shoulderX + 10}" y1="${headY - 26}" x2="${shoulderX + 35}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="${headX - 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX - 22}" cy="${headY - 6}" r="5" fill="${INK}"/>
+      <circle cx="${headX + 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX + 22}" cy="${headY - 6}" r="5" fill="${INK}"/>
+      <line x1="${headX - 35}" y1="${headY - 26}" x2="${headX - 10}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <line x1="${headX + 10}" y1="${headY - 26}" x2="${headX + 35}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
     `;
-    mouthSVG = `<line x1="${shoulderX - 18}" y1="${headY + 28}" x2="${shoulderX + 18}" y2="${headY + 28}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`;
+    mouthSVG = `<line x1="${headX - 18}" y1="${headY + 28}" x2="${headX + 18}" y2="${headY + 28}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`;
   } else if (expr.includes("sarcastic") || expr.includes("smirk")) {
     // Sarcastic half-lidded eyes with asymmetric smirk
     eyeSVG = `
-      <circle cx="${shoulderX - 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${shoulderX - 19}" cy="${headY - 6}" r="5" fill="${INK}"/>
-      <circle cx="${shoulderX + 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${shoulderX + 25}" cy="${headY - 6}" r="5" fill="${INK}"/>
-      <line x1="${shoulderX - 35}" y1="${headY - 26}" x2="${shoulderX - 10}" y2="${headY - 28}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-      <line x1="${shoulderX + 10}" y1="${headY - 30}" x2="${shoulderX + 35}" y2="${headY - 24}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="${headX - 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX - 19}" cy="${headY - 6}" r="5" fill="${INK}"/>
+      <circle cx="${headX + 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX + 25}" cy="${headY - 6}" r="5" fill="${INK}"/>
+      <line x1="${headX - 35}" y1="${headY - 26}" x2="${headX - 10}" y2="${headY - 28}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <line x1="${headX + 10}" y1="${headY - 30}" x2="${headX + 35}" y2="${headY - 24}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
     `;
-    mouthSVG = `<path d="M ${shoulderX - 12} ${headY + 30} Q ${shoulderX + 8} ${headY + 44} ${shoulderX + 26} ${headY + 22}" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+    mouthSVG = `<path d="M ${headX - 12} ${headY + 30} Q ${headX + 8} ${headY + 44} ${headX + 26} ${headY + 22}" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
   } else if (expr.includes("thinking") || expr.includes("puzzled") || poseName.includes("chin_on_hand")) {
     // Squinting thoughtful eyes looking upward
     eyeSVG = `
-      <circle cx="${shoulderX - 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${shoulderX - 20}" cy="${headY - 10}" r="5" fill="${INK}"/>
-      <circle cx="${shoulderX + 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${shoulderX + 24}" cy="${headY - 10}" r="5" fill="${INK}"/>
-      <line x1="${shoulderX - 35}" y1="${headY - 24}" x2="${shoulderX - 10}" y2="${headY - 28}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-      <line x1="${shoulderX + 10}" y1="${headY - 28}" x2="${shoulderX + 35}" y2="${headY - 24}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="${headX - 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX - 20}" cy="${headY - 10}" r="5" fill="${INK}"/>
+      <circle cx="${headX + 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX + 24}" cy="${headY - 10}" r="5" fill="${INK}"/>
+      <line x1="${headX - 35}" y1="${headY - 24}" x2="${headX - 10}" y2="${headY - 28}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <line x1="${headX + 10}" y1="${headY - 28}" x2="${headX + 35}" y2="${headY - 24}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
     `;
-    mouthSVG = `<path d="M ${shoulderX - 10} ${headY + 30} Q ${shoulderX + 10} ${headY + 32} ${shoulderX + 20} ${headY + 26}" stroke="${INK}" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+    mouthSVG = `<path d="M ${headX - 10} ${headY + 30} Q ${headX + 10} ${headY + 32} ${headX + 20} ${headY + 26}" stroke="${INK}" stroke-width="4" fill="none" stroke-linecap="round"/>`;
   } else {
     // Standard attentive animated face with blink & talking mouth
     eyeSVG = blink ? `
-      <line x1="${shoulderX - 34}" y1="${headY - 6}" x2="${shoulderX - 10}" y2="${headY - 6}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-      <line x1="${shoulderX + 10}" y1="${headY - 6}" x2="${shoulderX + 34}" y2="${headY - 6}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <line x1="${headX - 34}" y1="${headY - 6}" x2="${headX - 10}" y2="${headY - 6}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <line x1="${headX + 10}" y1="${headY - 6}" x2="${headX + 34}" y2="${headY - 6}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
     ` : `
-      <circle cx="${shoulderX - 22}" cy="${headY - 6}" r="15" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${shoulderX - 18}" cy="${headY - 6}" r="6" fill="${INK}"/>
-      <circle cx="${shoulderX + 22}" cy="${headY - 6}" r="15" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${shoulderX + 26}" cy="${headY - 6}" r="6" fill="${INK}"/>
-      <line x1="${shoulderX - 35}" y1="${headY - 26}" x2="${shoulderX - 10}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-      <line x1="${shoulderX + 10}" y1="${headY - 26}" x2="${shoulderX + 35}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="${headX - 22}" cy="${headY - 6}" r="15" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX - 18}" cy="${headY - 6}" r="6" fill="${INK}"/>
+      <circle cx="${headX + 22}" cy="${headY - 6}" r="15" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX + 26}" cy="${headY - 6}" r="6" fill="${INK}"/>
+      <line x1="${headX - 35}" y1="${headY - 26}" x2="${headX - 10}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <line x1="${headX + 10}" y1="${headY - 26}" x2="${headX + 35}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
     `;
 
     mouthSVG = mouthOpen > 2 ? `
-      <ellipse cx="${shoulderX}" cy="${headY + 30}" rx="14" ry="${mouthOpen}" fill="${RED}" stroke="${INK}" stroke-width="4"/>
+      <ellipse cx="${headX}" cy="${headY + 30}" rx="14" ry="${mouthOpen}" fill="${RED}" stroke="${INK}" stroke-width="4"/>
     ` : `
-      <ellipse cx="${shoulderX}" cy="${headY + 30}" rx="10" ry="5" fill="${INK}"/>
+      <ellipse cx="${headX}" cy="${headY + 30}" rx="10" ry="5" fill="${INK}"/>
     `;
   }
 
@@ -324,49 +371,30 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
     `;
   }
 
-  // ARM POSES
-  if (actionName.includes("chin_scratch") || poseName.includes("thinking") || poseName.includes("chin_on_hand")) {
-    // Thoughtful pose: Lead arm bent with hand cupping chin, Rear arm crossing chest
-    armsSVG = `
-      <path d="M ${shoulderX - 22 * dir} ${shoulderY + 10} Q ${heroX - 50 * dir} ${shoulderY + 80} ${heroX - 10 * dir} ${shoulderY + 120}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <path d="M ${shoulderX + 22 * dir} ${shoulderY + 10} Q ${heroX + 60 * dir} ${shoulderY + 70} ${heroX + 16 * dir} ${headY + 36}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <circle cx="${heroX + 16 * dir}" cy="${headY + 36}" r="8" fill="${INK}"/>
-    `;
-  } else if (actionName.includes("slow_clap") || poseName.includes("celebrate_win")) {
-    // Sarcastic slow clapping: Hands meeting together in front of chest
-    const clapCycle = Math.sin(t * 8) * 12;
-    armsSVG = `
-      <path d="M ${shoulderX - 22 * dir} ${shoulderY + 10} Q ${heroX - 40 * dir} ${shoulderY + 70} ${heroX + (-8 + clapCycle) * dir} ${shoulderY + 100}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <path d="M ${shoulderX + 22 * dir} ${shoulderY + 10} Q ${heroX + 40 * dir} ${shoulderY + 70} ${heroX + (8 - clapCycle) * dir} ${shoulderY + 100}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <circle cx="${heroX + (-8 + clapCycle) * dir}" cy="${shoulderY + 100}" r="8" fill="${INK}"/>
-      <circle cx="${heroX + (8 - clapCycle) * dir}" cy="${shoulderY + 100}" r="8" fill="${INK}"/>
-    `;
-  } else if (actionName.includes("point") || poseName.includes("pointing")) {
-    // Pointing toward diagram or card
-    armsSVG = `
-      <path d="M ${shoulderX - 22 * dir} ${shoulderY + 10} Q ${heroX - 45 * dir} ${shoulderY + 80} ${heroX - 30 * dir} ${shoulderY + 140}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <path d="M ${shoulderX + 22 * dir} ${shoulderY + 10} Q ${heroX + 100 * dir} ${shoulderY + 30} ${heroX + 220 * dir} ${shoulderY + 40}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <circle cx="${heroX + 225 * dir}" cy="${shoulderY + 40}" r="8" fill="${INK}"/>
-    `;
-  } else if (phoneInHand) {
-    // Standard phone check
-    const phoneX = heroX;
-    const phoneY = shoulderY + 130;
+  // ARMS from interpolated pose rig (offsets relative to shoulder, mirrored by dir)
+  const armPath = (sign, hx, hy, cx, cy) => {
+    const sx = shoulderX + sign * 22 * dir;
+    return `<path d="M ${sx} ${shoulderY + 10} Q ${shoulderX + cx * dir} ${shoulderY + cy} ${shoulderX + hx * dir} ${shoulderY + hy}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>`;
+  };
+  const lHandX = shoulderX + pose.lx * dir;
+  const lHandY = shoulderY + pose.ly;
+  const rHandX = shoulderX + pose.rx * dir;
+  const rHandY = shoulderY + pose.ry;
+  armsSVG = `
+      ${armPath(-1, pose.lx, pose.ly, pose.lcx, pose.lcy)}
+      ${armPath(1, pose.rx, pose.ry, pose.rcx, pose.rcy)}
+      <circle cx="${lHandX}" cy="${lHandY}" r="8" fill="${INK}"/>
+      <circle cx="${rHandX}" cy="${rHandY}" r="8" fill="${INK}"/>
+  `;
+
+  if (phoneInHand) {
+    // Phone held in the front hand
     const phoneGlow = props.includes("phone_glow") || props.includes("smartphone_glow");
     const screenColor = phoneGlow ? BLUE : '#333538';
-
-    armsSVG = `
-      <path d="M ${shoulderX - 22 * dir} ${shoulderY + 10} Q ${heroX - 55 * dir} ${shoulderY + 80} ${phoneX - 18 * dir} ${phoneY + 25}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <path d="M ${shoulderX + 22 * dir} ${shoulderY + 10} Q ${heroX + 55 * dir} ${shoulderY + 80} ${phoneX + 18 * dir} ${phoneY + 25}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <rect x="${phoneX - 22}" y="${phoneY - 15}" width="44" height="78" rx="8" fill="#18191c" stroke="${INK}" stroke-width="5"/>
-      <rect x="${phoneX - 16}" y="${phoneY - 7}" width="32" height="60" rx="4" fill="${screenColor}"/>
-      ${phoneGlow ? `<rect x="${phoneX - 14}" y="${phoneY + 32}" width="28" height="6" rx="2" fill="#ffffff" opacity="0.8"/>` : ''}
-    `;
-  } else {
-    // Hands resting naturally
-    armsSVG = `
-      <path d="M ${shoulderX - 22 * dir} ${shoulderY + 10} Q ${heroX - 45 * dir} ${shoulderY + 90} ${heroX - 35 * dir} ${shoulderY + 150}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
-      <path d="M ${shoulderX + 22 * dir} ${shoulderY + 10} Q ${heroX + 45 * dir} ${shoulderY + 90} ${heroX + 35 * dir} ${shoulderY + 150}" stroke="${INK}" stroke-width="11" fill="none" stroke-linecap="round"/>
+    armsSVG += `
+      <rect x="${rHandX - 22}" y="${rHandY - 39}" width="44" height="78" rx="8" fill="#18191c" stroke="${INK}" stroke-width="5"/>
+      <rect x="${rHandX - 16}" y="${rHandY - 31}" width="32" height="60" rx="4" fill="${screenColor}"/>
+      ${phoneGlow ? `<rect x="${rHandX - 14}" y="${rHandY + 8}" width="28" height="6" rx="2" fill="#ffffff" opacity="0.8"/>` : ''}
     `;
   }
 
@@ -400,13 +428,13 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30) {
       <path d="M ${heroX + 18} ${hipY} Q ${heroX + 35} ${hipY + 140} ${heroX + 45} ${FLOOR_Y}" stroke="${INK}" stroke-width="12" fill="none" stroke-linecap="round"/>
 
       <!-- Torso -->
-      <path d="M ${heroX} ${hipY} Q ${heroX - 3} ${hipY - 110} ${shoulderX} ${shoulderY}" stroke="${INK}" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <path d="M ${heroX} ${hipY} Q ${(heroX + shoulderX) / 2 - 3} ${hipY - 110} ${shoulderX} ${shoulderY}" stroke="${INK}" stroke-width="14" fill="none" stroke-linecap="round"/>
 
       <!-- Arms & Prop Interaction -->
-      ${armsSVG}
+      <g id="arms">${armsSVG}</g>
 
       <!-- Head & Expression -->
-      <circle cx="${shoulderX}" cy="${headY}" r="${headRadius}" fill="${WHITE}" stroke="${INK}" stroke-width="8"/>
+      <circle cx="${headX}" cy="${headY}" r="${headRadius}" fill="${WHITE}" stroke="${INK}" stroke-width="8"/>
       ${eyeSVG}
       ${mouthSVG}
     </g>

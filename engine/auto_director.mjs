@@ -76,7 +76,7 @@ async function renderSceneToMP4(scene, index) {
 
   // 1. Render all frames in vector SVG -> PNG
   for (let f = 0; f < totalFrames; f++) {
-    const svgStr = renderSceneFrameSVG(scene, f, totalFrames, FPS);
+    const svgStr = renderSceneFrameSVG(scene, f, totalFrames, FPS, scenesToRender[index - 1] || null);
     const pngPath = path.join(tempFrameDir, `${String(f).padStart(5, '0')}.png`);
     await sharp(Buffer.from(svgStr)).png().toFile(pngPath);
   }
