@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
 import { renderSceneFrameSVG, esc } from '../engine/vector_scene_renderer.mjs';
+import { iconSVG } from '../engine/icons.mjs';
 
 const examplePath = path.resolve('templates/storyboard-example.json');
 const exampleStoryboard = JSON.parse(fs.readFileSync(examplePath, 'utf-8'));
@@ -76,4 +77,22 @@ test('with position.x = 0.75, card is placed on the left of the character withou
   assert.equal(cardCx, 0.28 * 1920);
   assert.equal(heroX, 0.75 * 1920);
   assert.ok(cardCx + 220 < heroX - 100, `Card right edge (${cardCx + 220}) should be well left of hero (${heroX})`);
+});
+
+test('iconSVG supports all 15 vocab icons plus fallback and renders non-empty PNGs', async () => {
+  const icons = [
+    'lightbulb', 'brain', 'clock', 'bell_off', 'lock', 'phone', 'mail_empty',
+    'check', 'cross', 'question', 'warning', 'chart_up', 'chart_down',
+    'coin', 'heart',
+  ];
+
+  for (const name of [...icons, 'unknown_icon_xyz']) {
+    const frag = iconSVG(name, 80, 80, 1);
+    assert.ok(typeof frag === 'string' && frag.length > 0, `iconSVG("${name}") should return non-empty string`);
+    assert.ok(frag.startsWith('<'), `iconSVG("${name}") should start with "<"`);
+
+    const fullSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">${frag}</svg>`;
+    const png = await sharp(Buffer.from(fullSvg)).png().toBuffer();
+    assert.ok(png.length > 0, `PNG for icon "${name}" should be non-empty`);
+  }
 });
