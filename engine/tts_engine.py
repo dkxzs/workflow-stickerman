@@ -13,8 +13,8 @@ import sys
 import imageio_ffmpeg
 import edge_tts
 
-DEFAULT_VOICE = "en-US-ChristopherNeural"
-FALLBACK_VOICES = ["en-US-ChristopherNeural", "en-US-GuyNeural", "en-US-EricNeural", "en-US-BrianNeural"]
+DEFAULT_VOICE = "en-GB-RyanNeural"
+FALLBACK_VOICES = ["en-GB-RyanNeural", "en-US-ChristopherNeural", "en-US-GuyNeural", "en-US-EricNeural", "en-US-BrianNeural"]
 
 
 def get_audio_duration_sec(audio_path: str) -> float:
