@@ -42,9 +42,9 @@ export function getWavyLine(cx, y, width, color = RED) {
 }
 
 /**
- * Render storyboard info card at (cx, cy). Returns empty string when card is absent.
+ * Render storyboard info card at (cx, cy) with optional scale. Returns empty string when card is absent.
  */
-export function renderCard(card, cx, cy, accent) {
+export function renderCard(card, cx, cy, accent, scale = 1) {
   if (!card) return '';
   const cardW = 440;
   const cardH = 260;
@@ -69,9 +69,10 @@ export function renderCard(card, cx, cy, accent) {
   const iconMarkup = icon ? drawIconSVG(icon, 0, -42, 1) : '';
   const titleY = icon ? 58 : 4;
   const subY = icon ? 92 : 42;
+  const scalePart = scale === 1 ? '' : ` scale(${scale.toFixed(4)})`;
 
   return `
-    <g id="info_card" transform="translate(${cx}, ${cy})" filter="url(#cardShadow)">
+    <g id="info_card" transform="translate(${cx}, ${cy})${scalePart}" filter="url(#cardShadow)">
       <rect x="${-cardW / 2}" y="${-cardH / 2}" width="${cardW}" height="${cardH}" rx="22" fill="#ffffff" stroke="#d2cdc6" stroke-width="3"/>
       ${iconMarkup}
       ${rawTitle ? `<text x="0" y="${titleY}" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="${titleSize}" fill="${titleColor}" letter-spacing="1"${titleAttr}>${esc(rawTitle)}</text>` : ''}
@@ -189,8 +190,6 @@ function determineBackground(scene) {
   let detail = 'high';
   if (type === 'void' || type === 'studio') {
     detail = 'low';
-  } else if (scene.actual_duration_sec && scene.actual_duration_sec < 2.2) {
-    detail = 'low';
   }
 
   return { type, detail };
@@ -236,6 +235,131 @@ export function resolvePose(scene, prevScene, t) {
   return out;
 }
 
+export const MOODS = ['neutral', 'eager', 'happy', 'flat', 'deadpan', 'sad'];
+
+const FRAMING_ZOOM = { wide: 1.0, medium: 1.08, close_up: 1.35, close: 1.35 };
+
+export function computeCameraTransform(camera, f, totalFrames, focusX, focusY, cardCx = null) {
+  const cam = camera || {};
+  const framing = cam.framing || 'wide';
+  const move = cam.movement || 'static';
+  let zoom = FRAMING_ZOOM[framing] ?? 1.0;
+
+  const p = totalFrames > 1 ? f / (totalFrames - 1) : 0;
+  const ease = p * p * (3 - 2 * p);
+
+  let cx = W / 2;
+  let cy = H / 2;
+  if ((framing === 'close_up' || framing === 'close') && cardCx !== null) {
+    zoom = 1.18;
+    cx = (focusX + cardCx) / 2;
+    cy = 0.6 * focusY + 0.4 * cy;
+  } else if (framing === 'close_up' || framing === 'close') {
+    cx = 0.85 * focusX + 0.15 * cx;
+    cy = 0.85 * focusY + 0.15 * cy;
+  }
+
+  if (move === 'zoom_in') {
+    zoom += 0.15 * ease;
+  } else if (move === 'zoom_out') {
+    zoom = Math.max(1.0, zoom + 0.15 - 0.15 * ease);
+  } else if (move === 'pan_left' || move === 'pan_right') {
+    zoom = Math.max(zoom, 1.10);
+    const span = 0.03 * W;
+    cx += move === 'pan_left' ? (span - 2 * span * ease) : (-span + 2 * span * ease);
+  } else if (move === 'shake') {
+    zoom = Math.max(zoom, 1.04);
+    const amp = 10 * Math.exp(-f / 6);
+    cx += amp * Math.sin(f * 2.3);
+    cy += amp * 0.6 * Math.cos(f * 2.9);
+  }
+
+  const w = W / zoom;
+  const h = H / zoom;
+  const left = Math.min(Math.max(cx - w / 2, 0), W - w);
+  const top = Math.min(Math.max(cy - h / 2, 0), H - h);
+  if (zoom === 1 && left === 0 && top === 0) return '';
+  return `translate(${(-left * zoom).toFixed(2)}, ${(-top * zoom).toFixed(2)}) scale(${zoom.toFixed(4)})`;
+}
+
+export function resolveMood(visual) {
+  const m = visual?.mood;
+  return MOODS.includes(m) ? m : 'neutral';
+}
+
+function renderFace(headX, headY, mood, blink, mouthOpen) {
+  let eyeSVG = '';
+  if (blink) {
+    eyeSVG = `
+      <line x1="${headX - 34}" y1="${headY - 6}" x2="${headX - 10}" y2="${headY - 6}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <line x1="${headX + 10}" y1="${headY - 6}" x2="${headX + 34}" y2="${headY - 6}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+    `;
+  } else if (mood === 'deadpan') {
+    eyeSVG = `
+      <line x1="${headX - 34}" y1="${headY - 6}" x2="${headX - 10}" y2="${headY - 6}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="${headX - 22}" cy="${headY - 2}" r="4" fill="${INK}"/>
+      <line x1="${headX + 10}" y1="${headY - 6}" x2="${headX + 34}" y2="${headY - 6}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="${headX + 22}" cy="${headY - 2}" r="4" fill="${INK}"/>
+      <line x1="${headX - 35}" y1="${headY - 24}" x2="${headX - 10}" y2="${headY - 24}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <line x1="${headX + 10}" y1="${headY - 24}" x2="${headX + 35}" y2="${headY - 24}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+    `;
+  } else if (mood === 'flat') {
+    eyeSVG = `
+      <circle cx="${headX - 22}" cy="${headY - 6}" r="13" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX - 22}" cy="${headY - 6}" r="5" fill="${INK}"/>
+      <circle cx="${headX + 22}" cy="${headY - 6}" r="13" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX + 22}" cy="${headY - 6}" r="5" fill="${INK}"/>
+      <line x1="${headX - 35}" y1="${headY - 25}" x2="${headX - 10}" y2="${headY - 25}" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="${headX + 10}" y1="${headY - 25}" x2="${headX + 35}" y2="${headY - 25}" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>
+    `;
+  } else if (mood === 'sad') {
+    eyeSVG = `
+      <circle cx="${headX - 22}" cy="${headY - 4}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX - 22}" cy="${headY - 1}" r="5" fill="${INK}"/>
+      <circle cx="${headX + 22}" cy="${headY - 4}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX + 22}" cy="${headY - 1}" r="5" fill="${INK}"/>
+      <line x1="${headX - 35}" y1="${headY - 20}" x2="${headX - 10}" y2="${headY - 28}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <line x1="${headX + 10}" y1="${headY - 28}" x2="${headX + 35}" y2="${headY - 20}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+    `;
+  } else if (mood === 'eager' || mood === 'happy') {
+    const r = mood === 'eager' ? 16 : 15;
+    eyeSVG = `
+      <circle cx="${headX - 22}" cy="${headY - 6}" r="${r}" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX - 18}" cy="${headY - 8}" r="6" fill="${INK}"/>
+      <circle cx="${headX + 22}" cy="${headY - 6}" r="${r}" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX + 26}" cy="${headY - 8}" r="6" fill="${INK}"/>
+      <path d="M ${headX - 35} ${headY - 24} Q ${headX - 22} ${headY - 34} ${headX - 10} ${headY - 24}" fill="none" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <path d="M ${headX + 10} ${headY - 24} Q ${headX + 22} ${headY - 34} ${headX + 35} ${headY - 24}" fill="none" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+    `;
+  } else {
+    // neutral
+    eyeSVG = `
+      <circle cx="${headX - 22}" cy="${headY - 6}" r="15" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX - 18}" cy="${headY - 6}" r="6" fill="${INK}"/>
+      <circle cx="${headX + 22}" cy="${headY - 6}" r="15" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <circle cx="${headX + 26}" cy="${headY - 6}" r="6" fill="${INK}"/>
+      <line x1="${headX - 35}" y1="${headY - 26}" x2="${headX - 10}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <line x1="${headX + 10}" y1="${headY - 26}" x2="${headX + 35}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+    `;
+  }
+
+  let mouthSVG = '';
+  if (mouthOpen > 2) {
+    mouthSVG = `<ellipse cx="${headX}" cy="${headY + 30}" rx="14" ry="${mouthOpen}" fill="${RED}" stroke="${INK}" stroke-width="4"/>`;
+  } else if (mood === 'happy') {
+    mouthSVG = `<path d="M ${headX - 22} ${headY + 22} Q ${headX} ${headY + 44} ${headX + 22} ${headY + 22}" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+  } else if (mood === 'eager') {
+    mouthSVG = `<path d="M ${headX - 18} ${headY + 24} Q ${headX} ${headY + 38} ${headX + 18} ${headY + 24}" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+  } else if (mood === 'sad') {
+    mouthSVG = `<path d="M ${headX - 18} ${headY + 34} Q ${headX} ${headY + 20} ${headX + 18} ${headY + 34}" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+  } else if (mood === 'flat' || mood === 'deadpan') {
+    mouthSVG = `<line x1="${headX - 18}" y1="${headY + 28}" x2="${headX + 18}" y2="${headY + 28}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`;
+  } else {
+    mouthSVG = `<line x1="${headX - 14}" y1="${headY + 28}" x2="${headX + 14}" y2="${headY + 28}" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>`;
+  }
+  return { eyeSVG, mouthSVG };
+}
+
 /**
  * Render complete 1080p SVG frame for a given scene at frame f.
  */
@@ -247,14 +371,28 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30, prevScene =
 
   const { type: bgType, detail: bgDetail } = determineBackground(scene);
 
-  // Character staging
+  // Character staging + slide-in on first scene or when position.x changes
   const pos = scene.visual?.position || { x: 0.25, y: 0.82 };
   const posX = pos.x !== undefined ? pos.x : (pos.anchor === "bottom_right" ? 1420 / W : 0.25);
-  const heroX = posX * W;
-  const dir = heroX < W / 2 ? 1 : -1;
+  const targetHeroX = posX * W;
+  const prevPosX = prevScene?.visual?.position?.x;
+  let heroX = targetHeroX;
+  if (!prevScene || (prevPosX !== undefined && Math.abs(prevPosX - posX) > 0.01)) {
+    const startX = !prevScene ? (targetHeroX < W / 2 ? -120 : W + 120) : prevPosX * W;
+    const sx = Math.min(1, Math.max(0, t / POSE_BLEND_SEC));
+    const se = 1 - Math.pow(1 - sx, 3);
+    heroX = startX + (targetHeroX - startX) * se;
+  }
+
+  const dir = targetHeroX < W / 2 ? 1 : -1;
   const hipY = 630 + breath * 0.3;
   const shoulderY = 410;
   const headRadius = 66;
+
+  // Mouth sync & talking head nod
+  const isTalking = t < duration - 0.25;
+  const mouthOpen = isTalking ? Math.abs(Math.sin(t * 14)) * 14 : 0;
+  const talkNod = isTalking ? Math.sin(t * 10) * 3.5 : 0;
 
   // Pose (interpolated) + idle sway: torso sways, head follows ~3 frames later
   const pose = resolvePose(scene, prevScene, t);
@@ -264,75 +402,11 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30, prevScene =
   const rad = (d) => (d * Math.PI) / 180;
   const shoulderX = heroX + Math.sin(rad(torsoLean)) * (hipY - shoulderY) * dir;
   const headX = shoulderX + Math.sin(rad(headLean)) * (headRadius + 10) * dir;
-  const headY = shoulderY - Math.cos(rad(headLean)) * (headRadius + 10) + breath * 0.6;
+  const headY = shoulderY - Math.cos(rad(headLean)) * (headRadius + 10) + breath * 0.6 + talkNod;
 
-  // Mouth sync
-  const isTalking = t < duration - 0.25;
-  const mouthOpen = isTalking ? Math.abs(Math.sin(t * 14)) * 14 : 0;
-
-  // Pose interpretation
-  const poseName = scene.visual?.stickman_pose || "idle_neutral";
-  const actionName = scene.visual?.action || "";
   const props = Array.isArray(scene.visual?.props) ? scene.visual.props : [];
-
-  // Face & Expression logic
-  const expr = (scene.visual?.expression || "neutral").toLowerCase();
-  let eyeSVG = "";
-  let mouthSVG = "";
-
-  if (expr.includes("deadpan") || expr.includes("disbelief")) {
-    // Deadpan horizontal slit eyes, flat line mouth
-    eyeSVG = `
-      <circle cx="${headX - 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${headX - 22}" cy="${headY - 6}" r="5" fill="${INK}"/>
-      <circle cx="${headX + 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${headX + 22}" cy="${headY - 6}" r="5" fill="${INK}"/>
-      <line x1="${headX - 35}" y1="${headY - 26}" x2="${headX - 10}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-      <line x1="${headX + 10}" y1="${headY - 26}" x2="${headX + 35}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-    `;
-    mouthSVG = `<line x1="${headX - 18}" y1="${headY + 28}" x2="${headX + 18}" y2="${headY + 28}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`;
-  } else if (expr.includes("sarcastic") || expr.includes("smirk")) {
-    // Sarcastic half-lidded eyes with asymmetric smirk
-    eyeSVG = `
-      <circle cx="${headX - 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${headX - 19}" cy="${headY - 6}" r="5" fill="${INK}"/>
-      <circle cx="${headX + 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${headX + 25}" cy="${headY - 6}" r="5" fill="${INK}"/>
-      <line x1="${headX - 35}" y1="${headY - 26}" x2="${headX - 10}" y2="${headY - 28}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-      <line x1="${headX + 10}" y1="${headY - 30}" x2="${headX + 35}" y2="${headY - 24}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-    `;
-    mouthSVG = `<path d="M ${headX - 12} ${headY + 30} Q ${headX + 8} ${headY + 44} ${headX + 26} ${headY + 22}" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
-  } else if (expr.includes("thinking") || expr.includes("puzzled") || poseName.includes("chin_on_hand")) {
-    // Squinting thoughtful eyes looking upward
-    eyeSVG = `
-      <circle cx="${headX - 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${headX - 20}" cy="${headY - 10}" r="5" fill="${INK}"/>
-      <circle cx="${headX + 22}" cy="${headY - 6}" r="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${headX + 24}" cy="${headY - 10}" r="5" fill="${INK}"/>
-      <line x1="${headX - 35}" y1="${headY - 24}" x2="${headX - 10}" y2="${headY - 28}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-      <line x1="${headX + 10}" y1="${headY - 28}" x2="${headX + 35}" y2="${headY - 24}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-    `;
-    mouthSVG = `<path d="M ${headX - 10} ${headY + 30} Q ${headX + 10} ${headY + 32} ${headX + 20} ${headY + 26}" stroke="${INK}" stroke-width="4" fill="none" stroke-linecap="round"/>`;
-  } else {
-    // Standard attentive animated face with blink & talking mouth
-    eyeSVG = blink ? `
-      <line x1="${headX - 34}" y1="${headY - 6}" x2="${headX - 10}" y2="${headY - 6}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-      <line x1="${headX + 10}" y1="${headY - 6}" x2="${headX + 34}" y2="${headY - 6}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-    ` : `
-      <circle cx="${headX - 22}" cy="${headY - 6}" r="15" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${headX - 18}" cy="${headY - 6}" r="6" fill="${INK}"/>
-      <circle cx="${headX + 22}" cy="${headY - 6}" r="15" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
-      <circle cx="${headX + 26}" cy="${headY - 6}" r="6" fill="${INK}"/>
-      <line x1="${headX - 35}" y1="${headY - 26}" x2="${headX - 10}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-      <line x1="${headX + 10}" y1="${headY - 26}" x2="${headX + 35}" y2="${headY - 26}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-    `;
-
-    mouthSVG = mouthOpen > 2 ? `
-      <ellipse cx="${headX}" cy="${headY + 30}" rx="14" ry="${mouthOpen}" fill="${RED}" stroke="${INK}" stroke-width="4"/>
-    ` : `
-      <ellipse cx="${headX}" cy="${headY + 30}" rx="10" ry="5" fill="${INK}"/>
-    `;
-  }
+  const mood = resolveMood(scene.visual);
+  const { eyeSVG, mouthSVG } = renderFace(headX, headY, mood, blink, mouthOpen);
 
   // Arms and props interaction
   let armsSVG = "";
@@ -398,10 +472,22 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30, prevScene =
     `;
   }
 
-  // STORYBOARD INFO CARD
+  // STORYBOARD INFO CARD (pop-in with easeOutBack over 0.35s)
   const cardCx = posX <= 0.5 ? 0.72 * W : 0.28 * W;
   const cardCy = 480;
-  extraPropsSVG = renderCard(scene.visual?.card, cardCx, cardCy, scene.visual?.accent_color_focus);
+  const cardScale = Math.max(0.05, easeOutBack(Math.min(1, Math.max(0, t / POSE_BLEND_SEC))));
+  extraPropsSVG = renderCard(scene.visual?.card, cardCx, cardCy, scene.visual?.accent_color_focus, cardScale);
+
+  // Camera transform (applied to world layers 1-4; header & caption remain fixed)
+  const camTransform = computeCameraTransform(
+    scene.visual?.camera,
+    f,
+    totalFrames,
+    targetHeroX,
+    440,
+    scene.visual?.card ? cardCx : null
+  );
+  const camAttr = camTransform ? ` transform="${camTransform}"` : '';
 
   // Compose Full SVG
   return `
@@ -412,35 +498,37 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30, prevScene =
       </filter>
     </defs>
 
-    <!-- 1. DYNAMIC FLEXIBLE BACKGROUND (Type: ${bgType}, Detail: ${bgDetail}) -->
-    ${getBackgroundSVG(bgType, bgDetail, W, H, FLOOR_Y)}
+    <g id="camera_rig"${camAttr}>
+      <!-- 1. DYNAMIC FLEXIBLE BACKGROUND (Type: ${bgType}, Detail: ${bgDetail}) -->
+      ${getBackgroundSVG(bgType, bgDetail, W, H, FLOOR_Y)}
 
-    <!-- 2. DESK & PROPS (If in office/room) -->
-    ${deskPropsSVG}
+      <!-- 2. DESK & PROPS (If in office/room) -->
+      ${deskPropsSVG}
 
-    <!-- 3. STICKMAN CHARACTER -->
-    <g id="stickman_character">
-      <!-- Ground Shadow -->
-      <ellipse cx="${heroX}" cy="${FLOOR_Y + 4}" rx="68" ry="14" fill="#c4bdb2"/>
+      <!-- 3. STICKMAN CHARACTER -->
+      <g id="stickman_character">
+        <!-- Ground Shadow -->
+        <ellipse cx="${heroX}" cy="${FLOOR_Y + 4}" rx="68" ry="14" fill="#c4bdb2"/>
 
-      <!-- Legs -->
-      <path d="M ${heroX - 18} ${hipY} Q ${heroX - 35} ${hipY + 140} ${heroX - 45} ${FLOOR_Y}" stroke="${INK}" stroke-width="12" fill="none" stroke-linecap="round"/>
-      <path d="M ${heroX + 18} ${hipY} Q ${heroX + 35} ${hipY + 140} ${heroX + 45} ${FLOOR_Y}" stroke="${INK}" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <!-- Legs -->
+        <path d="M ${heroX - 18} ${hipY} Q ${heroX - 35} ${hipY + 140} ${heroX - 45} ${FLOOR_Y}" stroke="${INK}" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <path d="M ${heroX + 18} ${hipY} Q ${heroX + 35} ${hipY + 140} ${heroX + 45} ${FLOOR_Y}" stroke="${INK}" stroke-width="12" fill="none" stroke-linecap="round"/>
 
-      <!-- Torso -->
-      <path d="M ${heroX} ${hipY} Q ${(heroX + shoulderX) / 2 - 3} ${hipY - 110} ${shoulderX} ${shoulderY}" stroke="${INK}" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <!-- Torso -->
+        <path d="M ${heroX} ${hipY} Q ${(heroX + shoulderX) / 2 - 3} ${hipY - 110} ${shoulderX} ${shoulderY}" stroke="${INK}" stroke-width="14" fill="none" stroke-linecap="round"/>
 
-      <!-- Arms & Prop Interaction -->
-      <g id="arms">${armsSVG}</g>
+        <!-- Arms & Prop Interaction -->
+        <g id="arms">${armsSVG}</g>
 
-      <!-- Head & Expression -->
-      <circle cx="${headX}" cy="${headY}" r="${headRadius}" fill="${WHITE}" stroke="${INK}" stroke-width="8"/>
-      ${eyeSVG}
-      ${mouthSVG}
+        <!-- Head & Expression -->
+        <circle cx="${headX}" cy="${headY}" r="${headRadius}" fill="${WHITE}" stroke="${INK}" stroke-width="8"/>
+        ${eyeSVG}
+        ${mouthSVG}
+      </g>
+
+      <!-- 4. RIGHT SIDE INFO CARD / DIAGRAMS -->
+      ${extraPropsSVG}
     </g>
-
-    <!-- 4. RIGHT SIDE INFO CARD / DIAGRAMS -->
-    ${extraPropsSVG}
 
     <!-- 5. TOP HEADER (from visual.header only) -->
     ${renderHeader(scene.visual?.header)}

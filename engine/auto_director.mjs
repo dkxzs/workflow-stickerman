@@ -23,6 +23,37 @@ const AUDIO_DIR = path.join(PROJECT_DIR, 'audio_scenes');
 const OUT_DIR = path.join(PROJECT_DIR, 'output');
 const TEMP_SCENES_DIR = path.join(PROJECT_DIR, 'video_scenes_vector');
 const BGM_PATH = path.join(BASE_DIR, 'assets', 'audio', 'bgm', 'bgm-sneaky-snitch.mp3');
+const SFX_DIR = path.join(BASE_DIR, 'assets', 'audio', 'sfx');
+
+// SFX files & recipes synced with engine/vocab.py :: SFX_RECIPES
+const SFX_FILES = {
+  pop: path.join(SFX_DIR, 'click_003.ogg'),
+  whoosh: path.join(SFX_DIR, 'swish-1.wav'),
+  swish: path.join(SFX_DIR, 'swish-2.wav'),
+  click_1: path.join(SFX_DIR, 'click_001.ogg'),
+  click_2: path.join(SFX_DIR, 'click_002.ogg'),
+  click_3: path.join(SFX_DIR, 'click_003.ogg'),
+  scratch: path.join(SFX_DIR, '160909__raccoonanimator__scratch-speed.wav'),
+};
+
+const SFX_RECIPES = {
+  pop: [['pop', 120, 0.6]],
+  pop_pop_pop: [['pop', 100, 0.5], ['pop', 450, 0.5], ['pop', 800, 0.5]],
+  whoosh: [['whoosh', 60, 0.5]],
+  phone_unlock: [['swish', 50, 0.5], ['click_1', 250, 0.7]],
+  phone_lock: [['click_2', 250, 0.7]],
+  subtle_click: [['click_3', 200, 0.5]],
+  toggle_click: [['click_3', 200, 0.6]],
+  clock_tick: [['click_1', 200, 0.4], ['click_1', 700, 0.4], ['click_1', 1200, 0.4], ['click_1', 1700, 0.4]],
+  record_scratch: [['scratch', 150, 0.8]],
+};
+
+function resolveSceneSfx(sfxName) {
+  const recipe = SFX_RECIPES[sfxName] || [];
+  return recipe
+    .map(([key, delayMs, vol]) => ({ file: SFX_FILES[key], delayMs, vol }))
+    .filter(item => item.file && fs.existsSync(item.file));
+}
 
 fs.mkdirSync(OUT_DIR, { recursive: true });
 fs.mkdirSync(TEMP_SCENES_DIR, { recursive: true });
@@ -81,9 +112,10 @@ async function renderSceneToMP4(scene, index) {
     await sharp(Buffer.from(svgStr)).png().toFile(pngPath);
   }
 
-  // 2. Mux with Scene Audio using FFmpeg
+  // 2. Mux with Scene Audio + Storyboard SFX using FFmpeg
   await new Promise((resolve, reject) => {
     const hasAudio = fs.existsSync(audioFile);
+    const sfxItems = resolveSceneSfx(scene.audio?.sfx);
     const ffmpegArgs = [
       '-y',
       '-framerate', String(FPS),
@@ -92,10 +124,28 @@ async function renderSceneToMP4(scene, index) {
 
     if (hasAudio) {
       ffmpegArgs.push('-i', audioFile);
-      ffmpegArgs.push('-c:a', 'aac', '-b:a', '192k', '-shortest');
     } else {
-      ffmpegArgs.push('-f', 'lavfi', '-i', 'anullsrc=channel_layout=stereo:sample_rate=44100');
-      ffmpegArgs.push('-t', String(duration), '-c:a', 'aac');
+      ffmpegArgs.push('-f', 'lavfi', '-t', String(duration), '-i', 'anullsrc=channel_layout=stereo:sample_rate=44100');
+    }
+
+    if (sfxItems.length > 0) {
+      for (const item of sfxItems) {
+        ffmpegArgs.push('-i', item.file);
+      }
+      const filterParts = ['[1:a]aformat=sample_rates=44100:channel_layouts=stereo,volume=1.0[voice]'];
+      const mixLabels = ['[voice]'];
+      sfxItems.forEach((item, idx) => {
+        const inputIdx = 2 + idx;
+        filterParts.push(
+          `[${inputIdx}:a]aformat=sample_rates=44100:channel_layouts=stereo,adelay=${item.delayMs}|${item.delayMs},volume=${item.vol}[sfx${idx}]`
+        );
+        mixLabels.push(`[sfx${idx}]`);
+      });
+      filterParts.push(`${mixLabels.join('')}amix=inputs=${mixLabels.length}:duration=first:normalize=0[aout]`);
+      ffmpegArgs.push('-filter_complex', filterParts.join(';'));
+      ffmpegArgs.push('-map', '0:v', '-map', '[aout]');
+    } else {
+      ffmpegArgs.push('-map', '0:v', '-map', '1:a');
     }
 
     ffmpegArgs.push(
@@ -103,6 +153,11 @@ async function renderSceneToMP4(scene, index) {
       '-pix_fmt', 'yuv420p',
       '-preset', 'fast',
       '-crf', '18',
+      '-c:a', 'aac',
+      '-b:a', '192k',
+      '-ar', '44100',
+      '-ac', '2',
+      '-shortest',
       outMp4
     );
 

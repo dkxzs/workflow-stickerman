@@ -50,7 +50,7 @@
         "sfx": "phone_unlock",
         "bgm_mood": "curious"
       },
-      "actual_duration_sec": 2.23,
+      "actual_duration_sec": 2.16,
       "audio_file": "audio_scenes/SCENE_001.mp3"
     },
     {
@@ -91,7 +91,7 @@
         "sfx": "pop",
         "bgm_mood": "curious"
       },
-      "actual_duration_sec": 1.99,
+      "actual_duration_sec": 1.92,
       "audio_file": "audio_scenes/SCENE_002.mp3"
     },
     {
@@ -132,7 +132,7 @@
         "sfx": "subtle_click",
         "bgm_mood": "curious"
       },
-      "actual_duration_sec": 2.35,
+      "actual_duration_sec": 2.38,
       "audio_file": "audio_scenes/SCENE_003.mp3"
     },
     {

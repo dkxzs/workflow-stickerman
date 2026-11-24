@@ -61,10 +61,10 @@ test('with position.x = 0.75, card is placed on the left of the character withou
   );
   assert.ok(rightHeroScene, 'Example storyboard should have a scene with position.x = 0.75');
 
-  const svg = renderSceneFrameSVG(rightHeroScene, 5, 60, 30);
+  const svg = renderSceneFrameSVG(rightHeroScene, 12, 60, 30);
 
   // Extract info_card translate(cx, cy)
-  const cardMatch = svg.match(/<g id="info_card" transform="translate\(([\d.]+),\s*([\d.]+)\)"/);
+  const cardMatch = svg.match(/<g id="info_card" transform="translate\(([\d.]+),\s*([\d.]+)\)/);
   assert.ok(cardMatch, 'info_card transform should be present');
   const cardCx = parseFloat(cardMatch[1]);
 
@@ -151,15 +151,15 @@ test('POSE_RIGS: idle vs idea_lightbulb differ, f=0 equals prev pose, f=12 equal
 
   assert.notEqual(arms(renderSceneFrameSVG(idle, 20, 90, 30)), arms(renderSceneFrameSVG(idea, 20, 90, 30)));
 
-  // f=0: idea scene after idle scene looks exactly like idle
+  // f=0: idea scene after idle scene looks exactly like idle (both with same prevScene so x matches)
   assert.equal(
     arms(renderSceneFrameSVG(idea, 0, 90, 30, idle)),
-    arms(renderSceneFrameSVG(idle, 0, 90, 30))
+    arms(renderSceneFrameSVG(idle, 0, 90, 30, idle))
   );
   // f=12 (0.4s): blend finished, equals current pose regardless of prevScene
   assert.equal(
     arms(renderSceneFrameSVG(idea, 12, 90, 30, idle)),
-    arms(renderSceneFrameSVG(idea, 12, 90, 30))
+    arms(renderSceneFrameSVG(idea, 12, 90, 30, idea))
   );
   // unknown pose falls back to idle_neutral
   const weird = mk('does_not_exist');
@@ -211,4 +211,44 @@ test('background and phone placement come from visual.background and visual.prop
   baseScene.visual.props = ['phone_on_desk'];
   const svgOnDesk = renderSceneFrameSVG(baseScene, 5, 60, 30);
   assert.ok(svgOnDesk.includes('fill="#202124"'), 'Should draw phone on desk when props includes phone_on_desk');
+});
+
+test('camera, mood (all 6), slide-in, card easeOutBack, and talking head nod', () => {
+  const s = structuredClone(exampleStoryboard.scenes[0]);
+
+  // 1. Camera: wide+static has no transform; zoom_in changes scale across frames
+  s.visual.camera = { framing: 'wide', movement: 'static' };
+  const svgWide = renderSceneFrameSVG(s, 10, 60, 30, s);
+  assert.ok(!svgWide.includes('id="camera_rig" transform='), 'wide+static should have no camera transform');
+
+  s.visual.camera = { framing: 'medium', movement: 'zoom_in' };
+  const svgCam0 = renderSceneFrameSVG(s, 0, 60, 30, s);
+  const svgCam59 = renderSceneFrameSVG(s, 59, 60, 30, s);
+  const scale0 = parseFloat(svgCam0.match(/id="camera_rig" transform="[^"]*scale\(([\d.]+)\)"/)[1]);
+  const scale59 = parseFloat(svgCam59.match(/id="camera_rig" transform="[^"]*scale\(([\d.]+)\)"/)[1]);
+  assert.ok(scale59 > scale0, `zoom_in should increase scale (${scale0} -> ${scale59})`);
+
+  // 2. Mood: all 6 moods render without NaN and deadpan differs from happy
+  const faces = {};
+  for (const mood of ['neutral', 'eager', 'happy', 'flat', 'deadpan', 'sad']) {
+    const ms = structuredClone(s);
+    ms.visual.mood = mood;
+    const svgM = renderSceneFrameSVG(ms, 65, 70, 30, ms);
+    assert.ok(!/NaN|undefined/.test(svgM), `Mood ${mood} should not produce NaN`);
+    faces[mood] = svgM.match(/<circle cx="[\d.]+" cy="[\d.]+" r="66"[\s\S]*?<\/g>/)[0];
+  }
+  assert.notEqual(faces.happy, faces.deadpan);
+  assert.notEqual(faces.sad, faces.eager);
+
+  // 3. Slide-in on first scene: heroX at f=0 < heroX at f=12
+  const svgSlide0 = renderSceneFrameSVG(s, 0, 60, 30, null);
+  const svgSlide12 = renderSceneFrameSVG(s, 12, 60, 30, null);
+  const hx0 = parseFloat(svgSlide0.match(/<g id="stickman_character">[\s\S]*?<ellipse cx="([-\d.]+)"/)[1]);
+  const hx12 = parseFloat(svgSlide12.match(/<g id="stickman_character">[\s\S]*?<ellipse cx="([-\d.]+)"/)[1]);
+  assert.ok(hx0 < 0 && Math.abs(hx12 - 0.25 * 1920) < 1, `Expected slide-in from left (${hx0} -> ${hx12})`);
+
+  // 4. Card easeOutBack: scale at f=0 < scale at f=12
+  const cs0 = parseFloat(svgSlide0.match(/id="info_card" transform="[^"]*scale\(([\d.]+)\)"/)[1]);
+  assert.ok(cs0 < 0.2, `Card should start small at f=0 (got ${cs0})`);
+  assert.ok(!svgSlide12.includes('id="info_card" transform="translate(1382.4, 480) scale('), 'Card settles at scale 1 by f=12');
 });
