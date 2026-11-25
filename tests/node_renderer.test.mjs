@@ -69,7 +69,7 @@ test('with position.x = 0.75, card is placed on the left of the character withou
   const cardCx = parseFloat(cardMatch[1]);
 
   // Extract character ground shadow cx (heroX)
-  const heroMatch = svg.match(/<g id="stickman_character">[\s\S]*?<ellipse cx="([\d.]+)"/);
+  const heroMatch = svg.match(/<g id="stickman_character"[^>]*>[\s\S]*?<ellipse cx="([\d.]+)"/);
   assert.ok(heroMatch, 'stickman_character ground shadow cx should be present');
   const heroX = parseFloat(heroMatch[1]);
 
@@ -243,8 +243,8 @@ test('camera, mood (all 6), slide-in, card easeOutBack, and talking head nod', (
   // 3. Slide-in on first scene: heroX at f=0 < heroX at f=12
   const svgSlide0 = renderSceneFrameSVG(s, 0, 60, 30, null);
   const svgSlide12 = renderSceneFrameSVG(s, 12, 60, 30, null);
-  const hx0 = parseFloat(svgSlide0.match(/<g id="stickman_character">[\s\S]*?<ellipse cx="([-\d.]+)"/)[1]);
-  const hx12 = parseFloat(svgSlide12.match(/<g id="stickman_character">[\s\S]*?<ellipse cx="([-\d.]+)"/)[1]);
+  const hx0 = parseFloat(svgSlide0.match(/<g id="stickman_character"[^>]*>[\s\S]*?<ellipse cx="([-\d.]+)"/)[1]);
+  const hx12 = parseFloat(svgSlide12.match(/<g id="stickman_character"[^>]*>[\s\S]*?<ellipse cx="([-\d.]+)"/)[1]);
   assert.ok(hx0 < 0 && Math.abs(hx12 - 0.25 * 1920) < 1, `Expected slide-in from left (${hx0} -> ${hx12})`);
 
   // 4. Card easeOutBack: scale at f=0 < scale at f=12

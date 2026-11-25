@@ -67,6 +67,14 @@ async def process_storyboard(storyboard_path: str, audio_dir: str, voice: str = 
         narration = scene["narration_text"]
         out_mp3 = os.path.join(audio_dir, f"{scene_id}.mp3")
 
+        if narration.strip() in ("...", "[pause]", "[silent]"):
+            dur = float(scene.get("estimated_duration_sec") or 2.5)
+            scene["actual_duration_sec"] = round(dur, 2)
+            if os.path.exists(out_mp3):
+                os.remove(out_mp3)
+            print(f"  [{idx}/{len(scenes)}] Silent beat {scene_id} (duration: {dur:.2f}s)")
+            continue
+
         print(f"  [{idx}/{len(scenes)}] Synthesizing {scene_id} ({len(narration.split())} words)...")
         dur = await synthesize_scene_audio(narration, out_mp3, voice=voice)
         scene["actual_duration_sec"] = dur

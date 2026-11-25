@@ -15,6 +15,8 @@ const BASE_DIR = path.resolve('.');
 const args = process.argv.slice(2);
 const projectArg = args.find(a => a.startsWith('--project='))?.split('=')[1] || 'video-001';
 const previewArg = args.find(a => a.startsWith('--preview='))?.split('=')[1];
+const scenesArg = args.find(a => a.startsWith('--scenes='))?.split('=')[1];
+const skipExisting = args.includes('--skip-existing');
 const maxScenes = previewArg ? parseInt(previewArg, 10) : (args.includes('--preview') ? 6 : 999);
 
 const PROJECT_DIR = path.join(BASE_DIR, 'projects', projectArg);
@@ -81,7 +83,10 @@ if (valResult.status !== 0) {
 
 const storyboard = JSON.parse(fs.readFileSync(SB_PATH, 'utf-8'));
 const FPS = 30;
-const scenesToRender = storyboard.scenes.slice(0, maxScenes);
+const pickedIds = scenesArg ? new Set(scenesArg.split(',').map(s => s.trim())) : null;
+const scenesToRender = pickedIds
+  ? storyboard.scenes.filter(s => pickedIds.has(s.scene_id))
+  : storyboard.scenes.slice(0, maxScenes);
 
 console.log(`\n========================================================`);
 console.log(`🎬 AUTO DIRECTOR — 1-COMMAND YOUTUBE ENGINE`);
@@ -95,6 +100,11 @@ async function renderSceneToMP4(scene, index) {
   const audioFile = path.join(PROJECT_DIR, scene.audio_file || `audio_scenes/${sceneId}.mp3`);
   const outMp4 = path.join(TEMP_SCENES_DIR, `${sceneId}.mp4`);
 
+  if (skipExisting && fs.existsSync(outMp4) && fs.statSync(outMp4).size > 1000) {
+    console.log(`[${index + 1}/${scenesToRender.length}] Reusing ${sceneId}.mp4`);
+    return outMp4;
+  }
+
   // Calculate duration
   const duration = scene.actual_duration_sec || scene.estimated_duration_sec || 2.5;
   const totalFrames = Math.max(15, Math.round(duration * FPS));
@@ -105,11 +115,18 @@ async function renderSceneToMP4(scene, index) {
   const tempFrameDir = path.join(TEMP_SCENES_DIR, `temp_${sceneId}`);
   fs.mkdirSync(tempFrameDir, { recursive: true });
 
-  // 1. Render all frames in vector SVG -> PNG
-  for (let f = 0; f < totalFrames; f++) {
-    const svgStr = renderSceneFrameSVG(scene, f, totalFrames, FPS, scenesToRender[index - 1] || null);
-    const pngPath = path.join(tempFrameDir, `${String(f).padStart(5, '0')}.png`);
-    await sharp(Buffer.from(svgStr)).png().toFile(pngPath);
+  // 1. Render all frames in vector SVG -> PNG (batched concurrency for multi-core speed)
+  const prevScene = scenesToRender[index - 1] || null;
+  const FRAME_BATCH = 16;
+  for (let startF = 0; startF < totalFrames; startF += FRAME_BATCH) {
+    const endF = Math.min(totalFrames, startF + FRAME_BATCH);
+    const jobs = [];
+    for (let f = startF; f < endF; f++) {
+      const svgStr = renderSceneFrameSVG(scene, f, totalFrames, FPS, prevScene);
+      const pngPath = path.join(tempFrameDir, `${String(f).padStart(5, '0')}.png`);
+      jobs.push(sharp(Buffer.from(svgStr)).png({ compressionLevel: 1 }).toFile(pngPath));
+    }
+    await Promise.all(jobs);
   }
 
   // 2. Mux with Scene Audio + Storyboard SFX using FFmpeg
@@ -184,14 +201,18 @@ async function concatScenes(sceneMp4s, finalOutMp4) {
 
   const rawConcat = path.join(OUT_DIR, 'temp_raw_concat.mp4');
 
-  // Step 1: Concat video + voiceover
+  // Step 1: Concat video + voiceover (re-encode audio cleanly to avoid AAC DTS drift across 100+ scenes)
   await new Promise((resolve, reject) => {
     const proc = spawn(FFMPEG, [
       '-y',
       '-f', 'concat',
       '-safe', '0',
       '-i', listFile,
-      '-c', 'copy',
+      '-c:v', 'copy',
+      '-c:a', 'aac',
+      '-b:a', '192k',
+      '-ar', '44100',
+      '-ac', '2',
       rawConcat
     ], { stdio: 'inherit' });
     proc.on('close', code => (code === 0 ? resolve() : reject(new Error(`Concat error ${code}`))));
@@ -227,14 +248,19 @@ async function concatScenes(sceneMp4s, finalOutMp4) {
 }
 
 async function run() {
-  const masterOut = path.join(OUT_DIR, previewArg ? 'video_preview_master.mp4' : 'video_full_master.mp4');
-  const renderedFiles = [];
+  const masterOut = path.join(OUT_DIR, (previewArg || scenesArg) ? 'video_preview_master.mp4' : 'video_full_master.mp4');
+  const renderedFiles = new Array(scenesToRender.length);
+  const SCENE_CONCURRENCY = 3;
+  let nextIdx = 0;
 
-  for (let i = 0; i < scenesToRender.length; i++) {
-    const mp4 = await renderSceneToMP4(scenesToRender[i], i);
-    renderedFiles.push(mp4);
+  async function worker() {
+    while (nextIdx < scenesToRender.length) {
+      const i = nextIdx++;
+      renderedFiles[i] = await renderSceneToMP4(scenesToRender[i], i);
+    }
   }
 
+  await Promise.all(Array.from({ length: Math.min(SCENE_CONCURRENCY, scenesToRender.length) }, () => worker()));
   await concatScenes(renderedFiles, masterOut);
 }
 

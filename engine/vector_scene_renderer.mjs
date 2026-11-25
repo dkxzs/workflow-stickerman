@@ -15,7 +15,8 @@ const MUTED = '#8c857b';
 const W = 1920;
 const H = 1080;
 const FLOOR_Y = 900;
-const DESK_TOP_Y = 660;
+const DESK_TOP_Y = 740;
+const CHAR_SCALE = 0.56;
 
 // Helper for XML/SVG escaping
 export function esc(s) {
@@ -120,7 +121,7 @@ export function renderHeader(header) {
  */
 export function wrapCaptionLines(text, maxChars = 40) {
   const clean = String(text ?? '').trim().replace(/\s+/g, ' ');
-  if (!clean) return [];
+  if (!clean || clean === '...' || clean === '[pause]' || clean === '[silent]') return [];
   if (clean.length <= maxChars) return [clean];
 
   const words = clean.split(' ');
@@ -177,8 +178,51 @@ export function renderCaption(narrationText) {
 const KNOWN_BACKGROUNDS = new Set([
   'office', 'room', 'street', 'city', 'nature', 'park',
   'hospital', 'clinic', 'classroom', 'school', 'water', 'ocean', 'lake',
-  'void', 'studio',
+  'void', 'studio', 'bedroom_night', 'street_night', 'arcade', 'sleep_lab',
 ]);
+
+/**
+ * Render 1964 Vintage Newspaper & Polaroid Portrait Dossier Card for Randy Gardner (100% copyright-safe vector sketch).
+ */
+export function renderDossierCard(cx, cy, scale = 1) {
+  const scalePart = scale === 1 ? '' : ` scale(${scale.toFixed(4)})`;
+  return `
+    <g id="info_card" transform="translate(${cx}, ${cy})${scalePart}" filter="url(#cardShadow)">
+      <!-- Vintage 1964 Newspaper Clipping Backing -->
+      <rect x="-240" y="-165" width="480" height="330" rx="16" fill="#f5efe2" stroke="${INK}" stroke-width="4"/>
+      <rect x="-220" y="-148" width="440" height="34" rx="4" fill="${INK}"/>
+      <text x="0" y="-125" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="18" fill="#f5efe2" letter-spacing="3">SAN DIEGO SCIENCE ARCHIVE • 1964</text>
+
+      <!-- Left Polaroid Portrait Frame with 1960s Student Sketch -->
+      <g transform="translate(-115, 10) rotate(-3)">
+        <rect x="-85" y="-105" width="170" height="200" rx="6" fill="#ffffff" stroke="${INK}" stroke-width="3"/>
+        <rect x="-73" y="-93" width="146" height="142" fill="#e2e8f0" stroke="${INK}" stroke-width="2"/>
+        <!-- Shoulders & 1960s Collar -->
+        <path d="M -58 49 C -52 10 52 10 58 49 Z" fill="#334155" stroke="${INK}" stroke-width="3"/>
+        <polygon points="-18,16 0,38 18,16 8,10 -8,10" fill="#ffffff" stroke="${INK}" stroke-width="2"/>
+        <!-- Head & 1960s Parted Hair -->
+        <circle cx="0" cy="-24" r="34" fill="#fbfaf8" stroke="${INK}" stroke-width="3.5"/>
+        <path d="M -34 -30 C -34 -62 34 -62 34 -28 C 22 -44 -10 -46 -34 -30 Z" fill="${INK}"/>
+        <!-- Determined teenage face -->
+        <circle cx="-11" cy="-22" r="3.5" fill="${INK}"/>
+        <circle cx="11" cy="-22" r="3.5" fill="${INK}"/>
+        <path d="M -9 -6 Q 0 -2 9 -6" fill="none" stroke="${INK}" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="0" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="14" fill="${INK}" letter-spacing="1">RANDY GARDNER</text>
+      </g>
+
+      <!-- Right Dossier Facts -->
+      <g transform="translate(85, -55)">
+        <text x="-85" y="0" font-family="Arial, sans-serif" font-weight="900" font-size="22" fill="${RED}">SUBJECT #01</text>
+        <line x1="-85" y1="10" x2="115" y2="10" stroke="${INK}" stroke-width="2"/>
+        <text x="-85" y="42" font-family="Arial, sans-serif" font-weight="800" font-size="17" fill="${INK}">AGE: 17 YEARS OLD</text>
+        <text x="-85" y="74" font-family="Arial, sans-serif" font-weight="800" font-size="17" fill="${INK}">CITY: SAN DIEGO, CA</text>
+        <text x="-85" y="106" font-family="Arial, sans-serif" font-weight="800" font-size="17" fill="${INK}">GOAL: 264 HOURS</text>
+        <rect x="-85" y="128" width="195" height="34" rx="6" fill="#fee2e2" stroke="${RED}" stroke-width="2.5"/>
+        <text x="12" y="151" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="15" fill="${RED}" letter-spacing="1">NO STIMULANTS</text>
+      </g>
+    </g>
+  `;
+}
 
 /**
  * Determine background type and detail level based on scene metadata.
@@ -389,47 +433,89 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30, prevScene =
   const shoulderY = 410;
   const headRadius = 66;
 
-  // Mouth sync & talking head nod
-  const isTalking = t < duration - 0.25;
+  const props = Array.isArray(scene.visual?.props) ? scene.visual.props : [];
+
+  // Mouth sync & talking head nod:
+  // When "actor_mode" is in props, the stickman is acting out the story rather than lip-syncing the narrator.
+  const rawNarration = String(scene.narration_text ?? '').trim();
+  const isSilentBeat = !rawNarration || rawNarration === '...' || rawNarration === '[pause]' || rawNarration === '[silent]';
+  const isActorMode = props.includes('actor_mode');
+  const isTalking = !isSilentBeat && !isActorMode && t < duration - 0.25;
   const mouthOpen = isTalking ? Math.abs(Math.sin(t * 14)) * 14 : 0;
   const talkNod = isTalking ? Math.sin(t * 10) * 3.5 : 0;
 
   // Pose (interpolated) + idle sway: torso sways, head follows ~3 frames later
   const pose = resolvePose(scene, prevScene, t);
   const sway = (ff) => Math.sin((ff / fps) * 2.2) * 1.5;
+  const tremor = props.includes('tremor') ? Math.sin(t * 42) * 3.5 : 0;
   const torsoLean = pose.lean + sway(f);
   const headLean = pose.lean + sway(f - 3) + pose.tilt;
   const rad = (d) => (d * Math.PI) / 180;
-  const shoulderX = heroX + Math.sin(rad(torsoLean)) * (hipY - shoulderY) * dir;
+  const shoulderX = heroX + tremor + Math.sin(rad(torsoLean)) * (hipY - shoulderY) * dir;
   const headX = shoulderX + Math.sin(rad(headLean)) * (headRadius + 10) * dir;
   const headY = shoulderY - Math.cos(rad(headLean)) * (headRadius + 10) + breath * 0.6 + talkNod;
 
-  const props = Array.isArray(scene.visual?.props) ? scene.visual.props : [];
   const mood = resolveMood(scene.visual);
   const { eyeSVG, mouthSVG } = renderFace(headX, headY, mood, blink, mouthOpen);
+
+  // Character condition overlays (dark circles, sweat drops, theta waves, blurred vision)
+  let actorFxSVG = '';
+  if (props.includes('dark_circles')) {
+    actorFxSVG += `
+      <path d="M ${headX - 35} ${headY + 9} Q ${headX - 22} ${headY + 19} ${headX - 9} ${headY + 9}" fill="none" stroke="#6b5b7b" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+      <path d="M ${headX + 9} ${headY + 9} Q ${headX + 22} ${headY + 19} ${headX + 35} ${headY + 9}" fill="none" stroke="#6b5b7b" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+    `;
+  }
+  if (props.includes('sweat_drops') || scene.visual?.stickman_pose === 'stressed_headache') {
+    const dropY = headY - 18 + ((t * 35) % 18);
+    actorFxSVG += `
+      <path d="M ${headX + 48 * dir} ${dropY} C ${headX + 42 * dir} ${dropY + 12} ${headX + 54 * dir} ${dropY + 12} ${headX + 48 * dir} ${dropY} Z" fill="#38bdf8" stroke="${INK}" stroke-width="2.5"/>
+      <line x1="${headX - 55}" y1="${headY - 78}" x2="${headX - 42}" y2="${headY - 64}" stroke="${RED}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="${headX}" y1="${headY - 88}" x2="${headX}" y2="${headY - 72}" stroke="${RED}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="${headX + 55}" y1="${headY - 78}" x2="${headX + 42}" y2="${headY - 64}" stroke="${RED}" stroke-width="4" stroke-linecap="round"/>
+    `;
+  }
+  if (props.includes('blur_vision')) {
+    const blurShift = Math.sin(t * 7) * 9;
+    actorFxSVG += `
+      <circle cx="${headX + blurShift}" cy="${headY}" r="${headRadius + 6}" fill="none" stroke="${RED}" stroke-width="3" opacity="0.35" stroke-dasharray="10 6"/>
+      <circle cx="${headX - blurShift}" cy="${headY}" r="${headRadius + 12}" fill="none" stroke="${BLUE}" stroke-width="3" opacity="0.3" stroke-dasharray="12 8"/>
+    `;
+  }
+  if (props.includes('microsleep_wave')) {
+    const waveShift = Math.sin(t * 5) * 12;
+    actorFxSVG += `
+      <g transform="translate(${headX}, ${headY - 98})">
+        <path d="M -70 0 Q -35 ${-18 + waveShift} 0 0 T 70 0" fill="none" stroke="${RED}" stroke-width="5" stroke-linecap="round"/>
+        <text x="0" y="-22" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="16" fill="${RED}" letter-spacing="2">THETA MICROSLEEP</text>
+      </g>
+    `;
+  }
 
   // Arms and props interaction
   let armsSVG = "";
   let extraPropsSVG = "";
   let deskPropsSVG = "";
 
-  // Check if scene is at desk and phone placement from visual.props
-  const isDeskScene = bgType === "office" || bgType === "room" || props.includes("desk_edge") || props.includes("desk_silhouette") || props.includes("phone_on_desk");
+  // Check if scene has a side desk (placed BESIDE the character so it never cuts across the character's body)
+  const isDeskScene = props.includes("desk_edge") || props.includes("desk_silhouette") || props.includes("phone_on_desk");
   const phoneOnDesk = props.includes("phone_on_desk");
   const phoneInHand = !phoneOnDesk && props.includes("phone_in_hand");
 
   if (isDeskScene) {
-    const mugX = 250;
+    const deskX = dir === 1 ? 70 : 1510;
+    const deskW = 310;
+    const mugX = deskX + 95;
     const mugY = DESK_TOP_Y;
     const steamY1 = mugY - 70 - ((t * 40) % 55);
-    const deskPhoneX = 390;
+    const deskPhoneX = deskX + 190;
 
     deskPropsSVG = `
-      <!-- Desk Legs -->
-      <line x1="160" y1="${DESK_TOP_Y + 28}" x2="160" y2="${FLOOR_Y}" stroke="${INK}" stroke-width="12" stroke-linecap="round"/>
-      <line x1="780" y1="${DESK_TOP_Y + 28}" x2="780" y2="${FLOOR_Y}" stroke="${INK}" stroke-width="12" stroke-linecap="round"/>
-      <!-- Desk Surface -->
-      <rect x="120" y="${DESK_TOP_Y}" width="700" height="28" rx="8" fill="#dfd7ca" stroke="${INK}" stroke-width="6"/>
+      <!-- Side Desk Legs -->
+      <line x1="${deskX + 25}" y1="${DESK_TOP_Y + 28}" x2="${deskX + 25}" y2="${FLOOR_Y}" stroke="${INK}" stroke-width="12" stroke-linecap="round"/>
+      <line x1="${deskX + deskW - 25}" y1="${DESK_TOP_Y + 28}" x2="${deskX + deskW - 25}" y2="${FLOOR_Y}" stroke="${INK}" stroke-width="12" stroke-linecap="round"/>
+      <!-- Side Desk Surface -->
+      <rect x="${deskX}" y="${DESK_TOP_Y}" width="${deskW}" height="28" rx="8" fill="#dfd7ca" stroke="${INK}" stroke-width="6"/>
 
       <!-- Coffee Mug -->
       <ellipse cx="${mugX}" cy="${mugY + 2}" rx="28" ry="7" fill="#c4bdb2"/>
@@ -472,22 +558,112 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30, prevScene =
     `;
   }
 
-  // STORYBOARD INFO CARD (pop-in with easeOutBack over 0.35s)
+  // Interactive Story Props held or acted out by Randy
+  if (props.includes('act_coin_toss')) {
+    const cycle = (t * 1.4) % 1;
+    const coinY = rHandY - 30 - 240 * (4 * cycle * (1 - cycle));
+    const coinRx = Math.max(4, Math.abs(Math.cos(t * 16)) * 22);
+    armsSVG += `
+      <ellipse cx="${rHandX + 18 * dir}" cy="${coinY}" rx="22" ry="${coinRx}" fill="${GOLD}" stroke="${INK}" stroke-width="4"/>
+      <path d="M ${rHandX + 18 * dir} ${rHandY - 20} L ${rHandX + 18 * dir} ${coinY + 30}" stroke="${GOLD}" stroke-width="3" stroke-dasharray="6 6" opacity="0.7"/>
+    `;
+  }
+  if (props.includes('act_football')) {
+    // Randy holds an American football while wearing a Charger-gold helmet stripe in his delusion
+    const fx = rHandX + 12 * dir;
+    const fy = rHandY - 10;
+    armsSVG += `
+      <g transform="translate(${fx}, ${fy}) rotate(${-20 * dir})">
+        <ellipse cx="0" cy="0" rx="38" ry="22" fill="#8b4513" stroke="${INK}" stroke-width="4"/>
+        <line x1="-18" y1="0" x2="18" y2="0" stroke="#ffffff" stroke-width="3"/>
+        <line x1="-10" y1="-6" x2="-10" y2="6" stroke="#ffffff" stroke-width="2.5"/>
+        <line x1="0" y1="-6" x2="0" y2="6" stroke="#ffffff" stroke-width="2.5"/>
+        <line x1="10" y1="-6" x2="10" y2="6" stroke="#ffffff" stroke-width="2.5"/>
+      </g>
+    `;
+  }
+  if (props.includes('act_blind_touch')) {
+    // Small testing table in front of Randy with mystery object + floating '?' above head
+    const tx = shoulderX + 145 * dir;
+    const ty = hipY + 25;
+    armsSVG += `
+      <rect x="${tx - 55}" y="${ty}" width="110" height="16" rx="4" fill="#dfd7ca" stroke="${INK}" stroke-width="4"/>
+      <line x1="${tx - 38}" y1="${ty + 16}" x2="${tx - 38}" y2="${FLOOR_Y}" stroke="${INK}" stroke-width="8"/>
+      <line x1="${tx + 38}" y1="${ty + 16}" x2="${tx + 38}" y2="${FLOOR_Y}" stroke="${INK}" stroke-width="8"/>
+      <circle cx="${tx}" cy="${ty - 14}" r="14" fill="${GOLD}" stroke="${INK}" stroke-width="3"/>
+      <text x="${headX + 55 * dir}" y="${headY - 75 - Math.sin(t * 6) * 8}" font-family="Arial, sans-serif" font-weight="900" font-size="44" fill="${RED}">?</text>
+    `;
+  }
+  if (props.includes('act_serial_sevens')) {
+    const nums = ['100', '93', '86', '79', '72', '65... ?'];
+    const shown = nums[Math.min(nums.length - 1, Math.floor((t / Math.max(1, duration)) * nums.length))];
+    actorFxSVG += `
+      <g transform="translate(${headX}, ${headY - 115})">
+        <rect x="-85" y="-34" width="170" height="52" rx="14" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+        <text x="0" y="2" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="30" fill="${RED}">${shown}</text>
+      </g>
+    `;
+  }
+
+  // STORYBOARD INFO CARD or 1964 DOSSIER CARD (pop-in with easeOutBack over 0.35s)
   const cardCx = posX <= 0.5 ? 0.72 * W : 0.28 * W;
   const cardCy = 480;
   const cardScale = Math.max(0.05, easeOutBack(Math.min(1, Math.max(0, t / POSE_BLEND_SEC))));
-  extraPropsSVG = renderCard(scene.visual?.card, cardCx, cardCy, scene.visual?.accent_color_focus, cardScale);
+  if (props.includes('dossier_randy')) {
+    extraPropsSVG = renderDossierCard(cardCx, cardCy, cardScale);
+  } else {
+    extraPropsSVG = renderCard(scene.visual?.card, cardCx, cardCy, scene.visual?.accent_color_focus, cardScale);
+  }
 
+  // Optional Day 4 Street-Sign Shadow Hallucination Figure
+  if (props.includes('street_sign_shadow')) {
+    const sx = posX <= 0.5 ? 1120 : 800;
+    const pulse = 0.75 + Math.sin(t * 6) * 0.2;
+    extraPropsSVG += `
+      <g transform="translate(${sx}, ${FLOOR_Y})" opacity="${pulse.toFixed(2)}">
+        <line x1="0" y1="0" x2="0" y2="-340" stroke="#0f172a" stroke-width="12"/>
+        <path d="M -55 -210 Q 0 -310 55 -210 L 42 0 L -42 0 Z" fill="#0f172a"/>
+        <circle cx="0" cy="-340" r="46" fill="#0f172a" stroke="${RED}" stroke-width="3"/>
+        <circle cx="-14" cy="-344" r="6" fill="#fef08a"/>
+        <circle cx="14" cy="-344" r="6" fill="#fef08a"/>
+      </g>
+    `;
+  }
+
+  // Optional 1960s Glaring TV Prop on Day 2
+  if (props.includes('act_tv_glare')) {
+    const tvX = posX <= 0.5 ? 920 : 1000;
+    const glare = 0.22 + Math.abs(Math.sin(t * 12)) * 0.18;
+    extraPropsSVG += `
+      <g transform="translate(${tvX}, ${FLOOR_Y - 180})">
+        <polygon points="0,45 ${-240 * dir},-55 ${-240 * dir},145" fill="#fef08a" opacity="${glare.toFixed(2)}"/>
+        <rect x="-55" y="0" width="110" height="86" rx="10" fill="#78350f" stroke="${INK}" stroke-width="5"/>
+        <rect x="-42" y="12" width="70" height="62" rx="6" fill="#fef08a" stroke="${INK}" stroke-width="3"/>
+        <line x1="-15" y1="0" x2="-40" y2="-38" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>
+        <line x1="15" y1="0" x2="40" y2="-38" stroke="${INK}" stroke-width="4" stroke-linecap="round"/>
+        <line x1="-35" y1="86" x2="-45" y2="180" stroke="${INK}" stroke-width="7" stroke-linecap="round"/>
+        <line x1="35" y1="86" x2="45" y2="180" stroke="${INK}" stroke-width="7" stroke-linecap="round"/>
+      </g>
+    `;
+  }
+
+  // Walking / stumbling leg animation when running_hurry or act_stumble_walk
+  const isWalking = scene.visual?.stickman_pose === 'running_hurry' || props.includes('act_stumble_walk');
+  const legStride = isWalking ? Math.sin(t * 10) * 38 : 0;
+  const happyBounce = (scene.visual?.mood === 'happy' && scene.visual?.stickman_pose === 'celebrate_win')
+    ? Math.abs(Math.sin(t * 8)) * 18
+    : 0;
   // Camera transform (applied to world layers 1-4; header & caption remain fixed)
   const camTransform = computeCameraTransform(
     scene.visual?.camera,
     f,
     totalFrames,
     targetHeroX,
-    440,
+    680,
     scene.visual?.card ? cardCx : null
   );
   const camAttr = camTransform ? ` transform="${camTransform}"` : '';
+  const charScaleTransform = `translate(${heroX}, ${FLOOR_Y - happyBounce}) scale(${CHAR_SCALE}) translate(${-heroX}, ${-FLOOR_Y})`;
 
   // Compose Full SVG
   return `
@@ -505,14 +681,14 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30, prevScene =
       <!-- 2. DESK & PROPS (If in office/room) -->
       ${deskPropsSVG}
 
-      <!-- 3. STICKMAN CHARACTER -->
-      <g id="stickman_character">
+      <!-- 3. STICKMAN CHARACTER (harmonious 0.56 scale anchored at floor) -->
+      <g id="stickman_character" transform="${charScaleTransform}">
         <!-- Ground Shadow -->
         <ellipse cx="${heroX}" cy="${FLOOR_Y + 4}" rx="68" ry="14" fill="#c4bdb2"/>
 
         <!-- Legs -->
-        <path d="M ${heroX - 18} ${hipY} Q ${heroX - 35} ${hipY + 140} ${heroX - 45} ${FLOOR_Y}" stroke="${INK}" stroke-width="12" fill="none" stroke-linecap="round"/>
-        <path d="M ${heroX + 18} ${hipY} Q ${heroX + 35} ${hipY + 140} ${heroX + 45} ${FLOOR_Y}" stroke="${INK}" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <path d="M ${heroX - 18} ${hipY} Q ${heroX - 35 + legStride * 0.5} ${hipY + 140} ${heroX - 45 + legStride} ${FLOOR_Y}" stroke="${INK}" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <path d="M ${heroX + 18} ${hipY} Q ${heroX + 35 - legStride * 0.5} ${hipY + 140} ${heroX + 45 - legStride} ${FLOOR_Y}" stroke="${INK}" stroke-width="12" fill="none" stroke-linecap="round"/>
 
         <!-- Torso -->
         <path d="M ${heroX} ${hipY} Q ${(heroX + shoulderX) / 2 - 3} ${hipY - 110} ${shoulderX} ${shoulderY}" stroke="${INK}" stroke-width="14" fill="none" stroke-linecap="round"/>
@@ -524,6 +700,7 @@ export function renderSceneFrameSVG(scene, f, totalFrames, fps = 30, prevScene =
         <circle cx="${headX}" cy="${headY}" r="${headRadius}" fill="${WHITE}" stroke="${INK}" stroke-width="8"/>
         ${eyeSVG}
         ${mouthSVG}
+        ${actorFxSVG}
       </g>
 
       <!-- 4. RIGHT SIDE INFO CARD / DIAGRAMS -->

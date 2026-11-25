@@ -34,6 +34,14 @@ export function getBackgroundSVG(type = 'office', detail = 'high', W = 1920, H =
     case 'ocean':
     case 'lake':
       return renderWater(detail, W, H, floorY, options);
+    case 'bedroom_night':
+      return renderBedroomNight(detail, W, H, floorY, options);
+    case 'street_night':
+      return renderStreetNight(detail, W, H, floorY, options);
+    case 'arcade':
+      return renderArcade(detail, W, H, floorY, options);
+    case 'sleep_lab':
+      return renderSleepLab(detail, W, H, floorY, options);
     case 'void':
     case 'studio':
     default:
@@ -107,15 +115,23 @@ function renderStreet(detail, W, H, floorY, opts) {
   return `
     <rect width="${W}" height="${H}" fill="${skyBg}"/>
 
-    <!-- Distant City Skyline Silhouettes -->
-    <g fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2">
-      <rect x="80" y="460" width="140" height="440"/>
-      <rect x="250" y="380" width="180" height="520"/>
-      <rect x="460" y="520" width="120" height="380"/>
-      <rect x="620" y="420" width="200" height="480"/>
-      <rect x="1350" y="450" width="160" height="450"/>
-      <rect x="1540" y="360" width="190" height="540"/>
-      <rect x="1760" y="500" width="130" height="400"/>
+    <!-- Distant City Skyline Silhouettes (Tall Buildings) -->
+    <g fill="#e2e8f0" stroke="#94a3b8" stroke-width="3">
+      <rect x="60" y="260" width="170" height="640"/>
+      <rect x="250" y="180" width="220" height="720"/>
+      <rect x="490" y="310" width="160" height="590"/>
+      <rect x="670" y="220" width="240" height="680"/>
+      <rect x="1320" y="250" width="190" height="650"/>
+      <rect x="1530" y="170" width="230" height="730"/>
+      <rect x="1780" y="290" width="140" height="610"/>
+    </g>
+    <!-- Building Windows Grid -->
+    <g fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" opacity="0.85">
+      <rect x="280" y="220" width="36" height="48"/><rect x="340" y="220" width="36" height="48"/><rect x="400" y="220" width="36" height="48"/>
+      <rect x="280" y="295" width="36" height="48"/><rect x="340" y="295" width="36" height="48"/><rect x="400" y="295" width="36" height="48"/>
+      <rect x="280" y="370" width="36" height="48"/><rect x="340" y="370" width="36" height="48"/><rect x="400" y="370" width="36" height="48"/>
+      <rect x="705" y="260" width="42" height="52"/><rect x="770" y="260" width="42" height="52"/><rect x="835" y="260" width="42" height="52"/>
+      <rect x="705" y="340" width="42" height="52"/><rect x="770" y="340" width="42" height="52"/><rect x="835" y="340" width="42" height="52"/>
     </g>
 
     <!-- Sidewalk Curb -->
@@ -124,6 +140,26 @@ function renderStreet(detail, W, H, floorY, opts) {
     <!-- Asphalt Road Plane -->
     <rect x="0" y="${floorY}" width="${W}" height="${H - floorY}" fill="${roadBg}"/>
     <line x1="0" y1="${floorY}" x2="${W}" y2="${floorY}" stroke="${INK}" stroke-width="6"/>
+
+    <!-- Parked Street Car (Proportional to buildings & stickman) -->
+    <g transform="translate(690, ${floorY - 195})">
+      <ellipse cx="205" cy="198" rx="195" ry="12" fill="#1e1c1a" opacity="0.22"/>
+      <!-- Car cabin & roof -->
+      <path d="M 75 95 L 130 22 L 285 22 L 340 95 Z" fill="#64748b" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>
+      <polygon points="95,90 138,34 205,34 205,90" fill="#e0f2fe" stroke="${INK}" stroke-width="3"/>
+      <polygon points="217,90 217,34 277,34 320,90" fill="#e0f2fe" stroke="${INK}" stroke-width="3"/>
+      <!-- Car body -->
+      <rect x="15" y="92" width="385" height="72" rx="18" fill="#3b82f6" stroke="${INK}" stroke-width="5"/>
+      <rect x="5" y="138" width="24" height="16" rx="4" fill="#cbd5e1" stroke="${INK}" stroke-width="3"/>
+      <rect x="384" y="138" width="24" height="16" rx="4" fill="#cbd5e1" stroke="${INK}" stroke-width="3"/>
+      <rect x="378" y="106" width="18" height="20" rx="4" fill="#fef08a" stroke="${INK}" stroke-width="3"/>
+      <rect x="16" y="106" width="14" height="20" rx="4" fill="#ef4444" stroke="${INK}" stroke-width="3"/>
+      <!-- Wheels -->
+      <circle cx="95" cy="166" r="34" fill="#1e293b" stroke="${INK}" stroke-width="5"/>
+      <circle cx="95" cy="166" r="15" fill="#cbd5e1" stroke="${INK}" stroke-width="3"/>
+      <circle cx="315" cy="166" r="34" fill="#1e293b" stroke="${INK}" stroke-width="5"/>
+      <circle cx="315" cy="166" r="15" fill="#cbd5e1" stroke="${INK}" stroke-width="3"/>
+    </g>
 
     <!-- Dashed Road Markings -->
     <g stroke="#f8fafc" stroke-width="8" stroke-dasharray="45 35" stroke-linecap="round" opacity="0.85">
@@ -230,13 +266,13 @@ function renderHospital(detail, W, H, floorY, opts) {
     <line x1="0" y1="${floorY}" x2="${W}" y2="${floorY}" stroke="${INK}" stroke-width="6"/>
 
     <!-- Medical Curtain / Divider on left -->
-    <g transform="translate(80, 140)">
+    <g transform="translate(80, 210)">
       <line x1="0" y1="0" x2="260" y2="0" stroke="${INK}" stroke-width="6"/>
-      <path d="M 10 0 C 20 200 -5 450 15 ${floorY - 140} L 240 ${floorY - 140} C 255 450 230 200 245 0 Z" fill="#e0f2fe" opacity="0.6" stroke="${INK}" stroke-width="4"/>
+      <path d="M 10 0 C 20 180 -5 400 15 ${floorY - 210} L 240 ${floorY - 210} C 255 400 230 180 245 0 Z" fill="#e0f2fe" opacity="0.6" stroke="${INK}" stroke-width="4"/>
     </g>
 
-    <!-- Wall Heartbeat Monitor Sign -->
-    <g transform="translate(380, 240)">
+    <!-- Wall Heartbeat Monitor Sign (kept below top header safe zone even on close_up) -->
+    <g transform="translate(360, 340)">
       <rect width="180" height="110" rx="10" fill="#0f172a" stroke="${INK}" stroke-width="4"/>
       <path d="M 15 55 L 60 55 L 75 25 L 95 85 L 115 45 L 125 55 L 165 55" stroke="#22c55e" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
       <circle cx="165" cy="55" r="4" fill="#22c55e"/>
@@ -345,5 +381,104 @@ function renderVoid(detail, W, H, floorY, opts) {
     <rect width="${W}" height="${H}" fill="${bg}"/>
     <!-- Subtle ground horizon line -->
     <line x1="${W * 0.1}" y1="${floorY}" x2="${W * 0.9}" y2="${floorY}" stroke="${INK}" stroke-width="4" stroke-linecap="round" opacity="0.3"/>
+  `;
+}
+
+// 8. BEDROOM NIGHT (1964 San Diego Bedroom — Moonlit window, wall clock, untouched bed)
+function renderBedroomNight(detail, W, H, floorY) {
+  return `
+    <rect width="${W}" height="${H}" fill="#eaeef5"/>
+    <rect x="0" y="${floorY}" width="${W}" height="${H - floorY}" fill="#d8d2c7"/>
+    <rect x="0" y="${floorY - 14}" width="${W}" height="14" fill="#c7bfb2"/>
+    <line x1="0" y1="${floorY}" x2="${W}" y2="${floorY}" stroke="${INK}" stroke-width="6"/>
+
+    <!-- Night Window with Crescent Moon & Stars -->
+    <g transform="translate(110, 190)">
+      <rect width="210" height="290" rx="8" fill="#1e293b" stroke="${INK}" stroke-width="5"/>
+      <circle cx="155" cy="70" r="26" fill="#fef08a"/>
+      <circle cx="167" cy="62" r="22" fill="#1e293b"/>
+      <circle cx="55" cy="55" r="3" fill="#ffffff" opacity="0.8"/>
+      <circle cx="95" cy="110" r="2.5" fill="#ffffff" opacity="0.7"/>
+      <circle cx="48" cy="195" r="3" fill="#ffffff" opacity="0.75"/>
+      <line x1="105" y1="0" x2="105" y2="290" stroke="${INK}" stroke-width="4"/>
+      <line x1="0" y1="145" x2="210" y2="145" stroke="${INK}" stroke-width="4"/>
+      <rect x="-14" y="288" width="238" height="16" rx="3" fill="#c7bfb2" stroke="${INK}" stroke-width="4"/>
+    </g>
+
+    <!-- Wall Clock ticking at 3:00 AM -->
+    <g transform="translate(880, 235)">
+      <circle cx="0" cy="0" r="46" fill="#ffffff" stroke="${INK}" stroke-width="5"/>
+      <line x1="0" y1="-34" x2="0" y2="-41" stroke="${INK}" stroke-width="3"/>
+      <line x1="34" y1="0" x2="41" y2="0" stroke="${INK}" stroke-width="3"/>
+      <line x1="0" y1="34" x2="0" y2="41" stroke="${INK}" stroke-width="3"/>
+      <line x1="-34" y1="0" x2="-41" y2="0" stroke="${INK}" stroke-width="3"/>
+      <line x1="0" y1="0" x2="0" y2="-26" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+      <line x1="0" y1="0" x2="22" y2="0" stroke="#d7372c" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="0" cy="0" r="4" fill="${INK}"/>
+    </g>
+
+    <!-- Untouched Single Bed & Nightstand in Background (Proportional to 350px stickman) -->
+    <g transform="translate(690, ${floorY - 190})">
+      <rect x="0" y="85" width="430" height="72" rx="10" fill="#ffffff" stroke="${INK}" stroke-width="5"/>
+      <rect x="115" y="85" width="315" height="72" rx="10" fill="#93c5fd" stroke="${INK}" stroke-width="5"/>
+      <rect x="22" y="56" width="88" height="32" rx="12" fill="#ffffff" stroke="${INK}" stroke-width="4"/>
+      <rect x="-12" y="10" width="20" height="180" rx="5" fill="#8c6d53" stroke="${INK}" stroke-width="5"/>
+      <rect x="422" y="50" width="20" height="140" rx="5" fill="#8c6d53" stroke="${INK}" stroke-width="5"/>
+    </g>
+  `;
+}
+
+// 9. STREET NIGHT (San Diego Night Walk — Streetlamp glow, dark buildings, sidewalk)
+function renderStreetNight(detail, W, H, floorY) {
+  return `
+    <rect width="${W}" height="${H}" fill="#1e2436"/>
+    <!-- Distant City Silhouette -->
+    <rect x="80" y="${floorY - 360}" width="180" height="360" fill="#29324a" stroke="${INK}" stroke-width="4"/>
+    <rect x="290" y="${floorY - 280}" width="150" height="280" fill="#252d42" stroke="${INK}" stroke-width="4"/>
+    <rect x="1480" y="${floorY - 340}" width="210" height="340" fill="#29324a" stroke="${INK}" stroke-width="4"/>
+    <!-- Sidewalk -->
+    <rect x="0" y="${floorY}" width="${W}" height="${H - floorY}" fill="#64748b"/>
+    <line x1="0" y1="${floorY}" x2="${W}" y2="${floorY}" stroke="${INK}" stroke-width="6"/>
+    <!-- Streetlamp & Warm Light Cone -->
+    <polygon points="960,260 1220,${floorY} 700,${floorY}" fill="#fef08a" opacity="0.16"/>
+    <line x1="960" y1="240" x2="960" y2="${floorY}" stroke="${INK}" stroke-width="10"/>
+    <path d="M 960 245 Q 960 210 995 210" fill="none" stroke="${INK}" stroke-width="8"/>
+    <ellipse cx="1005" cy="215" rx="22" ry="10" fill="#fde047" stroke="${INK}" stroke-width="4"/>
+  `;
+}
+
+// 10. ARCADE / PINBALL ROOM (Day 10 Pinball Paradox)
+function renderArcade(detail, W, H, floorY) {
+  return `
+    <rect width="${W}" height="${H}" fill="#f3efe6"/>
+    <rect x="0" y="${floorY}" width="${W}" height="${H - floorY}" fill="#d6cfc2"/>
+    <line x1="0" y1="${floorY}" x2="${W}" y2="${floorY}" stroke="${INK}" stroke-width="6"/>
+    <!-- Classic 1960s Pinball Machine in center-background -->
+    <g transform="translate(760, ${floorY - 330})">
+      <rect x="220" y="0" width="90" height="145" rx="6" fill="#1e293b" stroke="${INK}" stroke-width="5"/>
+      <rect x="232" y="14" width="66" height="45" rx="4" fill="#fef08a" stroke="${INK}" stroke-width="3"/>
+      <polygon points="0,155 290,120 290,195 0,215" fill="#e63946" stroke="${INK}" stroke-width="5"/>
+      <line x1="30" y1="212" x2="20" y2="330" stroke="${INK}" stroke-width="8" stroke-linecap="round"/>
+      <line x1="265" y1="195" x2="275" y2="330" stroke="${INK}" stroke-width="8" stroke-linecap="round"/>
+    </g>
+  `;
+}
+
+// 11. SLEEP LAB (U.S. Naval Hospital EEG Monitoring Room)
+function renderSleepLab(detail, W, H, floorY) {
+  return `
+    <rect width="${W}" height="${H}" fill="#eef6f6"/>
+    <rect x="0" y="${floorY}" width="${W}" height="${H - floorY}" fill="#dde8e8"/>
+    <line x1="0" y1="${floorY}" x2="${W}" y2="${floorY}" stroke="${INK}" stroke-width="6"/>
+    <!-- EEG Brainwave Monitor Console (kept below top header safe zone) -->
+    <g transform="translate(760, 310)">
+      <rect x="0" y="0" width="320" height="210" rx="12" fill="#ffffff" stroke="${INK}" stroke-width="5"/>
+      <rect x="20" y="20" width="280" height="130" rx="8" fill="#0f172a" stroke="${INK}" stroke-width="4"/>
+      <path d="M 35 65 L 75 65 L 90 35 L 105 95 L 120 45 L 135 85 L 155 65 L 210 65 L 225 38 L 240 92 L 285 65" fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 35 115 Q 70 95 105 115 T 175 115 T 245 115 T 285 115" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="45" cy="178" r="10" fill="#2a9d8f" stroke="${INK}" stroke-width="3"/>
+      <circle cx="85" cy="178" r="10" fill="#f4b400" stroke="${INK}" stroke-width="3"/>
+      <circle cx="125" cy="178" r="10" fill="#d7372c" stroke="${INK}" stroke-width="3"/>
+    </g>
   `;
 }
