@@ -1,0 +1,6517 @@
+{
+  "project_id": "video-002",
+  "title": "What Happens If You Don't Sleep for 11 Days? (The 264-Hour Experiment)",
+  "resolution": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30
+  },
+  "global_settings": {
+    "background_color": "#F7F5F0",
+    "primary_line_color": "#212529",
+    "font_family": "Arial, Helvetica, sans-serif"
+  },
+  "scenes": [
+    {
+      "scene_id": "SCENE_001",
+      "narration_text": "In December nineteen sixty-three, two high school kids in San Diego flipped a coin.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 5.88,
+      "audio_file": "audio_scenes/SCENE_001.mp3",
+      "visual": {
+        "description": "SCENE_001: Hero (idle_neutral, eager) at x=0.25 in office.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "act_coin_toss"
+        ],
+        "background": "street",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "coin",
+          "title": "DECEMBER 1963",
+          "subtitle": "SAN DIEGO, CALIFORNIA"
+        },
+        "header": {
+          "title": "THE 1964 EXPERIMENT",
+          "subtitle": "264 HOURS WITHOUT SLEEP"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_002",
+      "narration_text": "They were not deciding who would take out the trash.",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 3.34,
+      "audio_file": "audio_scenes/SCENE_002.mp3",
+      "visual": {
+        "description": "SCENE_002: Hero (thinking, deadpan) at x=0.25 in office.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "cross",
+          "title": "NOT A CHORE",
+          "subtitle": "A BIGGER BET"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_003",
+      "narration_text": "They were deciding who would stop sleeping for eleven straight days.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 4.25,
+      "audio_file": "audio_scenes/SCENE_003.mp3",
+      "visual": {
+        "description": "SCENE_003: Hero (shocked_fall, eager) at x=0.25 in office.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "clock",
+          "title": "11 DAYS AWAKE",
+          "subtitle": "ZERO SLEEP"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_004",
+      "narration_text": "Their names were Randy Gardner and Bruce McAllister.",
+      "estimated_duration_sec": 2.8,
+      "actual_duration_sec": 3.58,
+      "audio_file": "audio_scenes/SCENE_004.mp3",
+      "visual": {
+        "description": "SCENE_004: Hero (pointing_target, neutral) at x=0.25 in office.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dossier_randy",
+          "actor_mode"
+        ],
+        "background": "classroom",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "check",
+          "title": "RANDY GARDNER",
+          "subtitle": "AGE 17 SUBJECT"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_005",
+      "narration_text": "They wanted to win first prize at the Greater San Diego Science Fair.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.8,
+      "audio_file": "audio_scenes/SCENE_005.mp3",
+      "visual": {
+        "description": "SCENE_005: Hero (celebrate_win, happy) at x=0.75 in office.",
+        "stickman_pose": "celebrate_win",
+        "action": "act_celebrate_win",
+        "expression": "happy",
+        "mood": "happy",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "classroom",
+        "camera": {
+          "framing": "wide",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "lightbulb",
+          "title": "SCIENCE FAIR",
+          "subtitle": "FIRST PRIZE GOAL"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      }
+    },
+    {
+      "scene_id": "SCENE_006",
+      "narration_text": "And their plan was terrifyingly simple.",
+      "estimated_duration_sec": 2.4,
+      "actual_duration_sec": 3.1,
+      "audio_file": "audio_scenes/SCENE_006.mp3",
+      "visual": {
+        "description": "SCENE_006: Hero (thinking, eager) at x=0.75 in office.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "SIMPLE PLAN",
+          "subtitle": "EXTREME RISK"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_007",
+      "narration_text": "Beat the world record of two hundred and sixty hours without sleep.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.44,
+      "audio_file": "audio_scenes/SCENE_007.mp3",
+      "visual": {
+        "description": "SCENE_007: Hero (pointing_target, eager) at x=0.25 in office.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_up",
+          "title": "260 HOURS",
+          "subtitle": "WORLD RECORD TARGET"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_008",
+      "narration_text": "No coffee. No caffeine pills.",
+      "estimated_duration_sec": 2.2,
+      "actual_duration_sec": 3.86,
+      "audio_file": "audio_scenes/SCENE_008.mp3",
+      "visual": {
+        "description": "SCENE_008: Hero (idle_neutral, flat) at x=0.25 in office.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "NO CAFFEINE",
+          "subtitle": "ZERO COFFEE"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_009",
+      "narration_text": "No stimulant drugs of any kind.",
+      "estimated_duration_sec": 2.3,
+      "actual_duration_sec": 2.88,
+      "audio_file": "audio_scenes/SCENE_009.mp3",
+      "visual": {
+        "description": "SCENE_009: Hero (thinking, deadpan) at x=0.25 in office.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "lock",
+          "title": "NO STIMULANTS",
+          "subtitle": "PURE BIOLOGY"
+        }
+      },
+      "audio": {
+        "sfx": "phone_lock",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_010",
+      "narration_text": "Just a teenager, two friends with a notebook, and a ticking clock.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.78,
+      "audio_file": "audio_scenes/SCENE_010.mp3",
+      "visual": {
+        "description": "SCENE_010: Hero (pointing_target, neutral) at x=0.25 in office.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "clock",
+          "title": "264 HOUR CLOCK",
+          "subtitle": "COUNTDOWN STARTS"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_011",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 2.6,
+      "audio_file": "audio_scenes/SCENE_011.mp3",
+      "visual": {
+        "description": "SCENE_011: Hero (idle_neutral, neutral) at x=0.25 in office.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "header": {
+          "title": "HOUR 0 — START",
+          "subtitle": "DECEMBER 28, 1963"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_012",
+      "narration_text": "Most of us feel like a walking zombie after pulling just one all-nighter.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.68,
+      "audio_file": "audio_scenes/SCENE_012.mp3",
+      "visual": {
+        "description": "SCENE_012: Hero (stressed_headache, sad) at x=0.75 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_edge",
+          "actor_mode"
+        ],
+        "background": "office",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "1 ALL-NIGHTER",
+          "subtitle": "INSTANT EXHAUSTION"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_013",
+      "narration_text": "Your eyes burn, your head throbs, and you reread the same sentence four times.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.38,
+      "audio_file": "audio_scenes/SCENE_013.mp3",
+      "visual": {
+        "description": "SCENE_013: Hero (stressed_headache, sad) at x=0.75 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "desk_edge",
+          "actor_mode"
+        ],
+        "background": "office",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "brain",
+          "title": "BRAIN FOG",
+          "subtitle": "ZERO FOCUS"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_014",
+      "narration_text": "So what actually happens inside your body when you stay awake for eleven days?",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.02,
+      "audio_file": "audio_scenes/SCENE_014.mp3",
+      "visual": {
+        "description": "SCENE_014: Hero (thinking, eager) at x=0.25 in void.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "question",
+          "title": "264 HOURS",
+          "subtitle": "INSIDE THE BODY"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_015",
+      "narration_text": "Let us walk through the experiment hour by hour.",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 3.48,
+      "audio_file": "audio_scenes/SCENE_015.mp3",
+      "visual": {
+        "description": "SCENE_015: Hero (pointing_target, eager) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "clock",
+          "title": "HOUR BY HOUR",
+          "subtitle": "CLINICAL LOG"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_016",
+      "narration_text": "And see why Guinness World Records eventually banned anyone from trying this again.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.23,
+      "audio_file": "audio_scenes/SCENE_016.mp3",
+      "visual": {
+        "description": "SCENE_016: Hero (shocked_fall, deadpan) at x=0.25 in void.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "lock",
+          "title": "BANNED RECORD",
+          "subtitle": "TOO DANGEROUS"
+        }
+      },
+      "audio": {
+        "sfx": "phone_lock",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_017",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 2.6,
+      "audio_file": "audio_scenes/SCENE_017.mp3",
+      "visual": {
+        "description": "SCENE_017: Hero (idle_neutral, eager) at x=0.25 in office.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703",
+        "header": {
+          "title": "HOUR 24 — DAY 1",
+          "subtitle": "THE DOPAMINE REBOUND"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_018",
+      "narration_text": "At the twenty-four-hour mark, Randy actually felt surprisingly fine.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 4.9,
+      "audio_file": "audio_scenes/SCENE_018.mp3",
+      "visual": {
+        "description": "SCENE_018: Hero (celebrate_win, happy) at x=0.25 in office.",
+        "stickman_pose": "celebrate_win",
+        "action": "act_celebrate_win",
+        "expression": "happy",
+        "mood": "happy",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "check",
+          "title": "FEELING FINE",
+          "subtitle": "HOUR 24 STATUS"
+        },
+        "header": {
+          "title": "HOUR 24 — DAY 1",
+          "subtitle": "THE DOPAMINE REBOUND"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      }
+    },
+    {
+      "scene_id": "SCENE_019",
+      "narration_text": "If you have ever stayed up all night, you know that strange second wind.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.51,
+      "audio_file": "audio_scenes/SCENE_019.mp3",
+      "visual": {
+        "description": "SCENE_019: Hero (idea_lightbulb, eager) at x=0.25 in office.",
+        "stickman_pose": "idea_lightbulb",
+        "action": "act_idea_lightbulb",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "lightbulb",
+          "title": "SECOND WIND",
+          "subtitle": "MORNING ENERGY SPIKE"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_020",
+      "narration_text": "That is not real energy. That is your brain panicking.",
+      "estimated_duration_sec": 3.0,
+      "actual_duration_sec": 4.66,
+      "audio_file": "audio_scenes/SCENE_020.mp3",
+      "visual": {
+        "description": "SCENE_020: Hero (shocked_fall, deadpan) at x=0.75 in void.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "shake"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "BRAIN PANIC",
+          "subtitle": "FALSE ENERGY"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_021",
+      "narration_text": "When you miss a full night of sleep, your nervous system assumes danger.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.63,
+      "audio_file": "audio_scenes/SCENE_021.mp3",
+      "visual": {
+        "description": "SCENE_021: Hero (running_hurry, eager) at x=0.75 in void.",
+        "stickman_pose": "running_hurry",
+        "action": "act_running_hurry",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "pan_right"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "SURVIVAL MODE",
+          "subtitle": "PREDATOR ALERT"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_022",
+      "narration_text": "It floods your bloodstream with cortisol and adrenaline to keep your eyes open.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 4.92,
+      "audio_file": "audio_scenes/SCENE_022.mp3",
+      "visual": {
+        "description": "SCENE_022: Hero (pointing_target, eager) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "heart",
+          "title": "ADRENALINE FLOOD",
+          "subtitle": "CORTISOL SURGE"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_023",
+      "narration_text": "For a few hours, you feel wired, talkative, and almost euphoric.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 5.14,
+      "audio_file": "audio_scenes/SCENE_023.mp3",
+      "visual": {
+        "description": "SCENE_023: Hero (celebrate_win, happy) at x=0.25 in office.",
+        "stickman_pose": "celebrate_win",
+        "action": "act_celebrate_win",
+        "expression": "happy",
+        "mood": "happy",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "chart_up",
+          "title": "WIRED & TALKATIVE",
+          "subtitle": "TEMPORARY HIGH"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      }
+    },
+    {
+      "scene_id": "SCENE_024",
+      "narration_text": "Researchers call this the dopamine rebound phase.",
+      "estimated_duration_sec": 2.7,
+      "actual_duration_sec": 3.77,
+      "audio_file": "audio_scenes/SCENE_024.mp3",
+      "visual": {
+        "description": "SCENE_024: Hero (pointing_target, neutral) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "brain",
+          "title": "DOPAMINE REBOUND",
+          "subtitle": "CHEMICAL MASK"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_025",
+      "narration_text": "Your brain boosts dopamine in a desperate attempt to keep your cortex running.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 4.87,
+      "audio_file": "audio_scenes/SCENE_025.mp3",
+      "visual": {
+        "description": "SCENE_025: Hero (thinking, eager) at x=0.25 in void.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "brain",
+          "title": "FORCED FOCUS",
+          "subtitle": "PREFRONTAL STRAIN"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_026",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 2.6,
+      "audio_file": "audio_scenes/SCENE_026.mp3",
+      "visual": {
+        "description": "SCENE_026: Hero (stressed_headache, flat) at x=0.25 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 48 — DAY 2",
+          "subtitle": "VISION & SENSORY GLITCH"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_027",
+      "narration_text": "By hour thirty-six, that chemical illusion collapses.",
+      "estimated_duration_sec": 2.8,
+      "actual_duration_sec": 4.18,
+      "audio_file": "audio_scenes/SCENE_027.mp3",
+      "visual": {
+        "description": "SCENE_027: Hero (stressed_headache, sad) at x=0.25 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_down",
+          "title": "ILLUSION CRASHES",
+          "subtitle": "HOUR 36 DROP"
+        },
+        "header": {
+          "title": "HOUR 48 — DAY 2",
+          "subtitle": "VISION & SENSORY GLITCH"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_028",
+      "narration_text": "On day two, a chemical called adenosine has piled up like uncollected garbage.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.45,
+      "audio_file": "audio_scenes/SCENE_028.mp3",
+      "visual": {
+        "description": "SCENE_028: Hero (pointing_target, flat) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "brain",
+          "title": "ADENOSINE PILEUP",
+          "subtitle": "METABOLIC TRASH"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_029",
+      "narration_text": "Every waking hour, your neurons burn energy and leave adenosine behind as ash.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.4,
+      "audio_file": "audio_scenes/SCENE_029.mp3",
+      "visual": {
+        "description": "SCENE_029: Hero (thinking, neutral) at x=0.25 in void.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "chart_up",
+          "title": "SLEEP PRESSURE",
+          "subtitle": "RISING EVERY HOUR"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_030",
+      "narration_text": "Normally, deep sleep washes that adenosine away overnight.",
+      "estimated_duration_sec": 2.8,
+      "actual_duration_sec": 4.25,
+      "audio_file": "audio_scenes/SCENE_030.mp3",
+      "visual": {
+        "description": "SCENE_030: Hero (idle_neutral, neutral) at x=0.75 in void.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "check",
+          "title": "DEEP SLEEP WASH",
+          "subtitle": "NIGHTLY CLEANUP"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "calm"
+      }
+    },
+    {
+      "scene_id": "SCENE_031",
+      "narration_text": "Without sleep, adenosine locks onto your receptors and slows down neural firing.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.54,
+      "audio_file": "audio_scenes/SCENE_031.mp3",
+      "visual": {
+        "description": "SCENE_031: Hero (stressed_headache, flat) at x=0.75 in void.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "lock",
+          "title": "RECEPTORS LOCKED",
+          "subtitle": "NEURAL BRAKES ON"
+        }
+      },
+      "audio": {
+        "sfx": "phone_lock",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_032",
+      "narration_text": "The first physical system to fail in Randy Gardner was not his muscles.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.7,
+      "audio_file": "audio_scenes/SCENE_032.mp3",
+      "visual": {
+        "description": "SCENE_032: Hero (thinking, deadpan) at x=0.25 in office.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "question",
+          "title": "FIRST FAILURE?",
+          "subtitle": "NOT THE MUSCLES"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_033",
+      "narration_text": "It was his eyes.",
+      "estimated_duration_sec": 1.8,
+      "actual_duration_sec": 1.97,
+      "audio_file": "audio_scenes/SCENE_033.mp3",
+      "visual": {
+        "description": "SCENE_033: Hero (pointing_target, deadpan) at x=0.25 in office.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "blur_vision",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "EYE FOCUS LOST",
+          "subtitle": "DAY 2 SYMPTOM"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_034",
+      "narration_text": "On day two, Randy found that he could no longer focus his vision.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 4.63,
+      "audio_file": "audio_scenes/SCENE_034.mp3",
+      "visual": {
+        "description": "SCENE_034: Hero (stressed_headache, sad) at x=0.25 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "blur_vision",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "BLURRED VISION",
+          "subtitle": "ASTHENOPIA"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_035",
+      "narration_text": "The tiny muscles inside his eyes were too exhausted to hold a focal length.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 4.97,
+      "audio_file": "audio_scenes/SCENE_035.mp3",
+      "visual": {
+        "description": "SCENE_035: Hero (thinking, sad) at x=0.25 in office.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "blur_vision",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_down",
+          "title": "CILIARY FATIGUE",
+          "subtitle": "MUSCLE STRAIN"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_036",
+      "narration_text": "He had to stop watching television because the screen blurred into a painful glare.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 4.99,
+      "audio_file": "audio_scenes/SCENE_036.mp3",
+      "visual": {
+        "description": "SCENE_036: Hero (shocked_fall, sad) at x=0.75 in office.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "blur_vision",
+          "actor_mode",
+          "act_tv_glare"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "bell_off",
+          "title": "TV TURNED OFF",
+          "subtitle": "LIGHT PAIN"
+        }
+      },
+      "audio": {
+        "sfx": "toggle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_037",
+      "narration_text": "Then his friends ran a simple neurological test.",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 3.65,
+      "audio_file": "audio_scenes/SCENE_037.mp3",
+      "visual": {
+        "description": "SCENE_037: Hero (pointing_target, neutral) at x=0.25 in office.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "question",
+          "title": "TOUCH TEST",
+          "subtitle": "EYES CLOSED"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_038",
+      "narration_text": "They asked Randy to close his eyes and identify objects strictly by touch.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.14,
+      "audio_file": "audio_scenes/SCENE_038.mp3",
+      "visual": {
+        "description": "SCENE_038: Hero (thinking, flat) at x=0.25 in office.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "blur_vision",
+          "actor_mode",
+          "act_blind_touch"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "coin",
+          "title": "FEEL THE OBJECT",
+          "subtitle": "COIN, KEY, OR PEN"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_039",
+      "narration_text": "In medicine, this ability is called stereognosis.",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 4.01,
+      "audio_file": "audio_scenes/SCENE_039.mp3",
+      "visual": {
+        "description": "SCENE_039: Hero (pointing_target, neutral) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "brain",
+          "title": "STEREOGNOSIS",
+          "subtitle": "PARIETAL LOBE MAP"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_040",
+      "narration_text": "It requires your parietal lobe to turn raw touch signals into a mental picture.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.5,
+      "audio_file": "audio_scenes/SCENE_040.mp3",
+      "visual": {
+        "description": "SCENE_040: Hero (idea_lightbulb, neutral) at x=0.25 in void.",
+        "stickman_pose": "idea_lightbulb",
+        "action": "act_idea_lightbulb",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "brain",
+          "title": "3D TOUCH MAP",
+          "subtitle": "SENSORY DECODING"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_041",
+      "narration_text": "By the end of day two, Randy's brain could no longer identify what he was holding.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.57,
+      "audio_file": "audio_scenes/SCENE_041.mp3",
+      "visual": {
+        "description": "SCENE_041: Hero (stressed_headache, deadpan) at x=0.25 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode",
+          "act_blind_touch"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "TOUCH BLINDNESS",
+          "subtitle": "SIGNAL BROKEN"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_042",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.5,
+      "actual_duration_sec": 2.5,
+      "audio_file": "audio_scenes/SCENE_042.mp3",
+      "visual": {
+        "description": "SCENE_042: Hero (stressed_headache, sad) at x=0.25 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "close_up",
+          "movement": "shake"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 48 — DAY 2",
+          "subtitle": "PARIETAL LOBE FATIGUE"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_043",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.5,
+      "actual_duration_sec": 2.5,
+      "audio_file": "audio_scenes/SCENE_043.mp3",
+      "visual": {
+        "description": "SCENE_043: Hero (idle_neutral, flat) at x=0.25 in office.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 72 — DAY 3",
+          "subtitle": "MICROSLEEPS BEGIN"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_044",
+      "narration_text": "By day three, the local newspaper had published an article about the experiment.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.42,
+      "audio_file": "audio_scenes/SCENE_044.mp3",
+      "visual": {
+        "description": "SCENE_044: Hero (pointing_target, neutral) at x=0.25 in office.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "street",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "check",
+          "title": "PRESS COVERAGE",
+          "subtitle": "SAN DIEGO NEWS"
+        },
+        "header": {
+          "title": "HOUR 72 — DAY 3",
+          "subtitle": "MICROSLEEPS BEGIN"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_045",
+      "narration_text": "It caught the attention of Doctor William Dement from Stanford University.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 4.51,
+      "audio_file": "audio_scenes/SCENE_045.mp3",
+      "visual": {
+        "description": "SCENE_045: Hero (idea_lightbulb, eager) at x=0.25 in hospital.",
+        "stickman_pose": "idea_lightbulb",
+        "action": "act_idea_lightbulb",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "brain",
+          "title": "DR. DEMENT",
+          "subtitle": "STANFORD SLEEP LAB"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_046",
+      "narration_text": "Along with Navy medical researcher John Ross, Dement rushed to observe Randy.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.11,
+      "audio_file": "audio_scenes/SCENE_046.mp3",
+      "visual": {
+        "description": "SCENE_046: Hero (running_hurry, eager) at x=0.75 in hospital.",
+        "stickman_pose": "running_hurry",
+        "action": "act_running_hurry",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "pan_right"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "check",
+          "title": "NAVY MEDICAL",
+          "subtitle": "CLINICAL WATCH"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_047",
+      "narration_text": "What the doctors saw on day three was the beginning of a neurological rebellion.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 4.78,
+      "audio_file": "audio_scenes/SCENE_047.mp3",
+      "visual": {
+        "description": "SCENE_047: Hero (shocked_fall, deadpan) at x=0.25 in hospital.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "BRAIN REBELLION",
+          "subtitle": "DAY 3 BREAKDOWN"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_048",
+      "narration_text": "Randy's physical coordination began to crumble, a condition known as ataxia.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.35,
+      "audio_file": "audio_scenes/SCENE_048.mp3",
+      "visual": {
+        "description": "SCENE_048: Hero (stressed_headache, sad) at x=0.25 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode",
+          "act_stumble_walk"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_down",
+          "title": "ATAXIA",
+          "subtitle": "BALANCE FAILING"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_049",
+      "narration_text": "He stumbled on flat ground and struggled to repeat basic tongue twisters.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.75,
+      "audio_file": "audio_scenes/SCENE_049.mp3",
+      "visual": {
+        "description": "SCENE_049: Hero (thinking, flat) at x=0.25 in office.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode",
+          "act_stumble_walk"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "MOTOR GLITCH",
+          "subtitle": "SLURRED WORDS"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_050",
+      "narration_text": "His sense of smell became strangely hypersensitive.",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 3.98,
+      "audio_file": "audio_scenes/SCENE_050.mp3",
+      "visual": {
+        "description": "SCENE_050: Hero (shocked_fall, sad) at x=0.75 in street.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "street",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "warning",
+          "title": "SMELL OVERLOAD",
+          "subtitle": "SENSORY SPIKE"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_051",
+      "narration_text": "Walking past a bakery, the smell of frying donuts made him violently nauseous.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.52,
+      "audio_file": "audio_scenes/SCENE_051.mp3",
+      "visual": {
+        "description": "SCENE_051: Hero (stressed_headache, sad) at x=0.75 in street.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "street",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "SEVERE NAUSEA",
+          "subtitle": "SENSORY MISFIRE"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_052",
+      "narration_text": "And then, the microsleeps began.",
+      "estimated_duration_sec": 2.3,
+      "actual_duration_sec": 3.05,
+      "audio_file": "audio_scenes/SCENE_052.mp3",
+      "visual": {
+        "description": "SCENE_052: Hero (idle_neutral, deadpan) at x=0.25 in void.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "microsleep_wave",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "clock",
+          "title": "MICROSLEEPS",
+          "subtitle": "2 TO 5 SECONDS"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_053",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.8,
+      "actual_duration_sec": 2.8,
+      "audio_file": "audio_scenes/SCENE_053.mp3",
+      "visual": {
+        "description": "SCENE_053: Hero (idle_neutral, deadpan) at x=0.25 in void.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "microsleep_wave",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "close_up",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 72 — DAY 3",
+          "subtitle": "MICROSLEEP BLACKOUT"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_054",
+      "narration_text": "When a brain is starved of sleep for three days, it stops asking permission.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.97,
+      "audio_file": "audio_scenes/SCENE_054.mp3",
+      "visual": {
+        "description": "SCENE_054: Hero (pointing_target, deadpan) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "brain",
+          "title": "FORCED SHUTDOWN",
+          "subtitle": "NO PERMISSION"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_055",
+      "narration_text": "It shuts down local clusters of neurons for two to five seconds at a time.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.11,
+      "audio_file": "audio_scenes/SCENE_055.mp3",
+      "visual": {
+        "description": "SCENE_055: Hero (thinking, flat) at x=0.25 in void.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "bell_off",
+          "title": "LOCAL SLEEP",
+          "subtitle": "NEURONS OFFLINE"
+        }
+      },
+      "audio": {
+        "sfx": "toggle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_056",
+      "narration_text": "Your eyes stay wide open. You might even still be standing upright.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 5.59,
+      "audio_file": "audio_scenes/SCENE_056.mp3",
+      "visual": {
+        "description": "SCENE_056: Hero (idle_neutral, deadpan) at x=0.75 in void.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "EYES WIDE OPEN",
+          "subtitle": "MIND ASLEEP"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_057",
+      "narration_text": "Yet slow theta waves suddenly sweep across your waking cortex.",
+      "estimated_duration_sec": 3.0,
+      "actual_duration_sec": 4.46,
+      "audio_file": "audio_scenes/SCENE_057.mp3",
+      "visual": {
+        "description": "SCENE_057: Hero (pointing_target, flat) at x=0.75 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "chart_down",
+          "title": "THETA WAVES",
+          "subtitle": "SLEEP INTRUSION"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_058",
+      "narration_text": "For three seconds, you are functionally blind and deaf to the outside world.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.9,
+      "audio_file": "audio_scenes/SCENE_058.mp3",
+      "visual": {
+        "description": "SCENE_058: Hero (shocked_fall, deadpan) at x=0.25 in void.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "microsleep_wave",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "lock",
+          "title": "3-SECOND VOID",
+          "subtitle": "BLIND AND DEAF"
+        }
+      },
+      "audio": {
+        "sfx": "phone_lock",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_059",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 2.6,
+      "audio_file": "audio_scenes/SCENE_059.mp3",
+      "visual": {
+        "description": "SCENE_059: Hero (thinking, deadpan) at x=0.25 in street.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "street_sign_shadow",
+          "actor_mode"
+        ],
+        "background": "street_night",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 96 — DAY 4",
+          "subtitle": "WAKING HALLUCINATIONS"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_060",
+      "narration_text": "On day four, the boundary between waking reality and dreaming dissolved.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 5.09,
+      "audio_file": "audio_scenes/SCENE_060.mp3",
+      "visual": {
+        "description": "SCENE_060: Hero (shocked_fall, deadpan) at x=0.25 in void.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "brain",
+          "title": "DREAM LEAKAGE",
+          "subtitle": "REALITY DISSOLVES"
+        },
+        "header": {
+          "title": "HOUR 96 — DAY 4",
+          "subtitle": "WAKING HALLUCINATIONS"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_061",
+      "narration_text": "Dreams are supposed to stay locked inside REM sleep.",
+      "estimated_duration_sec": 2.7,
+      "actual_duration_sec": 4.03,
+      "audio_file": "audio_scenes/SCENE_061.mp3",
+      "visual": {
+        "description": "SCENE_061: Hero (pointing_target, neutral) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "lock",
+          "title": "REM LOCK",
+          "subtitle": "DREAM BARRIER"
+        }
+      },
+      "audio": {
+        "sfx": "phone_lock",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_062",
+      "narration_text": "When you block REM sleep for four days, dreams break out into broad daylight.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.59,
+      "audio_file": "audio_scenes/SCENE_062.mp3",
+      "visual": {
+        "description": "SCENE_062: Hero (shocked_fall, eager) at x=0.25 in void.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "shake"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "WAKING DREAMS",
+          "subtitle": "REM INTRUSION"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_063",
+      "narration_text": "While walking down a San Diego street at night, Randy stopped in his tracks.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.38,
+      "audio_file": "audio_scenes/SCENE_063.mp3",
+      "visual": {
+        "description": "SCENE_063: Hero (idle_neutral, deadpan) at x=0.25 in street.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "street_sign_shadow",
+          "actor_mode"
+        ],
+        "background": "street_night",
+        "camera": {
+          "framing": "wide",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "question",
+          "title": "NIGHT WALK",
+          "subtitle": "SUDDEN FREEZE"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_064",
+      "narration_text": "He stared in horror at a metal street sign ahead of him.",
+      "estimated_duration_sec": 2.8,
+      "actual_duration_sec": 3.74,
+      "audio_file": "audio_scenes/SCENE_064.mp3",
+      "visual": {
+        "description": "SCENE_064: Hero (shocked_fall, sad) at x=0.25 in street.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "street_sign_shadow",
+          "actor_mode"
+        ],
+        "background": "street_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "STREET SIGN",
+          "subtitle": "VISUAL DISTORTION"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_065",
+      "narration_text": "To his exhausted visual cortex, the street sign had turned into a shadow person.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.59,
+      "audio_file": "audio_scenes/SCENE_065.mp3",
+      "visual": {
+        "description": "SCENE_065: Hero (stressed_headache, sad) at x=0.25 in street.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "street_sign_shadow",
+          "actor_mode"
+        ],
+        "background": "street_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "brain",
+          "title": "FIRST HALLUCINATION",
+          "subtitle": "SHADOW FIGURE"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_066",
+      "narration_text": "Hours later, he experienced his first full-blown delusion.",
+      "estimated_duration_sec": 2.8,
+      "actual_duration_sec": 4.32,
+      "audio_file": "audio_scenes/SCENE_066.mp3",
+      "visual": {
+        "description": "SCENE_066: Hero (thinking, deadpan) at x=0.75 in office.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "FALSE IDENTITY",
+          "subtitle": "FULL DELUSION"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_067",
+      "narration_text": "Randy became convinced that he was Paul Lowe, the famous football running back.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.11,
+      "audio_file": "audio_scenes/SCENE_067.mp3",
+      "visual": {
+        "description": "SCENE_067: Hero (celebrate_win, eager) at x=0.75 in office.",
+        "stickman_pose": "celebrate_win",
+        "action": "act_celebrate_win",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode",
+          "act_football"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "question",
+          "title": "PAUL LOWE",
+          "subtitle": "CHARGERS STAR DELUSION"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_068",
+      "narration_text": "When his friends reminded him he was a high school student, Randy grew furious.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.23,
+      "audio_file": "audio_scenes/SCENE_068.mp3",
+      "visual": {
+        "description": "SCENE_068: Hero (stressed_headache, sad) at x=0.25 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "shake"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "ANGRY OUTBURST",
+          "subtitle": "REALITY REJECTED"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_069",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.5,
+      "actual_duration_sec": 2.5,
+      "audio_file": "audio_scenes/SCENE_069.mp3",
+      "visual": {
+        "description": "SCENE_069: Hero (stressed_headache, deadpan) at x=0.25 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 120 — DAY 5",
+          "subtitle": "THE BREATHING WALLS"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_070",
+      "narration_text": "By day five, hour one hundred and twenty, hallucinations filled the room.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.09,
+      "audio_file": "audio_scenes/SCENE_070.mp3",
+      "visual": {
+        "description": "SCENE_070: Hero (shocked_fall, sad) at x=0.25 in office.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "blur_vision",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "clock",
+          "title": "120 HOURS AWAKE",
+          "subtitle": "CONSTANT ILLUSIONS"
+        },
+        "header": {
+          "title": "HOUR 120 — DAY 5",
+          "subtitle": "THE BREATHING WALLS"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_071",
+      "narration_text": "Randy reported seeing the walls of his living room breathing in and out.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.68,
+      "audio_file": "audio_scenes/SCENE_071.mp3",
+      "visual": {
+        "description": "SCENE_071: Hero (stressed_headache, deadpan) at x=0.25 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "blur_vision",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "BREATHING WALLS",
+          "subtitle": "WARPED DEPTH"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_072",
+      "narration_text": "He stared at a blank plaster wall and saw a forest path opening up ahead.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.9,
+      "audio_file": "audio_scenes/SCENE_072.mp3",
+      "visual": {
+        "description": "SCENE_072: Hero (pointing_target, deadpan) at x=0.75 in nature.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "blur_vision",
+          "actor_mode"
+        ],
+        "background": "nature",
+        "camera": {
+          "framing": "wide",
+          "movement": "pan_left"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "question",
+          "title": "PHANTOM FOREST",
+          "subtitle": "INSIDE THE ROOM"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_073",
+      "narration_text": "Inside his brain, the thalamus—the sensory relay filter—was failing.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 5.35,
+      "audio_file": "audio_scenes/SCENE_073.mp3",
+      "visual": {
+        "description": "SCENE_073: Hero (thinking, flat) at x=0.25 in void.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "blur_vision",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "brain",
+          "title": "THALAMUS FAILURE",
+          "subtitle": "FILTER BROKEN"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_074",
+      "narration_text": "Random electrical static was being painted directly onto the real world.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 4.9,
+      "audio_file": "audio_scenes/SCENE_074.mp3",
+      "visual": {
+        "description": "SCENE_074: Hero (stressed_headache, sad) at x=0.25 in void.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "blur_vision",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_down",
+          "title": "NEURAL STATIC",
+          "subtitle": "SENSORY FLOOD"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_075",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 2.6,
+      "audio_file": "audio_scenes/SCENE_075.mp3",
+      "visual": {
+        "description": "SCENE_075: Hero (shocked_fall, deadpan) at x=0.25 in void.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "blur_vision",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "close_up",
+          "movement": "shake"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 120 — DAY 5",
+          "subtitle": "SENSORY GATE COLLAPSE"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_076",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.5,
+      "actual_duration_sec": 2.5,
+      "audio_file": "audio_scenes/SCENE_076.mp3",
+      "visual": {
+        "description": "SCENE_076: Hero (idle_neutral, flat) at x=0.25 in hospital.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "blur_vision",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 144 — DAY 6",
+          "subtitle": "TOXIC BRAIN SLUDGE"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_077",
+      "narration_text": "Entering day six, the science project turned into a medical endurance crisis.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.42,
+      "audio_file": "audio_scenes/SCENE_077.mp3",
+      "visual": {
+        "description": "SCENE_077: Hero (stressed_headache, sad) at x=0.25 in hospital.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "DAY 6 CRISIS",
+          "subtitle": "144 HOURS AWAKE"
+        },
+        "header": {
+          "title": "HOUR 144 — DAY 6",
+          "subtitle": "TOXIC BRAIN SLUDGE"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_078",
+      "narration_text": "During deep sleep, your brain activates a plumbing network called the glymphatic system.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.54,
+      "audio_file": "audio_scenes/SCENE_078.mp3",
+      "visual": {
+        "description": "SCENE_078: Hero (pointing_target, neutral) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "brain",
+          "title": "GLYMPHATIC WASH",
+          "subtitle": "BRAIN PLUMBING"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_079",
+      "narration_text": "Fluid flushes through brain tissue, washing away toxic metabolic proteins.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 5.54,
+      "audio_file": "audio_scenes/SCENE_079.mp3",
+      "visual": {
+        "description": "SCENE_079: Hero (idea_lightbulb, neutral) at x=0.25 in void.",
+        "stickman_pose": "idea_lightbulb",
+        "action": "act_idea_lightbulb",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "check",
+          "title": "TOXIN CLEARANCE",
+          "subtitle": "NIGHTLY FLUSH"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "calm"
+      }
+    },
+    {
+      "scene_id": "SCENE_080",
+      "narration_text": "After six days awake, Randy's brain dishwasher had been turned off all week.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.14,
+      "audio_file": "audio_scenes/SCENE_080.mp3",
+      "visual": {
+        "description": "SCENE_080: Hero (stressed_headache, deadpan) at x=0.75 in void.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "WASHER OFFLINE",
+          "subtitle": "6 DAYS UNCLEANED"
+        }
+      },
+      "audio": {
+        "sfx": "phone_lock",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_081",
+      "narration_text": "The neurological sludge was taking a visible toll on his body.",
+      "estimated_duration_sec": 3.0,
+      "actual_duration_sec": 4.15,
+      "audio_file": "audio_scenes/SCENE_081.mp3",
+      "visual": {
+        "description": "SCENE_081: Hero (thinking, sad) at x=0.75 in hospital.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_down",
+          "title": "TOXIC BUILDUP",
+          "subtitle": "PHYSICAL TOLL"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_082",
+      "narration_text": "His hands developed a constant fine tremor, and his face froze into a flat mask.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.47,
+      "audio_file": "audio_scenes/SCENE_082.mp3",
+      "visual": {
+        "description": "SCENE_082: Hero (idle_neutral, deadpan) at x=0.25 in hospital.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "HAND TREMORS",
+          "subtitle": "FLAT FACIAL MASK"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_083",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.5,
+      "actual_duration_sec": 2.5,
+      "audio_file": "audio_scenes/SCENE_083.mp3",
+      "visual": {
+        "description": "SCENE_083: Hero (stressed_headache, sad) at x=0.25 in hospital.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 168 — DAY 7",
+          "subtitle": "PARANOIA & AMYGDALA ALARM"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_084",
+      "narration_text": "By day seven, his autonomic nervous system was misfiring.",
+      "estimated_duration_sec": 2.8,
+      "actual_duration_sec": 4.58,
+      "audio_file": "audio_scenes/SCENE_084.mp3",
+      "visual": {
+        "description": "SCENE_084: Hero (stressed_headache, sad) at x=0.25 in hospital.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "heart",
+          "title": "AUTONOMIC GLITCH",
+          "subtitle": "HOUR 168"
+        },
+        "header": {
+          "title": "HOUR 168 — DAY 7",
+          "subtitle": "PARANOIA & AMYGDALA ALARM"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_085",
+      "narration_text": "Randy felt freezing cold indoors, and his heart rate swung unpredictably.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.38,
+      "audio_file": "audio_scenes/SCENE_085.mp3",
+      "visual": {
+        "description": "SCENE_085: Hero (shocked_fall, sad) at x=0.25 in hospital.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "heart",
+          "title": "HEART SWINGS",
+          "subtitle": "THERMAL DROP"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_086",
+      "narration_text": "Emotionally, the easygoing teenager had completely vanished.",
+      "estimated_duration_sec": 2.8,
+      "actual_duration_sec": 4.37,
+      "audio_file": "audio_scenes/SCENE_086.mp3",
+      "visual": {
+        "description": "SCENE_086: Hero (idle_neutral, deadpan) at x=0.75 in office.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "MOOD COLLAPSE",
+          "subtitle": "TEENAGER GONE"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_087",
+      "narration_text": "In his place was a defensive, irritable, and deeply paranoid patient.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 4.99,
+      "audio_file": "audio_scenes/SCENE_087.mp3",
+      "visual": {
+        "description": "SCENE_087: Hero (stressed_headache, sad) at x=0.75 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "PARANOIA",
+          "subtitle": "DEFENSIVE ANGER"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_088",
+      "narration_text": "When the prefrontal cortex goes offline, the amygdala takes the wheel unchecked.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.06,
+      "audio_file": "audio_scenes/SCENE_088.mp3",
+      "visual": {
+        "description": "SCENE_088: Hero (pointing_target, deadpan) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "brain",
+          "title": "AMYGDALA HIJACK",
+          "subtitle": "FEAR CENTER ACTIVE"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_089",
+      "narration_text": "Sleep deprivation amplifies amygdala reactivity by more than sixty percent.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.14,
+      "audio_file": "audio_scenes/SCENE_089.mp3",
+      "visual": {
+        "description": "SCENE_089: Hero (shocked_fall, eager) at x=0.25 in void.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_up",
+          "title": "+60% REACTIVITY",
+          "subtitle": "EMOTIONAL ALARM"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_090",
+      "narration_text": "To Randy on day seven, harmless questions felt like hostile interrogations.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.52,
+      "audio_file": "audio_scenes/SCENE_090.mp3",
+      "visual": {
+        "description": "SCENE_090: Hero (stressed_headache, sad) at x=0.25 in hospital.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "question",
+          "title": "HOSTILE THREAT",
+          "subtitle": "PARANOID LENS"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_091",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.5,
+      "actual_duration_sec": 2.5,
+      "audio_file": "audio_scenes/SCENE_091.mp3",
+      "visual": {
+        "description": "SCENE_091: Hero (idle_neutral, deadpan) at x=0.25 in hospital.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "close_up",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 192 — DAY 8",
+          "subtitle": "COLLAPSE OF LANGUAGE"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_092",
+      "narration_text": "On day eight, language itself began to fall apart.",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 4.13,
+      "audio_file": "audio_scenes/SCENE_092.mp3",
+      "visual": {
+        "description": "SCENE_092: Hero (thinking, flat) at x=0.25 in hospital.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "bell_off",
+          "title": "SPEECH BREAKDOWN",
+          "subtitle": "HOUR 192"
+        },
+        "header": {
+          "title": "HOUR 192 — DAY 8",
+          "subtitle": "COLLAPSE OF LANGUAGE"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_093",
+      "narration_text": "Doctor Ross noted that Randy's speech had become slow, slurred, and monotone.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.42,
+      "audio_file": "audio_scenes/SCENE_093.mp3",
+      "visual": {
+        "description": "SCENE_093: Hero (idle_neutral, deadpan) at x=0.25 in hospital.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_down",
+          "title": "SLURRED SPEECH",
+          "subtitle": "FLAT MONOTONE"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_094",
+      "narration_text": "Worse still, he could no longer hold a sentence together from start to finish.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 4.94,
+      "audio_file": "audio_scenes/SCENE_094.mp3",
+      "visual": {
+        "description": "SCENE_094: Hero (stressed_headache, sad) at x=0.75 in hospital.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "BROKEN SENTENCES",
+          "subtitle": "LOST MID-THOUGHT"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_095",
+      "narration_text": "He would start answering a question, get four words out, and trail into silence.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.33,
+      "audio_file": "audio_scenes/SCENE_095.mp3",
+      "visual": {
+        "description": "SCENE_095: Hero (idle_neutral, deadpan) at x=0.75 in hospital.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "bell_off",
+          "title": "TRAILING SILENCE",
+          "subtitle": "4 WORDS MAX"
+        }
+      },
+      "audio": {
+        "sfx": "phone_lock",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_096",
+      "narration_text": "Working memory is the mental scratchpad that holds the start of your sentence.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 4.85,
+      "audio_file": "audio_scenes/SCENE_096.mp3",
+      "visual": {
+        "description": "SCENE_096: Hero (pointing_target, neutral) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "brain",
+          "title": "WORKING MEMORY",
+          "subtitle": "MENTAL SCRATCHPAD"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_097",
+      "narration_text": "By hour one hundred and ninety-two, that scratchpad had shrunk to zero.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.97,
+      "audio_file": "audio_scenes/SCENE_097.mp3",
+      "visual": {
+        "description": "SCENE_097: Hero (stressed_headache, deadpan) at x=0.25 in void.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_down",
+          "title": "MEMORY ZERO",
+          "subtitle": "BUFFER EMPTY"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_098",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 2.6,
+      "audio_file": "audio_scenes/SCENE_098.mp3",
+      "visual": {
+        "description": "SCENE_098: Hero (idle_neutral, deadpan) at x=0.25 in void.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "close_up",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 192 — DAY 8",
+          "subtitle": "WORKING MEMORY OFFLINE"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_099",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.5,
+      "actual_duration_sec": 2.5,
+      "audio_file": "audio_scenes/SCENE_099.mp3",
+      "visual": {
+        "description": "SCENE_099: Hero (running_hurry, flat) at x=0.25 in office.",
+        "stickman_pose": "running_hurry",
+        "action": "act_running_hurry",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 216 — DAY 9",
+          "subtitle": "CONSTANT MOTION"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_100",
+      "narration_text": "By day nine and ten, keeping Randy awake required constant physical movement.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.54,
+      "audio_file": "audio_scenes/SCENE_100.mp3",
+      "visual": {
+        "description": "SCENE_100: Hero (running_hurry, eager) at x=0.25 in office.",
+        "stickman_pose": "running_hurry",
+        "action": "act_running_hurry",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "pan_right"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "KEEP MOVING",
+          "subtitle": "HOUR 216"
+        },
+        "header": {
+          "title": "HOUR 216 — DAY 9",
+          "subtitle": "CONSTANT MOTION"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_101",
+      "narration_text": "If he sat down for more than ten seconds, his eyes would immediately roll back.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.04,
+      "audio_file": "audio_scenes/SCENE_101.mp3",
+      "visual": {
+        "description": "SCENE_101: Hero (shocked_fall, deadpan) at x=0.25 in office.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "clock",
+          "title": "10-SECOND LIMIT",
+          "subtitle": "INSTANT COLLAPSE"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_102",
+      "narration_text": "So Doctor Dement and his friends kept him standing, walking, and playing games.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.52,
+      "audio_file": "audio_scenes/SCENE_102.mp3",
+      "visual": {
+        "description": "SCENE_102: Hero (running_hurry, neutral) at x=0.75 in street.",
+        "stickman_pose": "running_hurry",
+        "action": "act_running_hurry",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "street_night",
+        "camera": {
+          "framing": "wide",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "check",
+          "title": "FORCED ACTIVITY",
+          "subtitle": "NIGHT WALKS"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_103",
+      "narration_text": "And this led to the strangest scientific paradox of the entire experiment.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 4.85,
+      "audio_file": "audio_scenes/SCENE_103.mp3",
+      "visual": {
+        "description": "SCENE_103: Hero (idea_lightbulb, eager) at x=0.75 in void.",
+        "stickman_pose": "idea_lightbulb",
+        "action": "act_idea_lightbulb",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "question",
+          "title": "STRANGE PARADOX",
+          "subtitle": "DAY 10 MYSTERY"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_104",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.4,
+      "actual_duration_sec": 2.4,
+      "audio_file": "audio_scenes/SCENE_104.mp3",
+      "visual": {
+        "description": "SCENE_104: Hero (thinking, eager) at x=0.25 in office.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703",
+        "header": {
+          "title": "HOUR 240 — DAY 10",
+          "subtitle": "THE PINBALL PARADOX"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_105",
+      "narration_text": "During quiet paper tests, Randy functioned like someone under heavy anesthesia.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.69,
+      "audio_file": "audio_scenes/SCENE_105.mp3",
+      "visual": {
+        "description": "SCENE_105: Hero (stressed_headache, deadpan) at x=0.25 in hospital.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "arcade",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_down",
+          "title": "QUIET TESTS",
+          "subtitle": "NEAR COMA SCORE"
+        },
+        "header": {
+          "title": "HOUR 240 — DAY 10",
+          "subtitle": "THE PINBALL PARADOX"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_106",
+      "narration_text": "Yet when Doctor Dement took him to play mechanical pinball, something bizarre happened.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.23,
+      "audio_file": "audio_scenes/SCENE_106.mp3",
+      "visual": {
+        "description": "SCENE_106: Hero (pointing_target, eager) at x=0.25 in office.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "arcade",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "lightbulb",
+          "title": "PINBALL ARCADE",
+          "subtitle": "SUDDEN SHIFT"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      }
+    },
+    {
+      "scene_id": "SCENE_107",
+      "narration_text": "Randy did not just play. He beat Doctor Dement over and over again.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.4,
+      "audio_file": "audio_scenes/SCENE_107.mp3",
+      "visual": {
+        "description": "SCENE_107: Hero (celebrate_win, happy) at x=0.75 in office.",
+        "stickman_pose": "celebrate_win",
+        "action": "act_celebrate_win",
+        "expression": "happy",
+        "mood": "happy",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "arcade",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "check",
+          "title": "RANDY WINS",
+          "subtitle": "REFLEX OVERRIDE"
+        }
+      },
+      "audio": {
+        "sfx": "pop_pop_pop",
+        "bgm_mood": "upbeat"
+      }
+    },
+    {
+      "scene_id": "SCENE_108",
+      "narration_text": "How could a boy who could barely speak a sentence still track a moving ball?",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.75,
+      "audio_file": "audio_scenes/SCENE_108.mp3",
+      "visual": {
+        "description": "SCENE_108: Hero (thinking, eager) at x=0.75 in void.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "question",
+          "title": "HOW POSSIBLE?",
+          "subtitle": "TWO BRAIN SYSTEMS"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_109",
+      "narration_text": "Quiet, repetitive thinking relies on the exhausted prefrontal cortex.",
+      "estimated_duration_sec": 3.0,
+      "actual_duration_sec": 5.06,
+      "audio_file": "audio_scenes/SCENE_109.mp3",
+      "visual": {
+        "description": "SCENE_109: Hero (pointing_target, flat) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "brain",
+          "title": "PREFRONTAL CORTEX",
+          "subtitle": "OFFLINE FIRST"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_110",
+      "narration_text": "Fast physical games trigger primitive subcortical motor loops and adrenaline.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.94,
+      "audio_file": "audio_scenes/SCENE_110.mp3",
+      "visual": {
+        "description": "SCENE_110: Hero (running_hurry, eager) at x=0.25 in void.",
+        "stickman_pose": "running_hurry",
+        "action": "act_running_hurry",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "heart",
+          "title": "SURVIVAL REFLEX",
+          "subtitle": "SUBCORTICAL LOOP"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "upbeat"
+      }
+    },
+    {
+      "scene_id": "SCENE_111",
+      "narration_text": "Your survival circuits can puppet a tired body while the higher mind is dark.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 4.9,
+      "audio_file": "audio_scenes/SCENE_111.mp3",
+      "visual": {
+        "description": "SCENE_111: Hero (idle_neutral, deadpan) at x=0.25 in void.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "AUTOPILOT BODY",
+          "subtitle": "CONSCIOUSNESS DARK"
+        }
+      },
+      "audio": {
+        "sfx": "phone_lock",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_112",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 2.6,
+      "audio_file": "audio_scenes/SCENE_112.mp3",
+      "visual": {
+        "description": "SCENE_112: Hero (idle_neutral, deadpan) at x=0.25 in hospital.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 264 — DAY 11",
+          "subtitle": "THE SERIAL SEVENS TEST"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_113",
+      "narration_text": "On the morning of January eighth, nineteen sixty-four, the clock struck two hundred and sixty-four hours.",
+      "estimated_duration_sec": 3.5,
+      "actual_duration_sec": 6.53,
+      "audio_file": "audio_scenes/SCENE_113.mp3",
+      "visual": {
+        "description": "SCENE_113: Hero (pointing_target, eager) at x=0.25 in hospital.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "clock",
+          "title": "264.4 HOURS",
+          "subtitle": "JANUARY 8, 1964"
+        },
+        "header": {
+          "title": "HOUR 264 — DAY 11",
+          "subtitle": "THE SERIAL SEVENS TEST"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_114",
+      "narration_text": "Eleven full days without a single second of sleep.",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 3.86,
+      "audio_file": "audio_scenes/SCENE_114.mp3",
+      "visual": {
+        "description": "SCENE_114: Hero (celebrate_win, flat) at x=0.25 in hospital.",
+        "stickman_pose": "celebrate_win",
+        "action": "act_celebrate_win",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "check",
+          "title": "11 FULL DAYS",
+          "subtitle": "RECORD BROKEN"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_115",
+      "narration_text": "Before ending, Doctor Ross gave Randy one last exam: the Serial Sevens test.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.93,
+      "audio_file": "audio_scenes/SCENE_115.mp3",
+      "visual": {
+        "description": "SCENE_115: Hero (pointing_target, neutral) at x=0.25 in hospital.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "question",
+          "title": "SERIAL SEVENS",
+          "subtitle": "FINAL BRAIN EXAM"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_116",
+      "narration_text": "Start at one hundred, and subtract seven repeatedly out loud.",
+      "estimated_duration_sec": 2.9,
+      "actual_duration_sec": 4.61,
+      "audio_file": "audio_scenes/SCENE_116.mp3",
+      "visual": {
+        "description": "SCENE_116: Hero (thinking, neutral) at x=0.25 in hospital.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "brain",
+          "title": "100 MINUS 7",
+          "subtitle": "COUNT BACKWARD"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_117",
+      "narration_text": "Ninety-three. Eighty-six. Seventy-nine.",
+      "estimated_duration_sec": 2.5,
+      "actual_duration_sec": 5.5,
+      "audio_file": "audio_scenes/SCENE_117.mp3",
+      "visual": {
+        "description": "SCENE_117: Hero (thinking, flat) at x=0.75 in hospital.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode",
+          "act_serial_sevens"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "clock",
+          "title": "93... 86... 79...",
+          "subtitle": "SLOW COUNTING"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_118",
+      "narration_text": "Seventy-two. Sixty-five. And then, Randy stopped.",
+      "estimated_duration_sec": 2.8,
+      "actual_duration_sec": 6.38,
+      "audio_file": "audio_scenes/SCENE_118.mp3",
+      "visual": {
+        "description": "SCENE_118: Hero (idle_neutral, deadpan) at x=0.75 in hospital.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode",
+          "act_serial_sevens"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "STOPS AT 65",
+          "subtitle": "TOTAL BLANK"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_119",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.8,
+      "actual_duration_sec": 2.8,
+      "audio_file": "audio_scenes/SCENE_119.mp3",
+      "visual": {
+        "description": "SCENE_119: Hero (idle_neutral, deadpan) at x=0.75 in void.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "close_up",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "HOUR 264 — DAY 11",
+          "subtitle": "65..."
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_120",
+      "narration_text": "Doctor Ross asked him why he had stopped counting.",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 3.65,
+      "audio_file": "audio_scenes/SCENE_120.mp3",
+      "visual": {
+        "description": "SCENE_120: Hero (thinking, neutral) at x=0.25 in hospital.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "microsleep_wave",
+          "actor_mode",
+          "act_serial_sevens"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "question",
+          "title": "WHY STOP?",
+          "subtitle": "DOCTOR'S QUESTION"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_121",
+      "narration_text": "Randy looked at the doctor with blank eyes and said, I forgot what I was doing.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.02,
+      "audio_file": "audio_scenes/SCENE_121.mp3",
+      "visual": {
+        "description": "SCENE_121: Hero (stressed_headache, deadpan) at x=0.25 in hospital.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "I FORGOT",
+          "subtitle": "MEMORY ERASED"
+        }
+      },
+      "audio": {
+        "sfx": "phone_lock",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_122",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 2.6,
+      "audio_file": "audio_scenes/SCENE_122.mp3",
+      "visual": {
+        "description": "SCENE_122: Hero (idle_neutral, neutral) at x=0.25 in hospital.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "tremor",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_out"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "header": {
+          "title": "RECOVERY — SLEEP LAB",
+          "subtitle": "U.S. NAVAL HOSPITAL"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "calm"
+      }
+    },
+    {
+      "scene_id": "SCENE_123",
+      "narration_text": "After a brief press conference, Randy was taken to the Naval Hospital in San Diego.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.86,
+      "audio_file": "audio_scenes/SCENE_123.mp3",
+      "visual": {
+        "description": "SCENE_123: Hero (idle_neutral, neutral) at x=0.25 in hospital.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "sleep_lab",
+        "camera": {
+          "framing": "wide",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "check",
+          "title": "NAVAL HOSPITAL",
+          "subtitle": "SLEEP LAB MONITOR"
+        },
+        "header": {
+          "title": "RECOVERY — SLEEP LAB",
+          "subtitle": "14 HOURS 40 MINUTES"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "calm"
+      }
+    },
+    {
+      "scene_id": "SCENE_124",
+      "narration_text": "Doctors taped electrodes to his scalp and finally let him close his eyes.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.85,
+      "audio_file": "audio_scenes/SCENE_124.mp3",
+      "visual": {
+        "description": "SCENE_124: Hero (idle_neutral, happy) at x=0.25 in hospital.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "happy",
+        "mood": "happy",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "sleep_lab",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "brain",
+          "title": "EEG ELECTRODES",
+          "subtitle": "LIGHTS OUT"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "calm"
+      }
+    },
+    {
+      "scene_id": "SCENE_125",
+      "narration_text": "You might expect someone awake for eleven days to sleep for three days straight.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 4.85,
+      "audio_file": "audio_scenes/SCENE_125.mp3",
+      "visual": {
+        "description": "SCENE_125: Hero (thinking, eager) at x=0.75 in hospital.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "sleep_lab",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "question",
+          "title": "72 HOUR SLEEP?",
+          "subtitle": "COMMON MYTH"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_126",
+      "narration_text": "He did not. Randy slept for exactly fourteen hours and forty minutes.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.78,
+      "audio_file": "audio_scenes/SCENE_126.mp3",
+      "visual": {
+        "description": "SCENE_126: Hero (pointing_target, eager) at x=0.75 in hospital.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "sleep_lab",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "clock",
+          "title": "14H 40M SLEEP",
+          "subtitle": "FIRST RECOVERY NIGHT"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      }
+    },
+    {
+      "scene_id": "SCENE_127",
+      "narration_text": "He woke up, ate a bowl of cereal, and told the nurses he felt fine.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 5.14,
+      "audio_file": "audio_scenes/SCENE_127.mp3",
+      "visual": {
+        "description": "SCENE_127: Hero (celebrate_win, happy) at x=0.25 in hospital.",
+        "stickman_pose": "celebrate_win",
+        "action": "act_celebrate_win",
+        "expression": "happy",
+        "mood": "happy",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "sleep_lab",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "check",
+          "title": "WOKE UP FINE",
+          "subtitle": "NORMAL SURFACE"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "upbeat"
+      }
+    },
+    {
+      "scene_id": "SCENE_128",
+      "narration_text": "But the brainwave recordings told a very different story.",
+      "estimated_duration_sec": 2.7,
+      "actual_duration_sec": 3.74,
+      "audio_file": "audio_scenes/SCENE_128.mp3",
+      "visual": {
+        "description": "SCENE_128: Hero (thinking, deadpan) at x=0.25 in void.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "HIDDEN EEG DATA",
+          "subtitle": "BRAINWAVE ALARM"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_129",
+      "narration_text": "During that sleep, Randy's brain plunged into an intense REM rebound.",
+      "estimated_duration_sec": 3.1,
+      "actual_duration_sec": 5.4,
+      "audio_file": "audio_scenes/SCENE_129.mp3",
+      "visual": {
+        "description": "SCENE_129: Hero (pointing_target, eager) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "sleep_lab",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_up",
+          "title": "REM REBOUND",
+          "subtitle": "+300% DREAM SURGE"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_130",
+      "narration_text": "And the real plot twist did not arrive for another forty years.",
+      "estimated_duration_sec": 3.0,
+      "actual_duration_sec": 4.22,
+      "audio_file": "audio_scenes/SCENE_130.mp3",
+      "visual": {
+        "description": "SCENE_130: Hero (shocked_fall, deadpan) at x=0.25 in void.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "clock",
+          "title": "40 YEARS LATER",
+          "subtitle": "THE DELAYED BILL"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_131",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 2.6,
+      "audio_file": "audio_scenes/SCENE_131.mp3",
+      "visual": {
+        "description": "SCENE_131: Hero (stressed_headache, sad) at x=0.25 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "close_up",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "40 YEARS LATER",
+          "subtitle": "THE DELAYED PRICE"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_132",
+      "narration_text": "Let us look closer at why the human brain cannot survive without this nightly reset.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.38,
+      "audio_file": "audio_scenes/SCENE_132.mp3",
+      "visual": {
+        "description": "SCENE_132: Hero (pointing_target, eager) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "brain",
+          "title": "NIGHTLY RESET",
+          "subtitle": "WHY WE SLEEP"
+        },
+        "header": {
+          "title": "INSIDE THE CORTEX",
+          "subtitle": "THE 4 BIOLOGICAL LOCKS"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_133",
+      "narration_text": "Every single day, eighty-six billion neurons fire trillions of electrical signals.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.64,
+      "audio_file": "audio_scenes/SCENE_133.mp3",
+      "visual": {
+        "description": "SCENE_133: Hero (idea_lightbulb, eager) at x=0.25 in void.",
+        "stickman_pose": "idea_lightbulb",
+        "action": "act_idea_lightbulb",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#FFB703",
+        "card": {
+          "icon": "chart_up",
+          "title": "86B NEURONS",
+          "subtitle": "CONSTANT FIRING"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_134",
+      "narration_text": "That electrical activity produces heat, oxidative stress, and microscopic cellular debris.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 6.31,
+      "audio_file": "audio_scenes/SCENE_134.mp3",
+      "visual": {
+        "description": "SCENE_134: Hero (thinking, neutral) at x=0.25 in void.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "CELLULAR DEBRIS",
+          "subtitle": "METABOLIC HEAT"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_135",
+      "narration_text": "When you fall into deep slow-wave sleep, your brain cells physically shrink by sixty percent.",
+      "estimated_duration_sec": 3.5,
+      "actual_duration_sec": 6.02,
+      "audio_file": "audio_scenes/SCENE_135.mp3",
+      "visual": {
+        "description": "SCENE_135: Hero (shocked_fall, eager) at x=0.75 in void.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "brain",
+          "title": "CELLS SHRINK 60%",
+          "subtitle": "CHANNELS OPEN"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_136",
+      "narration_text": "That shrinkage opens wide channels between neurons so cerebrospinal fluid can rush through.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.93,
+      "audio_file": "audio_scenes/SCENE_136.mp3",
+      "visual": {
+        "description": "SCENE_136: Hero (pointing_target, happy) at x=0.75 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "happy",
+        "mood": "happy",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "check",
+          "title": "FLUID CHANNELS",
+          "subtitle": "DEEP CLEAN CYCLE"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "calm"
+      }
+    },
+    {
+      "scene_id": "SCENE_137",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.5,
+      "actual_duration_sec": 2.5,
+      "audio_file": "audio_scenes/SCENE_137.mp3",
+      "visual": {
+        "description": "SCENE_137: Hero (idle_neutral, neutral) at x=0.75 in void.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "close_up",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "header": {
+          "title": "INSIDE THE CORTEX",
+          "subtitle": "GLYMPHATIC PULSE"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "calm"
+      }
+    },
+    {
+      "scene_id": "SCENE_138",
+      "narration_text": "Without that nightly rinse, two things happen inside your skull within forty-eight hours.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.71,
+      "audio_file": "audio_scenes/SCENE_138.mp3",
+      "visual": {
+        "description": "SCENE_138: Hero (pointing_target, flat) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "48-HOUR LIMIT",
+          "subtitle": "TWO FAILURES"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_139",
+      "narration_text": "First, synaptic connections become saturated and can no longer store new memories.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.71,
+      "audio_file": "audio_scenes/SCENE_139.mp3",
+      "visual": {
+        "description": "SCENE_139: Hero (stressed_headache, sad) at x=0.25 in void.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "lock",
+          "title": "SYNAPSES FULL",
+          "subtitle": "NO NEW MEMORY"
+        }
+      },
+      "audio": {
+        "sfx": "phone_lock",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_140",
+      "narration_text": "Your hippocampus—the brain's inbox—literally bounces new information away.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 5.81,
+      "audio_file": "audio_scenes/SCENE_140.mp3",
+      "visual": {
+        "description": "SCENE_140: Hero (thinking, deadpan) at x=0.25 in void.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "mail_empty",
+          "title": "INBOX FULL",
+          "subtitle": "HIPPOCAMPUS BLOCKED"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_141",
+      "narration_text": "Second, your emotional brakes in the medial prefrontal cortex disconnect from the amygdala.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.78,
+      "audio_file": "audio_scenes/SCENE_141.mp3",
+      "visual": {
+        "description": "SCENE_141: Hero (shocked_fall, sad) at x=0.75 in void.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "BRAKES CUT",
+          "subtitle": "EMOTIONAL SPIRAL"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_142",
+      "narration_text": "That is why Randy Gardner could go from laughing at a joke to shouting at his best friend in seconds.",
+      "estimated_duration_sec": 3.5,
+      "actual_duration_sec": 5.81,
+      "audio_file": "audio_scenes/SCENE_142.mp3",
+      "visual": {
+        "description": "SCENE_142: Hero (stressed_headache, sad) at x=0.75 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "MOOD WHIPLASH",
+          "subtitle": "ZERO FILTER"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_143",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.5,
+      "actual_duration_sec": 2.5,
+      "audio_file": "audio_scenes/SCENE_143.mp3",
+      "visual": {
+        "description": "SCENE_143: Hero (stressed_headache, deadpan) at x=0.75 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "close_up",
+          "movement": "shake"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "INSIDE THE CORTEX",
+          "subtitle": "PREFRONTAL DISCONNECT"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_144",
+      "narration_text": "And what about the body below the neck during those eleven days?",
+      "estimated_duration_sec": 3.0,
+      "actual_duration_sec": 4.06,
+      "audio_file": "audio_scenes/SCENE_144.mp3",
+      "visual": {
+        "description": "SCENE_144: Hero (thinking, eager) at x=0.25 in hospital.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "eager",
+        "mood": "eager",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "question",
+          "title": "BELOW THE NECK",
+          "subtitle": "ORGAN STRESS"
+        },
+        "header": {
+          "title": "SYSTEMIC IMPACT",
+          "subtitle": "HEART, HORMONES & IMMUNITY"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_145",
+      "narration_text": "After just four days without sleep, insulin sensitivity drops by more than thirty percent.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.98,
+      "audio_file": "audio_scenes/SCENE_145.mp3",
+      "visual": {
+        "description": "SCENE_145: Hero (pointing_target, flat) at x=0.25 in hospital.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "flat",
+        "mood": "flat",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_down",
+          "title": "INSULIN -30%",
+          "subtitle": "METABOLIC SHOCK"
+        },
+        "header": {
+          "title": "SYSTEMIC IMPACT",
+          "subtitle": "HEART, HORMONES & IMMUNITY"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_146",
+      "narration_text": "A healthy teenager's blood sugar begins to look like someone on the verge of pre-diabetes.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.62,
+      "audio_file": "audio_scenes/SCENE_146.mp3",
+      "visual": {
+        "description": "SCENE_146: Hero (shocked_fall, sad) at x=0.25 in hospital.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "GLUCOSE SPIKE",
+          "subtitle": "HORMONE CRASH"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_147",
+      "narration_text": "At the same time, natural killer immune cells plummet by nearly seventy percent.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.4,
+      "audio_file": "audio_scenes/SCENE_147.mp3",
+      "visual": {
+        "description": "SCENE_147: Hero (stressed_headache, sad) at x=0.75 in hospital.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_down",
+          "title": "IMMUNITY -70%",
+          "subtitle": "DEFENSE DOWN"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_148",
+      "narration_text": "Your blood pressure stays locked in its daytime high instead of dipping at night.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.85,
+      "audio_file": "audio_scenes/SCENE_148.mp3",
+      "visual": {
+        "description": "SCENE_148: Hero (pointing_target, deadpan) at x=0.75 in hospital.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "heart",
+          "title": "HIGH PRESSURE",
+          "subtitle": "NO NIGHT DIP"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_149",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.5,
+      "actual_duration_sec": 2.5,
+      "audio_file": "audio_scenes/SCENE_149.mp3",
+      "visual": {
+        "description": "SCENE_149: Hero (idle_neutral, deadpan) at x=0.75 in hospital.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "close_up",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "header": {
+          "title": "SYSTEMIC IMPACT",
+          "subtitle": "AUTONOMIC OVERLOAD"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_150",
+      "narration_text": "When Doctor Ross examined Randy's heart and blood vessels on day ten, he saw severe autonomic strain.",
+      "estimated_duration_sec": 3.5,
+      "actual_duration_sec": 6.84,
+      "audio_file": "audio_scenes/SCENE_150.mp3",
+      "visual": {
+        "description": "SCENE_150: Hero (thinking, sad) at x=0.25 in hospital.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "heart",
+          "title": "DAY 10 EKG",
+          "subtitle": "VASCULAR STRAIN"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_151",
+      "narration_text": "Every time Randy inhaled, his heart rate spiked; every time he exhaled, it dropped sharply.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 6.46,
+      "audio_file": "audio_scenes/SCENE_151.mp3",
+      "visual": {
+        "description": "SCENE_151: Hero (stressed_headache, deadpan) at x=0.25 in hospital.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "ERRATIC PULSE",
+          "subtitle": "VAGUS NERVE FATIGUE"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_152",
+      "narration_text": "Had the experiment continued for a few more days, doctors feared his cardiovascular system could have failed.",
+      "estimated_duration_sec": 3.5,
+      "actual_duration_sec": 6.91,
+      "audio_file": "audio_scenes/SCENE_152.mp3",
+      "visual": {
+        "description": "SCENE_152: Hero (shocked_fall, sad) at x=0.25 in hospital.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "hospital",
+        "camera": {
+          "framing": "medium",
+          "movement": "shake"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "FATAL THRESHOLD",
+          "subtitle": "CARDIAC RISK"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_153",
+      "narration_text": "For decades, textbooks claimed extreme sleep deprivation left no permanent damage.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 5.64,
+      "audio_file": "audio_scenes/SCENE_153.mp3",
+      "visual": {
+        "description": "SCENE_153: Hero (pointing_target, neutral) at x=0.25 in classroom.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "classroom",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "check",
+          "title": "TEXTBOOK MYTH",
+          "subtitle": "NO DAMAGE CLAIM"
+        },
+        "header": {
+          "title": "40 YEARS LATER",
+          "subtitle": "THE DELAYED PRICE"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "curious"
+      }
+    },
+    {
+      "scene_id": "SCENE_154",
+      "narration_text": "Then, in his sixties, Randy Gardner's ability to sleep suddenly broke.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 5.04,
+      "audio_file": "audio_scenes/SCENE_154.mp3",
+      "visual": {
+        "description": "SCENE_154: Hero (shocked_fall, sad) at x=0.25 in office.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "shake"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "cross",
+          "title": "SLEEP BROKEN",
+          "subtitle": "AGE 60 ONSET"
+        }
+      },
+      "audio": {
+        "sfx": "record_scratch",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_155",
+      "narration_text": "He was struck by severe, relentless chronic insomnia for over a decade.",
+      "estimated_duration_sec": 3.3,
+      "actual_duration_sec": 4.99,
+      "audio_file": "audio_scenes/SCENE_155.mp3",
+      "visual": {
+        "description": "SCENE_155: Hero (stressed_headache, sad) at x=0.75 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "clock",
+          "title": "CHRONIC INSOMNIA",
+          "subtitle": "WIDE AWAKE AT NIGHT"
+        }
+      },
+      "audio": {
+        "sfx": "clock_tick",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_156",
+      "narration_text": "Night after night, he lay exhausted to his bones yet unable to cross into sleep.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.42,
+      "audio_file": "audio_scenes/SCENE_156.mp3",
+      "visual": {
+        "description": "SCENE_156: Hero (stressed_headache, sad) at x=0.75 in office.",
+        "stickman_pose": "stressed_headache",
+        "action": "act_stressed_headache",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "dark_circles",
+          "sweat_drops",
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "warning",
+          "title": "UNABLE TO SLEEP",
+          "subtitle": "BROKEN SWITCH"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_157",
+      "narration_text": "Randy himself called it karmic payback for pushing his brain past its limits at seventeen.",
+      "estimated_duration_sec": 3.5,
+      "actual_duration_sec": 5.66,
+      "audio_file": "audio_scenes/SCENE_157.mp3",
+      "visual": {
+        "description": "SCENE_157: Hero (thinking, sad) at x=0.25 in office.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "brain",
+          "title": "KARMIC PAYBACK",
+          "subtitle": "RANDY'S OWN WORDS"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_158",
+      "narration_text": "Modern neuroscience now knows that extreme sleep loss triggers microglial pruning.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.38,
+      "audio_file": "audio_scenes/SCENE_158.mp3",
+      "visual": {
+        "description": "SCENE_158: Hero (pointing_target, deadpan) at x=0.25 in void.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "deadpan",
+        "mood": "deadpan",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "zoom_in"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "brain",
+          "title": "SYNAPTIC PRUNING",
+          "subtitle": "MICROGLIAL OVERDRIVE"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "tense"
+      }
+    },
+    {
+      "scene_id": "SCENE_159",
+      "narration_text": "The brain's immune cells literally chew away healthy synaptic connections.",
+      "estimated_duration_sec": 3.2,
+      "actual_duration_sec": 4.97,
+      "audio_file": "audio_scenes/SCENE_159.mp3",
+      "visual": {
+        "description": "SCENE_159: Hero (shocked_fall, sad) at x=0.25 in void.",
+        "stickman_pose": "shocked_fall",
+        "action": "act_shocked_fall",
+        "expression": "sad",
+        "mood": "sad",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "void",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#E63946",
+        "card": {
+          "icon": "chart_down",
+          "title": "SYNAPSE LOSS",
+          "subtitle": "HIDDEN SCAR TISSUE"
+        }
+      },
+      "audio": {
+        "sfx": "whoosh",
+        "bgm_mood": "dramatic"
+      }
+    },
+    {
+      "scene_id": "SCENE_160",
+      "narration_text": "In nineteen ninety-seven, Guinness permanently shut down the sleep deprivation record.",
+      "estimated_duration_sec": 3.4,
+      "actual_duration_sec": 5.47,
+      "audio_file": "audio_scenes/SCENE_160.mp3",
+      "visual": {
+        "description": "SCENE_160: Hero (pointing_target, neutral) at x=0.75 in office.",
+        "stickman_pose": "pointing_target",
+        "action": "act_pointing_target",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.75,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#1D3557",
+        "card": {
+          "icon": "lock",
+          "title": "RECORD CLOSED",
+          "subtitle": "1997 GUINNESS BAN"
+        }
+      },
+      "audio": {
+        "sfx": "phone_lock",
+        "bgm_mood": "calm"
+      }
+    },
+    {
+      "scene_id": "SCENE_161",
+      "narration_text": "Because sleep is not a luxury you can borrow against for free.",
+      "estimated_duration_sec": 3.0,
+      "actual_duration_sec": 4.08,
+      "audio_file": "audio_scenes/SCENE_161.mp3",
+      "visual": {
+        "description": "SCENE_161: Hero (thinking, neutral) at x=0.25 in office.",
+        "stickman_pose": "thinking",
+        "action": "act_thinking",
+        "expression": "neutral",
+        "mood": "neutral",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "medium",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "heart",
+          "title": "NOT A LUXURY",
+          "subtitle": "BIOLOGICAL DEBT"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "calm"
+      }
+    },
+    {
+      "scene_id": "SCENE_162",
+      "narration_text": "It is the nightly maintenance cycle that keeps your mind intact.",
+      "estimated_duration_sec": 3.0,
+      "actual_duration_sec": 4.03,
+      "audio_file": "audio_scenes/SCENE_162.mp3",
+      "visual": {
+        "description": "SCENE_162: Hero (celebrate_win, happy) at x=0.25 in office.",
+        "stickman_pose": "celebrate_win",
+        "action": "act_celebrate_win",
+        "expression": "happy",
+        "mood": "happy",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "wide",
+          "movement": "zoom_out"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "card": {
+          "icon": "check",
+          "title": "PROTECT YOUR SLEEP",
+          "subtitle": "MIND INTACT"
+        }
+      },
+      "audio": {
+        "sfx": "pop",
+        "bgm_mood": "triumphant"
+      }
+    },
+    {
+      "scene_id": "SCENE_163",
+      "narration_text": "...",
+      "estimated_duration_sec": 2.6,
+      "actual_duration_sec": 2.6,
+      "audio_file": "audio_scenes/SCENE_163.mp3",
+      "visual": {
+        "description": "SCENE_163: Hero (idle_neutral, happy) at x=0.25 in office.",
+        "stickman_pose": "idle_neutral",
+        "action": "act_idle_neutral",
+        "expression": "happy",
+        "mood": "happy",
+        "position": {
+          "x": 0.25,
+          "y": 0.82,
+          "anchor": "bottom_center"
+        },
+        "props": [
+          "actor_mode"
+        ],
+        "background": "bedroom_night",
+        "camera": {
+          "framing": "wide",
+          "movement": "static"
+        },
+        "transition": "cut",
+        "accent_color_focus": "#2A9D8F",
+        "header": {
+          "title": "264 HOURS",
+          "subtitle": "GOOD NIGHT"
+        }
+      },
+      "audio": {
+        "sfx": "subtle_click",
+        "bgm_mood": "calm"
+      }
+    }
+  ]
+}
