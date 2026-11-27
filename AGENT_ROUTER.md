@@ -251,3 +251,17 @@ Never guarantee views, subscribers, revenue, or monetization approval.
    - **Gate 4 (Technical Validation)**: `python -m engine.storyboard_validator projects/<project_id>/03_storyboard.json` must report `0 error(s)` (schema + engine vocabulary) before any rendering.
    - **Gate 4B (Preview Approval)**: after the contact sheet looks right, render only the first 20 seconds (`--preview-seconds 20`), mix it with audio, and get user approval before rendering the whole video. See `workflows/06-visual-render.md`.
    - **Gate 5 (Publication Readiness)**: `qa_report.md` passes all criteria with zero unresolved copyright or quality flags before publishing.
+
+---
+
+## 12. ĐỊNH TUYẾN LOẠI VIDEO (VIDEO TYPE ROUTING)
+
+Dự án hỗ trợ **2 engine dựng video cô lập 100%**. Trước khi bắt đầu bất kỳ tác vụ sản xuất video nào, AI Agent bắt buộc xác định đúng loại video người dùng yêu cầu và chỉ đi theo đúng một luồng duy nhất:
+
+| Yêu cầu của người dùng | Skill bắt buộc đọc & thực thi | Phạm vi được phép chạm | Cấm tuyệt đối |
+|---|---|---|---|
+| Video **người que / stickman** (hoặc mặc định YouTube Stickman Explainer) | `.agent/skills/stickman-video/SKILL.md` (hoặc `.agents/skills/stickman-video/SKILL.md`) + `instructions/`, `workflows/`, `templates/`, `engine/`, `projects/` | Luồng Stickman hiện tại (Node SVG + Python validator/contact sheet) | Không đọc, gọi script, hay sửa bất kỳ tệp nào trong `engines/whiteboard/`. |
+| Video **vẽ tay / whiteboard / bảng trắng** | `.agent/skills/whiteboard-video/SKILL.md` (hoặc `.agents/skills/whiteboard-video/SKILL.md`) + `engines/whiteboard/` | Luồng Whiteboard độc lập (`engines/whiteboard/.venv/`, `engines/whiteboard/scripts/`, `engines/whiteboard/assets/`) | Không dùng pipeline HTML/SVG/Node của Stickman (`engine/`, `instructions/VISUAL_STICKMAN.md`, `templates/storyboard-schema.json`). |
+
+- Nếu yêu cầu của người dùng **chưa nêu rõ** muốn làm video **người que (stickman)** hay **vẽ tay (whiteboard)**, hãy hỏi xác nhận 1 câu ngắn trước khi tạo tệp.
+- Mỗi luồng có bộ điều phối vai trò AI và các điểm dừng chờ duyệt riêng đã quy định sẵn trong `SKILL.md` tương ứng.

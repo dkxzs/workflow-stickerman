@@ -32,6 +32,7 @@ test_*.mp3
 inspect_*.png
 check_*.png
 PROJECT_BRIEF_FOR_CHATGPT.md
+tmp*.pem
 
 
 # Environment variables & secrets
