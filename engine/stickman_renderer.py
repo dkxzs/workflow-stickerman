@@ -171,6 +171,17 @@ POSE_RIGS = {
     "stressed_headache": dict(la=180, lb=-71, ra=0,  rb=-109, look=(0.0, 0.40),   mood="sad",     lean=8.0,   sweat=True),  # hands at temples
     "shocked_fall":      dict(la=-160, lb=-130, ra=-20, rb=-50, look=(0.30, 0.0),  mood="deadpan", lean=-15.0, shock=True),  # hands flung up
     "running_hurry":     dict(la=25,  lb=-45, ra=150, rb=105, look=(0.90, 0.10), mood="eager",   lean=16.0,  sweat=True, stride=True),
+    # Stickman 2.0 poses
+    "kneeling_offer":    dict(la=45,  lb=20,  ra=25, rb=10,  look=(0.80, -0.10), mood="happy",   lean=4.0),
+    "singing_mic":       dict(la=-120, lb=-80, ra=-35, rb=-60, look=(0.40, -0.40), mood="happy",  lean=-6.0),
+    "balancing":         dict(la=170, lb=175, ra=10, rb=5,   look=(0.60, 0.10),  mood="eager",   lean=2.0),
+    "lifting_weight":    dict(la=130, lb=60,  ra=20, rb=-85, look=(0.60, 0.0),   mood="sad",     lean=-2.0,  sweat=True),
+    "painting":          dict(la=60,  lb=40,  ra=20, rb=-15, look=(0.80, 0.0),   mood="eager",   lean=4.0),
+    "slipping_fall":     dict(la=-150, lb=-120, ra=-25, rb=-55, look=(0.20, 0.10), mood="deadpan", lean=-20.0, shock=True),
+    "dancing":           dict(la=150, lb=120, ra=-45, rb=-80, look=(0.50, -0.20), mood="happy",  lean=6.0),
+    "sitting":           dict(la=120, lb=85,  ra=40, rb=10,  look=(0.70, 0.15),  mood="neutral", lean=2.0),
+    "walking":           dict(la=125, lb=90,  ra=45, rb=25,  look=(0.80, 0.15),  mood="neutral", lean=6.0,   stride=True),
+    "presenting":        dict(la=135, lb=95,  ra=20, rb=-15, look=(0.80, 0.0),   mood="happy",   lean=3.0),
 }
 
 FRAMING_ZOOM = {"wide": 1.0, "medium": 1.08, "close_up": 1.35}

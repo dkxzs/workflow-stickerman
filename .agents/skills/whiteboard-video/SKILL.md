@@ -15,7 +15,7 @@ Biến chủ đề, kịch bản hoặc phụ đề SRT thành video vẽ tay b�
 
 ## Điều phối vai trò AI theo chặng (gọn, đúng việc)
 
-| Chặng | Vai trò AI đảm nhiệm | Đầu ra chính (`engines/whiteboard/assets/whiteboard/<tên-dự-án>/`) |
+| Chặng | Vai trò AI đảm nhiệm | Đầu ra chính (`projects/<tên-dự-án>/`) |
 |---|---|---|
 | **0a. Kịch bản** | **Whiteboard Scriptwriter** — viết lời dẫn giàu hình ảnh cụ thể, câu ngắn ≤ 5s | `script.md` |
 | **0b. Giọng đọc & SRT** | **Voice & Timing Engineer** — cắt câu, tạo TTS (Edge/CIT/Vbee), sinh SRT theo giọng thật | `draft.srt`, `input.srt`, `narration.m4a`, `tts-cache/` |
@@ -69,17 +69,17 @@ Khi bắt đầu từ chủ đề hoặc kịch bản, dùng **giọng đọc d�
 
 ## Quy trình
 
-0a. **Viết kịch bản (chỉ khi đầu vào là chủ đề).** Dựa vào chủ đề, thời lượng mục tiêu (mặc định 60 giây, khoảng 180–220 từ tiếng Việt), người xem và giọng văn, viết lời dẫn: một câu mở gây tò mò → thân (câu chuyện/luận điểm) → một câu kết đọng lại. Mỗi câu đọc không quá khoảng 5 giây, dễ minh hoạ (có người, vật, hành động cụ thể); giữa các đoạn cách một dòng trống (cuối đoạn sẽ nghỉ lâu hơn). Lưu vào `engines/whiteboard/assets/whiteboard/<tên-dự-án>/script.md`, kèm một câu thông điệp chính. **Xong thì dừng, chờ người dùng duyệt kịch bản.**
+0a. **Viết kịch bản (chỉ khi đầu vào là chủ đề).** Dựa vào chủ đề, thời lượng mục tiêu (mặc định 60 giây, khoảng 180–220 từ tiếng Việt), người xem và giọng văn, viết lời dẫn: một câu mở gây tò mò → thân (câu chuyện/luận điểm) → một câu kết đọng lại. Mỗi câu đọc không quá khoảng 5 giây, dễ minh hoạ (có người, vật, hành động cụ thể); giữa các đoạn cách một dòng trống (cuối đoạn sẽ nghỉ lâu hơn). Lưu vào `projects/<tên-dự-án>/script.md`, kèm một câu thông điệp chính. **Xong thì dừng, chờ người dùng duyệt kịch bản.**
 
 0b. **Tạo giọng đọc, sinh SRT (đầu vào chủ đề/kịch bản).** Chỉ làm sau khi kịch bản được duyệt (chạy từ thư mục gốc dự án):
    ```bash
    engines/whiteboard/.venv/Scripts/python.exe engines/whiteboard/scripts/script_to_srt.py \
-       engines/whiteboard/assets/whiteboard/<tên-dự-án>/script.md \
-       --output engines/whiteboard/assets/whiteboard/<tên-dự-án>/draft.srt
+       projects/<tên-dự-án>/script.md \
+       --output projects/<tên-dự-án>/draft.srt
    engines/whiteboard/.venv/Scripts/python.exe engines/whiteboard/scripts/tts_narration.py \
-       engines/whiteboard/assets/whiteboard/<tên-dự-án>/draft.srt \
-       --output engines/whiteboard/assets/whiteboard/<tên-dự-án>/narration.m4a \
-       --retime-out engines/whiteboard/assets/whiteboard/<tên-dự-án>/input.srt \
+       projects/<tên-dự-án>/draft.srt \
+       --output projects/<tên-dự-án>/narration.m4a \
+       --retime-out projects/<tên-dự-án>/input.srt \
        --pause <từng mục trong PAUSES>
    ```
    `input.srt` là phụ đề cho mọi bước sau; `narration.m4a` là giọng đọc cuối cùng (bước 8 dùng lại cache). Báo cho người dùng: cách cắt câu, tổng thời lượng, giọng đã dùng, và mời nghe thử `narration.m4a`. Giọng/tốc độ/engine lấy theo `engines/whiteboard/.env` (mặc định `TTS_PROVIDER=edge`); người dùng chỉ định thì dùng `--provider` / `--voice` / `--speed`. **Xong thì dừng, chờ người dùng duyệt giọng đọc và cách cắt câu.**
@@ -87,8 +87,8 @@ Khi bắt đầu từ chủ đề hoặc kịch bản, dùng **giọng đọc d�
 1. **Đọc phụ đề, lên phương án hình (chưa tạo ảnh).** Dùng `engines/whiteboard/scripts/parse_srt.py` tách SRT thành từng câu và gợi ý chia cảnh 20–35 giây/cảnh. Từ đó đưa ra phương án: mỗi cảnh có số thứ tự, ý chính, đối tượng trong hình, khoảng phụ đề tương ứng và `sceneDurationMs`. Mỗi cảnh chỉ một ý chính. **Xong thì dừng, chờ duyệt phương án.**
 
 2. **Tạo ảnh nét vẽ (`scene-XX-<tên>.png`).** Chỉ làm sau khi phương án được duyệt.
-   - **Nếu dự án hoặc môi trường agent có sẵn script/API/công cụ tạo ảnh** (ví dụ subagent `image-generator` hoặc script sinh ảnh): tự gọi để tạo từng ảnh 16:9 tuân thủ quy chuẩn hình ảnh với style `"minimalist hand-drawn black ink sketch on warm beige paper #F5EBD7, clean background, well-separated elements, no text"`, lưu đúng vào `engines/whiteboard/assets/whiteboard/<tên-dự-án>/scene-XX-<tên>.png`.
-   - **Nếu không có công cụ sinh ảnh:** xuất đầy đủ prompt từng cảnh vào `engines/whiteboard/assets/whiteboard/<tên-dự-án>/IMAGE_PROMPTS.md` và **dừng chờ người dùng** tạo rồi thả ảnh đúng tên `scene-XX-<tên>.png` vào thư mục dự án.
+   - **Nếu dự án hoặc môi trường agent có sẵn script/API/công cụ tạo ảnh** (ví dụ subagent `image-generator` hoặc script sinh ảnh): tự gọi để tạo từng ảnh 16:9 tuân thủ quy chuẩn hình ảnh với style `"minimalist hand-drawn black ink sketch on warm beige paper #F5EBD7, clean background, well-separated elements, no text"`, lưu đúng vào `projects/<tên-dự-án>/scene-XX-<tên>.png`.
+   - **Nếu không có công cụ sinh ảnh:** xuất đầy đủ prompt từng cảnh vào `projects/<tên-dự-án>/IMAGE_PROMPTS.md` và **dừng chờ người dùng** tạo rồi thả ảnh đúng tên `scene-XX-<tên>.png` vào thư mục dự án.
    - Không có chữ, ảnh chụp phức tạp, đối tượng chồng lên nhau hay yếu tố trái quy chuẩn. **Xong thì dừng, cho xem ảnh và chờ duyệt.**
 
 3. **Đọc phụ đề trước, xem ảnh sau, rồi chia vùng và mở trang xem trước.** Chỉ làm sau khi ảnh được duyệt. Đọc phụ đề của cảnh, **thực sự mở xem ảnh** và lấy kích thước pixel gốc; không được đoán hình chỉ từ phụ đề, cũng không được xếp thứ tự máy móc theo vị trí. Rút ra các sự kiện trong phụ đề, gắn từng đối tượng nhìn thấy trong ảnh với sự kiện, xếp thứ tự vẽ theo mạch "bối cảnh → nhân vật/đồ vật chính → hành động, xung đột hoặc biến đổi → phản ứng/kết quả". Sau đó tạo `<tên-ảnh>.annotation.json` cùng thư mục. Tạo xong, lập tức mở `engines/whiteboard/assets/preview.html` bằng trình duyệt mặc định và dùng nút "Mở thư mục" nạp **thư mục chứa file annotation**. **Trang xem trước đã nạp xong thì dừng, chờ duyệt annotation và bản xem trước.**
@@ -106,7 +106,7 @@ Khi bắt đầu từ chủ đề hoặc kịch bản, dùng **giọng đọc d�
 ## Thư mục dự án
 
 ```text
-engines/whiteboard/assets/whiteboard/<tên-dự-án>/
+projects/<tên-dự-án>/
   script.md                            # kịch bản (nếu bắt đầu từ chủ đề/kịch bản)
   input.srt                            # phụ đề chính thức
   IMAGE_PROMPTS.md                     # prompt tạo ảnh (khi không tự sinh ảnh)
@@ -140,8 +140,8 @@ Mọi script Python của luồng whiteboard chạy bằng `.venv` riêng trong 
 2. **Kịch bản → SRT nháp:**
    ```bash
    engines/whiteboard/.venv/Scripts/python.exe engines/whiteboard/scripts/script_to_srt.py \
-       engines/whiteboard/assets/whiteboard/<tên-dự-án>/script.md \
-       --output engines/whiteboard/assets/whiteboard/<tên-dự-án>/draft.srt [--max-chars 80] [--min-chars 12]
+       projects/<tên-dự-án>/script.md \
+       --output projects/<tên-dự-án>/draft.srt [--max-chars 80] [--min-chars 12]
    ```
 3. **Đọc phụ đề + gợi ý chia cảnh:**
    ```bash
@@ -153,7 +153,7 @@ Mọi script Python của luồng whiteboard chạy bằng `.venv` riêng trong 
    engines/whiteboard/.venv/Scripts/python.exe engines/whiteboard/scripts/render_annotation_preview.py \
        <ảnh> <annotation> <ảnh-kiểm-tra>
    ```
-5. **Trang xem trước (không cần server):** mở `engines/whiteboard/assets/preview.html` bằng Chrome/Edge, bấm "Mở thư mục" chọn `engines/whiteboard/assets/whiteboard/<tên-dự-án>/`.
+5. **Trang xem trước (không cần server):** mở `engines/whiteboard/assets/preview.html` bằng Chrome/Edge, bấm "Mở thư mục" chọn `projects/<tên-dự-án>/`.
 6. **Render một cảnh:**
    ```bash
    engines/whiteboard/.venv/Scripts/python.exe engines/whiteboard/scripts/render_stream_whiteboard.py \

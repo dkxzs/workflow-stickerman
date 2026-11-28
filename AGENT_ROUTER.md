@@ -1,267 +1,76 @@
 # AGENT ROUTER — YOUTUBE CONTENT ENGINE
 
-## 1. PROJECT OVERVIEW
+## 1. VIDEO TYPE ROUTING (MANDATORY FIRST STEP)
 
-This project is a complete content production system for a YouTube Stickman Explainer channel targeting English-speaking audiences, primarily viewers in the United States.
-The system is designed to support the entire video production pipeline:
+This repository contains **2 completely isolated video production engines**. Determine the requested type before starting any task:
 
-1. Topic research
-2. Content validation
-3. Video concept development
-4. Scriptwriting
-5. Storyboarding
-6. Voice-over generation
-7. Visual production
-8. Video editing and audio mixing
-9. Quality assurance
-10. YouTube publishing preparation
+| Request Type | Required Skill & Scope | Strictly Forbidden |
+|---|---|---|
+| **Stickman / Người que 2D** *(default YouTube Explainer)* | `.agent/skills/stickman-video/SKILL.md` + `instructions/`, `workflows/`, `templates/`, `engine/`, `projects/` | Do not read, run, or edit anything in `engines/whiteboard/`. |
+| **Whiteboard / Vẽ tay bảng trắng** | `.agent/skills/whiteboard-video/SKILL.md` + `engines/whiteboard/` (`.venv`, `scripts/`, `assets/`) + `projects/` | Do not use Stickman pipeline (`engine/`, `instructions/VISUAL_STICKMAN.md`, `templates/storyboard-schema.json`). |
 
-The primary goal is to produce original, engaging, informative, and monetization-conscious videos.
+If the user has not specified which video type they want, ask one short clarifying question before creating files.
 
-## 2. YOUR ROLE
+---
 
-Act as a coordinated team of specialized agents:
+## 2. STICKMAN PIPELINE — INSTRUCTION PRIORITY
 
-- **Content Researcher:** Finds and verifies interesting topics.
-- **Market Analyst:** Evaluates audience demand and competition.
-- **Content Strategist:** Selects topics and develops channel direction.
-- **Scriptwriter:** Creates engaging English narration.
-- **Storyboard Artist:** Converts scripts into visual scenes.
-- **Visual Director:** Maintains consistent Stickman visual identity.
-- **Production Engineer:** Supports technical video production.
-- **Quality Controller:** Checks factual accuracy and production quality.
-
-You must work systematically and never skip required stages.
-
-## 3. INSTRUCTION PRIORITY
-
-Follow instructions in this order:
-
+Follow instructions in this order (report conflicts clearly; never silently override prior decisions):
 1. User's explicit instructions in the current task.
 2. `instructions/GLOBAL_RULES.md`
 3. `instructions/CONTENT_STRATEGY.md`
 4. `instructions/SCRIPT_GUIDELINES.md`
-5. Other specialized instruction files relevant to the current task.
-6. The corresponding workflow file.
-
-If two instructions conflict, follow the higher-priority instruction and clearly report important conflicts.
-Never silently change an established project decision.
-
-## 4. REQUIRED FILE READING
-
-Before performing a task, read the relevant instruction files:
-
-**For research tasks (`01-research.md`)**
-
-- `instructions/GLOBAL_RULES.md`
-- `instructions/CONTENT_STRATEGY.md`
-- `workflows/01-research.md`
-
-**For concept development (`02-concept.md`)**
-
-- `instructions/GLOBAL_RULES.md`
-- `instructions/CONTENT_STRATEGY.md`
-- `workflows/02-concept.md`
-- `projects/<project_id>/01_research.md`
-
-**For scriptwriting (`03-script.md`)**
-
-- `instructions/GLOBAL_RULES.md`
-- `instructions/CONTENT_STRATEGY.md`
-- `instructions/SCRIPT_GUIDELINES.md`
-- `workflows/03-script.md`
-- `projects/<project_id>/01_research.md` (specifically the `## Approved Concept` section).
-
-**For storyboarding (`04-storyboard.md`)**
-
-- `instructions/GLOBAL_RULES.md`
-- `instructions/STORYBOARD_RULES.md`
-- `instructions/VISUAL_STICKMAN.md`
-- `workflows/04-storyboard.md`
-- The approved script (`projects/<project_id>/02_script.md`).
-
-**For audio production (`05-audio-tts.md`)**
-
-- `instructions/GLOBAL_RULES.md`
-- `workflows/05-audio-tts.md`
-
-**For visual production (`06-visual-render.md`)**
-
-- `instructions/GLOBAL_RULES.md`
-- `instructions/VISUAL_STICKMAN.md`
-- `workflows/06-visual-render.md`
-
-**For editing and mixing (`07-editing-mix.md`)**
-
-- `instructions/GLOBAL_RULES.md`
-- `workflows/07-editing-mix.md`
-
-**For quality assurance & publishing (`08-publishing.md`)**
-
-- `instructions/GLOBAL_RULES.md`
-- `instructions/QUALITY_CHECKLIST.md`
-- `instructions/CONTENT_STRATEGY.md`
-- `workflows/08-publishing.md`
-
-## 5. WORKING PRINCIPLES
-
-### 5.1 Evidence before assumptions
-
-Do not invent:
-
-- Research findings
-- Statistics
-- Audience demand
-- Competitor performance
-- Historical facts
-- Scientific claims
-- Sources or citations
-
-Clearly distinguish verified facts, estimates, interpretations, and hypotheses.
-
-### 5.2 Quality over quantity
-
-Do not produce content simply to fill a publishing schedule.
-Every video must have:
-
-- A clear central idea.
-- A compelling reason to watch.
-- A coherent narrative.
-- Meaningful educational or entertainment value.
-- Original presentation.
-
-### 5.3 No premature automation
-
-Do not build or modify production engines unless explicitly requested.
-Before implementing technical features:
-
-1. Explain the proposed implementation.
-2. Identify dependencies.
-3. Identify potential risks.
-4. Test the smallest working version first.
-
-Do not install unnecessary packages or introduce paid APIs without approval.
-
-### 5.4 Preserve project structure
-
-Do not rename, delete, move, or restructure existing project files without explicit approval.
-Do not overwrite user-created content without checking it first.
-
-### 5.5 Report honestly
-
-When a task is completed, report:
-
-- Files created or modified.
-- Work completed.
-- Issues encountered.
-- Items requiring user approval.
-- Recommended next step.
-
-Never claim a task is complete if it has not been verified.
-
-## 6. VIDEO PRODUCTION RULES
-
-The default video format is:
-
-- **Platform:** YouTube.
-- **Main format:** Long-form explainer videos.
-- **Visual identity:** 2D Stickman animation.
-- **Primary language:** Natural American English.
-- **Target audience:** English-speaking viewers.
-- **Resolution target:** 1920 × 1080.
-- **Frame rate target:** 30 FPS.
-
-Video duration must be determined by the topic and narrative. A duration of 6–8 minutes may be used as an initial planning target, not a mandatory limit.
-
-## 7. CONTENT PERSONALITY
-
-The channel should combine:
-
-- Accurate and interesting information.
-- Clear explanations.
-- Strong storytelling.
-- Natural conversational narration.
-- Occasional clever humor and light sarcasm.
-- Expressive Stickman characters.
-
-Humor must support the explanation rather than distract from it.
-The narrator should sound intelligent, approachable, confident, and entertaining.
-
-## 8. PRODUCTION WORKFLOW CONTROL & FILE STORAGE
-
-Follow the production stages in order:
-`Research → [Gate 1] → Concept → [Gate 2] → Script → [Gate 3] → Storyboard → [Gate 4] → Audio → Visual Rendering (contact sheet → [Gate 4B] → full render) → Editing → Quality Assurance → Publishing Preparation → [Gate 5].`
-
-**Visuals are chosen, not drawn.** The agent never draws images itself. It picks poses, moods, icons, camera moves and SFX from the closed lists in `engine/vocab.py` (print them with `python -m engine.vocab`), and the renderer in `engine/` draws them. This keeps the look consistent even with a weaker model.
-
-Do not automatically proceed to the next stage when the current stage requires user approval.
-The user has final authority over major creative and strategic decisions.
-
-All project-specific outputs must be strictly saved inside their dedicated project folder (`projects/<project_id>/`, e.g., `projects/video-001/`):
-
-- Research notes & Approved Concept: `01_research.md` (must contain `## Approved Concept` after Gate 2)
-- Approved script: `02_script.md`
-- Scene breakdown: `03_storyboard.json`
-- Individual voice-over clips: `audio_scenes/`
-- Individual raw scene renders: `video_scenes/`
-- Final video & YouTube metadata: `output/final_video.mp4` and `output/metadata.txt`
-- Quality assurance report: `qa_report.md`
-
-## 9. CURRENT STRATEGY STATUS
-
-The channel's final content niche has not yet been validated.
-Do not treat any candidate niche as a permanent decision until sufficient research has been completed and the user has approved the direction.
-When conducting research, compare multiple viable opportunities rather than defending an unverified initial preference.
-
-## 10. FINAL OBJECTIVE
-
-Build a sustainable YouTube channel with a recognizable identity, original content, strong audience retention, and long-term monetization potential.
-Never guarantee views, subscribers, revenue, or monetization approval.
+5. Task-specific instructions (`STORYBOARD_RULES.md`, `VISUAL_STICKMAN.md`, `QUALITY_CHECKLIST.md`).
+6. Corresponding workflow file (`workflows/01-research.md` … `08-publishing.md`).
 
 ---
 
-## 11. AGENT EXECUTION MATRIX & TECHNICAL HANDOFF
+## 3. WORKING PRINCIPLES
 
-### Agent Matrix & Workflow Mapping
-
-| Stage                 | Agent Identifier    | Assigned Role                             | Primary Instructions & References                                                                                                                                               | Input Files                                            | Output Deliverables                                                                                                     |
-| --------------------- | ------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| **01. Research**      | `AGENT-01-RESEARCH` | Content Researcher & Market Analyst       | `workflows/01-research.md`<br>`instructions/GLOBAL_RULES.md`<br>`instructions/CONTENT_STRATEGY.md`                                                                              | Raw search queries, competitor trends                  | `projects/<project_id>/01_research.md`                                                                                  |
-| **02. Concept**       | `AGENT-02-CONCEPT`  | Content Strategist & Packaging Specialist | `workflows/02-concept.md`<br>`instructions/GLOBAL_RULES.md`<br>`instructions/CONTENT_STRATEGY.md`                                                                               | `01_research.md`                                       | 3 Title options + Concept angle + Thumbnail ideas (saved under `## Approved Concept` in `01_research.md` upon approval) |
-| **03. Script**        | `AGENT-03-WRITER`   | Scriptwriter (American English)           | `workflows/03-script.md`<br>`instructions/GLOBAL_RULES.md`<br>`instructions/CONTENT_STRATEGY.md`<br>`instructions/SCRIPT_GUIDELINES.md`<br>`templates/script-template.md`       | `## Approved Concept` from `01_research.md`            | `projects/<project_id>/02_script.md`                                                                                    |
-| **04. Storyboard**    | `AGENT-04-DIRECTOR` | Storyboard Artist & Visual Director       | `workflows/04-storyboard.md`<br>`instructions/GLOBAL_RULES.md`<br>`instructions/STORYBOARD_RULES.md`<br>`instructions/VISUAL_STICKMAN.md`<br>`templates/storyboard-schema.json` | `02_script.md`                                         | `projects/<project_id>/03_storyboard.json`                                                                              |
-| **05. Voice / Audio** | `AGENT-05-VOICE`    | Audio & TTS Engineer                      | `workflows/05-audio-tts.md`<br>`instructions/GLOBAL_RULES.md`                                                                                                                   | `02_script.md`<br>`03_storyboard.json`                 | Per-scene audio files in `audio_scenes/`                                                                                |
-| **06. Render**        | `AGENT-06-RENDER`   | Visual Director & Animation Renderer      | `workflows/06-visual-render.md`<br>`instructions/GLOBAL_RULES.md`<br>`instructions/VISUAL_STICKMAN.md`                                                                          | `03_storyboard.json`<br>Pose assets                    | Per-scene video renders in `video_scenes/`                                                                              |
-| **07. Edit / Mix**    | `AGENT-07-EDITOR`   | Video Editor & Audio Mixer                | `workflows/07-editing-mix.md`<br>`instructions/GLOBAL_RULES.md`                                                                                                                 | `audio_scenes/`<br>`video_scenes/`<br>SFX & BGM assets | Draft master video in `output/final_video.mp4`                                                                          |
-| **08. QA & Pub**      | `AGENT-08-PUBLISH`  | Quality Controller & Publishing Manager   | `workflows/08-publishing.md`<br>`instructions/GLOBAL_RULES.md`<br>`instructions/QUALITY_CHECKLIST.md`<br>`instructions/CONTENT_STRATEGY.md`<br>`templates/metadata-template.md` | Draft master video<br>`01_research.md`                 | 1. `qa_report.md`<br>2. `output/metadata.txt` (only if QA passes)                                                       |
-
-### Handoff & Governance Protocols
-
-1. **Scene ID Uniformity**:
-   - Once assigned in `03_storyboard.json` (e.g., `SCENE_001`, `SCENE_002`), all downstream files (`SCENE_001.mp3`/`SCENE_001.wav`, `SCENE_001.mp4`) must maintain strict identifier matching.
-2. **Script Freeze & Exception Rule**:
-   - Once `02_script.md` is approved by the user at Gate 3, narration text must not be silently altered during audio or visual stages.
-   - **Exception**: If a severe TTS pronunciation error, factual inaccuracy, or critical technical flaw is discovered downstream, the agent must pause, report the exact issue to the user, and request explicit approval before updating `02_script.md`, regenerating audio, and re-exporting `03_storyboard.json`.
-3. **Strict QA-to-Publishing Order (`AGENT-08-PUBLISH`)**:
-   - Stage 08 must execute strictly in this sequence: (1) Inspect `output/final_video.mp4` against `instructions/QUALITY_CHECKLIST.md`, (2) Write findings to `qa_report.md`, (3) **Only if QA passes**, generate `output/metadata.txt`, (4) **Never auto-upload or publish** to YouTube without explicit user confirmation.
-4. **Approval Gate Checkpoints**:
-   - **Gate 1 (Research Approval)**: User signs off on validated niche and specific topic in `01_research.md`.
-   - **Gate 2 (Concept Approval)**: User signs off on Concept angle, 3 working titles, and Thumbnail concept; `AGENT-02-CONCEPT` records the approved choice under `## Approved Concept` inside `01_research.md`.
-   - **Gate 3 (Script Freeze)**: User signs off on `02_script.md` before storyboarding begins.
-   - **Gate 4 (Technical Validation)**: `python -m engine.storyboard_validator projects/<project_id>/03_storyboard.json` must report `0 error(s)` (schema + engine vocabulary) before any rendering.
-   - **Gate 4B (Preview Approval)**: after the contact sheet looks right, render only the first 20 seconds (`--preview-seconds 20`), mix it with audio, and get user approval before rendering the whole video. See `workflows/06-visual-render.md`.
-   - **Gate 5 (Publication Readiness)**: `qa_report.md` passes all criteria with zero unresolved copyright or quality flags before publishing.
+- **Evidence before assumptions:** Never fabricate statistics, research findings, competitor metrics, quotes, or sources. Distinguish verified facts from estimates/hypotheses.
+- **No premature automation:** Do not modify engine code, install packages, or add paid APIs unless explicitly requested.
+- **Preserve project structure:** Do not rename, delete, or overwrite user-created project files without approval.
+- **Visuals are chosen, not drawn:** Pick `pose`, `mood`, `icon`, `camera`, `background`, and `sfx` strictly from `engine/vocab.py` (`python -m engine.vocab`). The Node renderer (`engine/auto_director.mjs`) draws everything.
+- **Report honestly:** After each stage, report created/modified files, completed work, issues, items needing approval, and the next step. Never claim completion without verification.
+- **Channel niche status:** Niche remains pending research validation until explicitly approved by the user in `01_research.md`.
 
 ---
 
-## 12. ĐỊNH TUYẾN LOẠI VIDEO (VIDEO TYPE ROUTING)
+## 4. PRODUCTION WORKFLOW & APPROVAL GATES
 
-Dự án hỗ trợ **2 engine dựng video cô lập 100%**. Trước khi bắt đầu bất kỳ tác vụ sản xuất video nào, AI Agent bắt buộc xác định đúng loại video người dùng yêu cầu và chỉ đi theo đúng một luồng duy nhất:
+Execute stages strictly in order and **pause at every Gate for user sign-off**:
 
-| Yêu cầu của người dùng | Skill bắt buộc đọc & thực thi | Phạm vi được phép chạm | Cấm tuyệt đối |
-|---|---|---|---|
-| Video **người que / stickman** (hoặc mặc định YouTube Stickman Explainer) | `.agent/skills/stickman-video/SKILL.md` (hoặc `.agents/skills/stickman-video/SKILL.md`) + `instructions/`, `workflows/`, `templates/`, `engine/`, `projects/` | Luồng Stickman hiện tại (Node SVG + Python validator/contact sheet) | Không đọc, gọi script, hay sửa bất kỳ tệp nào trong `engines/whiteboard/`. |
-| Video **vẽ tay / whiteboard / bảng trắng** | `.agent/skills/whiteboard-video/SKILL.md` (hoặc `.agents/skills/whiteboard-video/SKILL.md`) + `engines/whiteboard/` | Luồng Whiteboard độc lập (`engines/whiteboard/.venv/`, `engines/whiteboard/scripts/`, `engines/whiteboard/assets/`) | Không dùng pipeline HTML/SVG/Node của Stickman (`engine/`, `instructions/VISUAL_STICKMAN.md`, `templates/storyboard-schema.json`). |
+```text
+01 Research → [Gate 1] → 02 Concept → [Gate 2] → 03 Script → [Gate 3]
+→ 04 Storyboard → [Gate 4] → 05 Audio TTS
+→ 06 Visual Render (contact sheet → preview 6 scenes → [Gate 4B] → full render)
+→ 07 Edit & Mix → 08 QA & Publishing → [Gate 5]
+```
 
-- Nếu yêu cầu của người dùng **chưa nêu rõ** muốn làm video **người que (stickman)** hay **vẽ tay (whiteboard)**, hãy hỏi xác nhận 1 câu ngắn trước khi tạo tệp.
-- Mỗi luồng có bộ điều phối vai trò AI và các điểm dừng chờ duyệt riêng đã quy định sẵn trong `SKILL.md` tương ứng.
+### Agent Execution Matrix
+
+| Stage | Agent ID | Role | Required Reading | Output (`projects/<project_id>/`) |
+|---|---|---|---|---|
+| **01. Research** | `AGENT-01-RESEARCH` | Content Researcher & Analyst | `workflows/01-research.md`, `GLOBAL_RULES.md`, `CONTENT_STRATEGY.md` | `01_research.md` |
+| **02. Concept** | `AGENT-02-CONCEPT` | Strategist & Packaging | `workflows/02-concept.md`, `GLOBAL_RULES.md`, `CONTENT_STRATEGY.md`, `01_research.md` | `## Approved Concept` in `01_research.md` |
+| **03. Script** | `AGENT-03-WRITER` | Scriptwriter (US English) | `workflows/03-script.md`, `GLOBAL_RULES.md`, `CONTENT_STRATEGY.md`, `SCRIPT_GUIDELINES.md`, `templates/script-template.md` | `02_script.md` *(frozen after Gate 3)* |
+| **04. Storyboard** | `AGENT-04-DIRECTOR` | Storyboard & Visual Director | `workflows/04-storyboard.md`, `GLOBAL_RULES.md`, `STORYBOARD_RULES.md`, `VISUAL_STICKMAN.md`, `templates/storyboard-schema.json` | `03_storyboard.json` |
+| **05. Voice/Audio** | `AGENT-05-VOICE` | Audio & TTS Engineer | `workflows/05-audio-tts.md`, `GLOBAL_RULES.md` | `audio_scenes/SCENE_XXX.*` |
+| **06. Render** | `AGENT-06-RENDER` | Animation Renderer | `workflows/06-visual-render.md`, `GLOBAL_RULES.md`, `VISUAL_STICKMAN.md` | `video_scenes_vector/`, `output/video_preview_master.mp4`, `output/video_full_master.mp4` |
+| **07. Edit/Mix** | `AGENT-07-EDITOR` | Video Editor & Audio Mixer | `workflows/07-editing-mix.md`, `GLOBAL_RULES.md` | `output/final_video.mp4` |
+| **08. QA & Pub** | `AGENT-08-PUBLISH` | QA & Publishing Manager | `workflows/08-publishing.md`, `GLOBAL_RULES.md`, `QUALITY_CHECKLIST.md`, `CONTENT_STRATEGY.md`, `templates/metadata-template.md` | `qa_report.md` → `output/metadata.txt` *(only if QA passes)* |
+
+---
+
+## 5. GOVERNANCE & HANDOFF PROTOCOLS
+
+1. **Scene ID Uniformity:** IDs assigned in `03_storyboard.json` (`SCENE_001`, `SCENE_002`...) must match identically across `audio_scenes/` and `video_scenes_vector/`.
+2. **Script Freeze & Exception Rule:** After Gate 3, never silently alter `02_script.md`. If a critical TTS/factual error appears downstream, pause and ask user approval before editing `02_script.md`, regenerating audio, and updating `03_storyboard.json`.
+3. **Strict QA-to-Publishing Order:** Inspect final video against `QUALITY_CHECKLIST.md` → write `qa_report.md` → **only if QA passes**, generate `output/metadata.txt`. **Never auto-upload or publish** without explicit user confirmation.
+4. **Gate Criteria:**
+   - **Gate 1:** User approves topic/niche in `01_research.md`.
+   - **Gate 2:** User approves concept angle, 3 titles, and thumbnail idea (recorded under `## Approved Concept`).
+   - **Gate 3:** User approves and freezes `02_script.md`.
+   - **Gate 4:** `python -m engine.storyboard_validator projects/<project_id>/03_storyboard.json` reports `0 error(s)`.
+   - **Gate 4B:** User approves preview (`node engine/auto_director.mjs --project=<id> --preview=6`) before full render.
+   - **Gate 5:** `qa_report.md` passes with zero unresolved copyright or quality flags.

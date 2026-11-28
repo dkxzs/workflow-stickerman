@@ -88,6 +88,18 @@ def validate_vocab_and_rules(data: dict, project_dir: str = None):
         mood = vis.get("mood")
         if mood and mood not in vocab.MOODS:
             errors.append(f"{sid}: visual.mood '{mood}' is not supported. Use one of: {', '.join(vocab.MOODS)}")
+        outfit = vis.get("outfit")
+        if outfit and outfit not in vocab.OUTFITS:
+            errors.append(f"{sid}: visual.outfit '{outfit}' is not supported. Use one of: {', '.join(vocab.OUTFITS)}")
+        hair = vis.get("hair")
+        if hair and hair not in vocab.HAIRS:
+            errors.append(f"{sid}: visual.hair '{hair}' is not supported. Use one of: {', '.join(vocab.HAIRS)}")
+        hand_prop = vis.get("hand_prop")
+        if hand_prop and hand_prop not in vocab.HAND_PROPS:
+            errors.append(f"{sid}: visual.hand_prop '{hand_prop}' is not supported. Use one of: {', '.join(vocab.HAND_PROPS)}")
+        layout = vis.get("layout")
+        if layout and layout not in vocab.LAYOUTS:
+            errors.append(f"{sid}: visual.layout '{layout}' is not supported. Use one of: {', '.join(vocab.LAYOUTS)}")
         if card:
             icon = card.get("icon")
             if icon and icon not in vocab.ICONS:
@@ -122,8 +134,8 @@ def validate_vocab_and_rules(data: dict, project_dir: str = None):
             in_right = vocab.SAFE_ZONE_RIGHT[0] <= x <= vocab.SAFE_ZONE_RIGHT[1]
             if not (in_left or in_right):
                 warnings.append(f"{sid}: hero x={x} overlaps the card area. Use x=0.25 (card right) or x=0.75 (card left)")
-        if not card:
-            warnings.append(f"{sid}: no visual.card — the scene will show the character only (add a card if the narration names a concept)")
+        if not card and layout in (None, "explainer_split") and not vis.get("characters") and not vis.get("custom_image"):
+            warnings.append(f"{sid}: no visual.card — set visual.layout='story_action' for full-scene acting, or add a card for explainer concepts")
 
         # --- camera sanity
         if cam.get("framing") == "close_up" and card:

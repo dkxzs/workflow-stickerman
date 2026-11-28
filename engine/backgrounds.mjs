@@ -1,20 +1,95 @@
 // engine/backgrounds.mjs
-// Flexible Vector Background Library with Level-of-Detail (LOD)
-// Supports High Detail (focus/hero scenes) and Lightweight/Minimalist (quick cuts/metaphors)
+// Flexible Background Library: Supports Colorful 2D Illustrated Image Backgrounds (assets/backgrounds/)
+// with automatic fallback to Procedural SVG Backgrounds.
+
+import fs from 'fs';
+import path from 'path';
 
 const INK = '#1e1c1a';
+const BG_ASSETS_DIR = path.resolve('assets', 'backgrounds');
+
+// In-memory base64 cache so we never re-read background PNGs per frame
+const IMAGE_DATA_URI_CACHE = new Map();
+
+const IMAGE_BG_ALIASES = {
+  cozy_office: 'cozy_office',
+  office: 'cozy_office',
+  room: 'cozy_office',
+  city_street: 'city_street',
+  street: 'city_street',
+  city: 'city_street',
+  park_sunny: 'park_sunny',
+  nature: 'park_sunny',
+  park: 'park_sunny',
+  cozy_cafe: 'cozy_cafe',
+  cafe: 'cozy_cafe',
+  stage_spotlight: 'stage_spotlight',
+  stage: 'stage_spotlight',
+  bedroom_night: 'bedroom_night',
+};
+
+export function loadImageDataURI(filePath) {
+  if (!filePath) return null;
+  const resolved = path.resolve(filePath);
+  if (IMAGE_DATA_URI_CACHE.has(resolved)) {
+    return IMAGE_DATA_URI_CACHE.get(resolved);
+  }
+  if (!fs.existsSync(resolved)) {
+    return null;
+  }
+  const ext = path.extname(resolved).toLowerCase();
+  const mime = ext === '.jpg' || ext === '.jpeg' ? 'image/jpeg'
+    : ext === '.webp' ? 'image/webp'
+    : 'image/png';
+  const b64 = fs.readFileSync(resolved).toString('base64');
+  const uri = `data:${mime};base64,${b64}`;
+  IMAGE_DATA_URI_CACHE.set(resolved, uri);
+  return uri;
+}
+
+export function resolveBackgroundImagePath(type, options = {}) {
+  if (options.imagePath) {
+    const direct = path.resolve(options.imagePath);
+    if (fs.existsSync(direct)) return direct;
+  }
+  if (!type) return null;
+  const raw = String(type).trim();
+  if (/\.(png|jpe?g|webp)$/i.test(raw)) {
+    const direct = path.resolve(raw);
+    if (fs.existsSync(direct)) return direct;
+    const inDir = path.join(BG_ASSETS_DIR, raw);
+    if (fs.existsSync(inDir)) return inDir;
+  }
+  const key = raw.toLowerCase();
+  const baseName = IMAGE_BG_ALIASES[key] || key;
+  for (const ext of ['.png', '.jpg', '.jpeg', '.webp']) {
+    const candidate = path.join(BG_ASSETS_DIR, `${baseName}${ext}`);
+    if (fs.existsSync(candidate)) return candidate;
+  }
+  return null;
+}
 
 /**
  * Generates an SVG string for the requested background environment.
- * @param {string} type - 'office' | 'street' | 'nature' | 'hospital' | 'classroom' | 'water' | 'void'
- * @param {'high'|'low'} detail - Level of Detail ('high' for hero/focus, 'low' for minimalist)
- * @param {number} W - Canvas Width (default 1920)
- * @param {number} H - Canvas Height (default 1080)
- * @param {number} floorY - Horizon/Floor line Y (default 900)
- * @param {object} options - Optional overrides (e.g. time of day, colors)
+ * Automatically uses colorful 2D illustrated image from assets/backgrounds/ when available
+ * (unless options.forceProcedural is true or detail === 'low').
  */
 export function getBackgroundSVG(type = 'office', detail = 'high', W = 1920, H = 1080, floorY = 900, options = {}) {
-  switch (type.toLowerCase()) {
+  if (!options.forceProcedural && detail !== 'low') {
+    const imgPath = resolveBackgroundImagePath(type, options);
+    const dataUri = imgPath ? loadImageDataURI(imgPath) : null;
+    if (dataUri) {
+      const dimOpacity = options.dimOpacity ?? 0.08;
+      return `
+        <g id="image_background" data-source="${path.basename(imgPath)}">
+          <image href="${dataUri}" x="0" y="0" width="${W}" height="${H}" preserveAspectRatio="xMidYMid slice"/>
+          ${dimOpacity > 0 ? `<rect width="${W}" height="${H}" fill="#ffffff" opacity="${dimOpacity}"/>` : ''}
+        </g>
+      `;
+    }
+  }
+
+  switch (String(type || 'office').toLowerCase()) {
     case 'office':
     case 'room':
       return renderOffice(detail, W, H, floorY, options);

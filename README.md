@@ -1,125 +1,85 @@
 # YouTube Content Engine
 
-Hệ thống bán tự động hỗ trợ sản xuất nội dung video YouTube chuẩn hóa (Stickman / 2D Minimalist Animation), tối ưu cho quy trình phối hợp giữa các AI Agent và nhà sáng tạo nội dung.
+Hệ thống sản xuất video YouTube bán tự động gồm **2 engine độc lập, cô lập 100%**, tối ưu cho quy trình phối hợp giữa AI Agent và người sáng tạo nội dung:
+
+1. **Stickman Explainer (`engine/`)**: Hoạt họa người que 2D vector (Node SVG + Sharp + FFmpeg), 1080p 30 FPS, quy trình 8 bước có cổng duyệt (Approval Gates).
+2. **Whiteboard Animation (`engines/whiteboard/`)**: Video vẽ tay bảng trắng trên nền giấy kem (`#F5EBD7`) bằng Python `.venv` riêng, chạy từ chủ đề / kịch bản / SRT → ảnh nét vẽ → chia vùng annotation → render nét bút liền mạch + giọng đọc + phụ đề.
 
 ---
 
-## 1. Trạng Thái Hiện Tại Của Dự Án
+## 1. Cấu Trúc Thư Mục
 
-- **Giai đoạn**: Khởi tạo kiến trúc dự án, hoàn thiện tài liệu hướng dẫn (`instructions/`), quy trình làm việc (`workflows/`), và biểu mẫu (`templates/`).
-- **Mã nguồn Engine (`engine/`)**: Chưa triển khai code thực thi; chưa cài đặt thư viện Python (tuân thủ nguyên tắc thiết lập hạ tầng tài liệu trước).
-- **Định hướng chiến lược nội dung (`instructions/CONTENT_STRATEGY.md`)**: **Đang ở trạng thái chờ nghiên cứu và xác thực (Pending Research & Validation)**. Hệ thống chưa khóa cố định vào bất kỳ ngách nào (kể cả Psychology hay Self-Improvement) nhằm phục vụ đánh giá dữ liệu thị trường khách quan trước khi chốt ngách.
-
----
-
-## 2. Kiến Trúc Thư Mục
-
-```
+```text
 youtube-content-engine/
+├── AGENTS.md / GEMINI.md         # Quy tắc định tuyến 2 luồng video cho AI Agent
+├── AGENT_ROUTER.md               # Điều phối 8 bước, phân vai & cổng duyệt (Stickman)
+├── .agent/skills/                # Skill chuẩn cho Antigravity (đồng bộ với .agents/skills/)
+│   ├── stickman-video/SKILL.md
+│   └── whiteboard-video/SKILL.md
 │
-├── README.md                     # Tài liệu tổng quan dự án & hướng dẫn khởi tạo
-├── AGENT_ROUTER.md               # Quy định điều phối & phân vai các AI Agent
-├── .gitignore                    # Bỏ qua file tạm, môi trường ảo, cache & file render nặng
+├── instructions/                 # Quy chuẩn nghiệp vụ (Stickman)
+├── workflows/                    # Quy trình 8 bước (01-research → 08-publishing)
+├── templates/                    # Mẫu kịch bản, metadata, storyboard schema & example
+├── assets/                       # Kho tài nguyên dùng chung (audio BGM/SFX, backgrounds, fonts, textures)
 │
-├── instructions/                 # Bộ quy chuẩn nghiệp vụ & nguyên tắc cốt lõi
-│   ├── GLOBAL_RULES.md           # Quy tắc chung về chất lượng, an toàn bản quyền, đặt tên
-│   ├── CONTENT_STRATEGY.md       # Khung chiến lược ngách (Trạng thái: Chờ xác thực)
-│   ├── SCRIPT_GUIDELINES.md      # Quy chuẩn viết kịch bản tối ưu retention & TTS
-│   ├── STORYBOARD_RULES.md       # Quy tắc bóc tách cảnh quay và nhịp visual
-│   ├── VISUAL_STICKMAN.md        # Tiêu chuẩn thẩm mỹ & tư thế stickman animation
-│   └── QUALITY_CHECKLIST.md      # Bảng kiểm tra chất lượng 4 lớp trước khi xuất bản
-│
-├── workflows/                    # Quy trình thực thi chuẩn hóa 8 bước
-│   ├── 01-research.md            # Bước 1: Nghiên cứu đề tài & phân tích đối thủ
-│   ├── 02-concept.md             # Bước 2: Xây dựng góc nhìn (Hook & Packaging)
-│   ├── 03-script.md              # Bước 3: Biên soạn kịch bản chi tiết
-│   ├── 04-storyboard.md          # Bước 4: Chuyển kịch bản thành Storyboard JSON
-│   ├── 05-audio-tts.md           # Bước 5: Tạo audio lồng tiếng (TTS) & đo thời lượng
-│   ├── 06-visual-render.md       # Bước 6: Render hoạt họa Stickman theo cảnh
-│   ├── 07-editing-mix.md         # Bước 7: Dựng video, hòa âm SFX/BGM & phụ đề
-│   └── 08-publishing.md          # Bước 8: Kiểm duyệt QA & xuất bản lên YouTube
-│
-├── engine/                       # Module code tự động hóa (đã chạy được)
-│   ├── auto_director.mjs         # [ĐƯỜNG CHÍNH] Điều phối render SVG -> PNG -> FFmpeg MP4
-│   ├── vector_scene_renderer.mjs # [ĐƯỜNG CHÍNH] Vẽ khung hình SVG 1080p từ dữ liệu storyboard
-│   ├── backgrounds.mjs           # Thư viện bối cảnh vector theo mức độ chi tiết (LOD)
-│   ├── icons.mjs                 # Thư viện 15 icon SVG cho thẻ thông tin (info card)
-│   ├── vocab.py                  # DANH MỤC ĐÓNG: pose, mood, icon, camera, SFX mà engine hỗ trợ
+├── engine/                       # [LUỒNG STICKMAN] Engine Node chính + công cụ Python
+│   ├── auto_director.mjs         # [CHÍNH] Điều phối render SVG → PNG → FFmpeg MP4
+│   ├── vector_scene_renderer.mjs # [CHÍNH] Vẽ khung hình SVG 1080p
+│   ├── character_renderer.mjs    # [CHÍNH] Rig & diễn xuất nhân vật Stickman
+│   ├── backgrounds.mjs           # Thư viện bối cảnh vector & ảnh nền
+│   ├── icons.mjs                 # Thư viện 15 icon SVG cho info card
+│   ├── vocab.py                  # Danh mục đóng: pose, mood, icon, camera, background, SFX
 │   ├── storyboard_validator.py   # Kiểm tra storyboard (Gate 4)
-│   ├── tts_engine.py             # Xử lý text-to-speech
-│   ├── stickman_renderer.py      # [CHỈ DÙNG TẠO CONTACT SHEET] Renderer Python cũ (render video đã lỗi thời)
-│   ├── icons.py                  # Thư viện icon Pillow (dùng cho contact sheet Python)
-│   └── audio_mixer.py            # Xử lý hòa trộn âm thanh (Python cũ)
+│   ├── tts_engine.py             # Tạo giọng đọc Edge-TTS & đo thời lượng từng cảnh
+│   ├── stickman_renderer.py      # [CONTACT SHEET] Tạo nhanh ảnh xem trước bố cục
+│   ├── icons.py / audio_mixer.py # Tiện ích Python hỗ trợ/legacy
+│   └── requirements.txt          # Thư viện Python cho luồng Stickman
 │
-├── templates/                    # Biểu mẫu chuẩn hóa
-│   ├── script-template.md        # Mẫu kịch bản chi tiết
-│   ├── storyboard-schema.json    # JSON Schema xác thực cấu trúc phân cảnh
-│   ├── storyboard-example.json   # Storyboard mẫu 9 cảnh, đủ trường, chạy được
-│   └── metadata-template.md      # Mẫu tiêu đề, mô tả, tags, chapters YouTube
+├── engines/whiteboard/           # [LUỒNG WHITEBOARD] Engine Python độc lập (.venv riêng)
+│   ├── scripts/                  # script_to_srt, parse_srt, tts_narration, render_stream_whiteboard, merge_scenes...
+│   ├── assets/                   # drawing-hand.png, preview.html
+│   ├── .env / .env.example       # Cấu hình TTS (mặc định Edge TTS; hỗ trợ CIT / Vbee)
+│   └── .venv/                    # Môi trường ảo Python riêng
 │
-├── projects/                     # Không gian thực thi từng video cụ thể
-│   └── video-001/                # Dự án video mẫu (Sandbox)
-│       ├── 01_research.md
-│       ├── 02_script.md
-│       ├── 03_storyboard.json
-│       ├── audio_scenes/         # Audio render từng phân cảnh
-│       ├── video_scenes/         # Video render từng phân cảnh
-│       ├── output/               # Video hoàn chỉnh cuối cùng
-│       └── qa_report.md          # Báo cáo đánh giá chất lượng video
+├── projects/                     # Nơi lưu mọi dự án video (cả Stickman lẫn Whiteboard)
+│   └── <project_id>/             # Ví dụ: video-001, video-002, test-whiteboard-01...
 │
-└── tests/                        # Kiểm thử tự động cho Engine
-    ├── test_tts.py               # Kiểm thử TTS engine
-    ├── test_renderer.py          # Kiểm thử Stickman renderer
-    ├── test_vocab_validator.py   # Kiểm thử danh mục, validator, camera, contact sheet
-    └── test_audio_mixer.py       # Kiểm thử Audio mixer
+└── tests/                        # Bộ kiểm thử tự động (Node + Pytest)
 ```
 
-### Chạy nhanh bước hình ảnh (Engine Node là đường chính)
+---
 
-- **Đường chính (Node SVG + Sharp + FFmpeg)**: dùng `engine/auto_director.mjs` để kiểm tra storyboard, vẽ từng frame SVG (`engine/vector_scene_renderer.mjs`), xuất PNG và ghép video MP4 kèm voiceover + nhạc nền.
-- **Python renderer (`engine/stickman_renderer.py`)**: chỉ dùng để tạo nhanh ảnh tĩnh **contact sheet** (`--contact-sheet`); phần render video MP4 bằng Python đã lỗi thời.
+## 2. Chạy Nhanh — Luồng Stickman (`engine/`)
+
+Nguyên tắc: AI **chọn** giá trị từ danh mục đóng `engine/vocab.py`, engine Node **vẽ** SVG → PNG → MP4.
 
 ```bash
-# 1. Xem danh mục giá trị hợp lệ & kiểm tra storyboard
+# 1. Xem danh mục giá trị hợp lệ & kiểm tra storyboard (Gate 4)
 python -m engine.vocab
 python -m engine.storyboard_validator projects/video-001/03_storyboard.json
 
-# 2. [ĐƯỜNG CHÍNH] Render bản xem thử 6 cảnh đầu hoặc toàn bộ video bằng Node
+# 2. [ĐƯỜNG CHÍNH] Render bản xem thử 6 cảnh đầu hoặc toàn bộ video (Node)
 node engine/auto_director.mjs --project=video-001 --preview=6
 node engine/auto_director.mjs --project=video-001
 
-# Đặt FFMPEG_PATH nếu ffmpeg chưa có trong PATH:
-FFMPEG_PATH=ffmpeg node engine/auto_director.mjs --project=video-001 --preview=6
-# Windows PowerShell (nếu dùng ffmpeg từ imageio-ffmpeg hoặc đường dẫn riêng):
+# Đặt FFMPEG_PATH nếu ffmpeg chưa có trong PATH (PowerShell):
 # $env:FFMPEG_PATH="C:\path\to\ffmpeg.exe"; node engine/auto_director.mjs --project=video-001 --preview=6
 
-# 3. [TÙY CHỌN] Tạo nhanh contact sheet tĩnh bằng Python renderer
+# 3. [TÙY CHỌN] Tạo contact sheet tĩnh để duyệt nhanh bố cục
 python engine/stickman_renderer.py --storyboard templates/storyboard-example.json --contact-sheet out/sheet.png
 
 # 4. Chạy bộ kiểm thử tự động
-node --test tests/*.test.mjs
+npm test
 python -m pytest tests/ -q
 ```
 
-Nguyên tắc: AI **chọn** giá trị trong `engine/vocab.py`, engine **vẽ**. Chi tiết ở `workflows/06-visual-render.md`.
-
 ---
 
-## 3. Quy Trình Vận Hành 8 Bước
+## 3. Chạy Nhanh — Luồng Whiteboard (`engines/whiteboard/`)
 
-1. **Research (`workflows/01-research.md`)**: Thu thập dữ liệu tìm kiếm, nhu cầu khán giả và phân tích video đối thủ.
-2. **Concept (`workflows/02-concept.md`)**: Quyết định góc tiếp cận (Angle), tiêu đề A/B/C và ý tưởng Thumbnail trước khi viết kịch bản.
-3. **Script (`workflows/03-script.md`)**: Soạn thảo kịch bản theo công thức giữ chân người xem (Hook - Retain - Deliver - Climax - CTA).
-4. **Storyboard (`workflows/04-storyboard.md`)**: Bóc tách kịch bản thành cấu trúc phân cảnh JSON chuẩn schema.
-5. **Audio TTS (`workflows/05-audio-tts.md`)**: Chuyển đổi văn bản thành âm thanh, đo đạc thời lượng chính xác từng câu.
-6. **Visual Render (`workflows/06-visual-render.md`)**: Tạo dựng hình ảnh/hoạt cảnh Stickman theo storyboard.
-7. **Editing & Mix (`workflows/07-editing-mix.md`)**: Hợp nhất visual, giọng đọc, âm thanh hiệu ứng (SFX), nhạc nền (BGM) và phụ đề.
-8. **Publishing (`workflows/08-publishing.md`)**: Đánh giá kiểm định chất lượng (QA), tối ưu hóa SEO metadata và phát hành video.
+Toàn bộ script Whiteboard chạy qua `.venv` riêng trong `engines/whiteboard/`, lưu đầu ra tại `projects/<tên-dự-án>/`. Chi tiết đầy đủ quy trình nằm tại [`.agent/skills/whiteboard-video/SKILL.md`](.agent/skills/whiteboard-video/SKILL.md).
 
----
-
-## 4. Kế Hoạch Tiếp Theo
-
-1. Tiến hành khảo sát dữ liệu thị trường và hoàn thành tài liệu `instructions/CONTENT_STRATEGY.md` để lựa chọn ngách nội dung tối ưu.
-2. Xây dựng mã nguồn lõi trong `engine/` dựa trên yêu cầu từ `templates/storyboard-schema.json`.
-3. Kiểm thử luồng tự động hóa hoàn chỉnh trên dự án mẫu `projects/video-001/`.
+```bash
+# Kiểm tra môi trường Whiteboard (Windows)
+engines/whiteboard/.venv/Scripts/python.exe engines/whiteboard/scripts/prepare_env.py --check
+```

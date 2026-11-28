@@ -13,7 +13,7 @@ returns precise, fixable error messages.
 Print the cheat sheet any time with:   python -m engine.vocab
 """
 
-# Character poses (rigs live in engine/stickman_renderer.py :: POSE_RIGS)
+# Character poses (rigs live in engine/character_renderer.mjs :: POSE_RIGS_V2 & engine/stickman_renderer.py :: POSE_RIGS)
 POSES = (
     "idle_neutral",
     "thinking",
@@ -23,10 +23,41 @@ POSES = (
     "pointing_target",
     "shocked_fall",
     "celebrate_win",
+    # Stickman 2.0 expressive poses
+    "kneeling_offer",
+    "singing_mic",
+    "balancing",
+    "lifting_weight",
+    "painting",
+    "slipping_fall",
+    "dancing",
+    "sitting",
+    "walking",
+    "presenting",
 )
 
 # Face moods (eyebrows + mouth). `visual.mood` picks one directly.
-MOODS = ("neutral", "eager", "happy", "flat", "deadpan", "sad")
+MOODS = (
+    "neutral", "eager", "happy", "flat", "deadpan", "sad",
+    "angry", "shocked", "laughing", "focused", "singing",
+)
+
+# Stickman 2.0 character customization & scene layouts
+OUTFITS = (
+    "casual", "hoodie", "suit", "jacket", "tank_top",
+    "artist", "disco", "lab_coat", "classic",
+)
+HAIRS = (
+    "none", "messy", "spiky", "parted", "ponytail",
+    "beret", "cap", "beanie", "crown",
+)
+HAND_PROPS = (
+    "none", "mic", "dumbbell", "paintbrush", "ring_box", "phone",
+    "coffee_mug", "book", "money", "magnifying_glass", "megaphone", "laptop",
+)
+LAYOUTS = (
+    "explainer_split", "story_action", "dialogue", "closeup", "custom_image",
+)
 
 # Icons for the info card shown next to the character (engine/icons.py)
 ICONS = (

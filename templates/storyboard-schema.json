@@ -101,8 +101,112 @@
                   "running_hurry",
                   "pointing_target",
                   "shocked_fall",
-                  "celebrate_win"
+                  "celebrate_win",
+                  "kneeling_offer",
+                  "singing_mic",
+                  "balancing",
+                  "lifting_weight",
+                  "painting",
+                  "slipping_fall",
+                  "dancing",
+                  "sitting",
+                  "walking",
+                  "presenting"
                 ]
+              },
+              "outfit": {
+                "type": "string",
+                "enum": [
+                  "casual",
+                  "hoodie",
+                  "suit",
+                  "jacket",
+                  "tank_top",
+                  "artist",
+                  "disco",
+                  "lab_coat",
+                  "classic"
+                ]
+              },
+              "outfit_color": {
+                "type": ["string", "null"]
+              },
+              "hair": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "messy",
+                  "spiky",
+                  "parted",
+                  "ponytail",
+                  "beret",
+                  "cap",
+                  "beanie",
+                  "crown"
+                ]
+              },
+              "hair_color": {
+                "type": ["string", "null"]
+              },
+              "skin_tone": {
+                "type": ["string", "null"]
+              },
+              "hand_prop": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "mic",
+                  "dumbbell",
+                  "paintbrush",
+                  "ring_box",
+                  "phone",
+                  "coffee_mug",
+                  "book",
+                  "money",
+                  "magnifying_glass",
+                  "megaphone",
+                  "laptop"
+                ]
+              },
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "explainer_split",
+                  "story_action",
+                  "dialogue",
+                  "closeup",
+                  "custom_image"
+                ]
+              },
+              "background_image": {
+                "type": ["string", "null"]
+              },
+              "custom_image": {
+                "type": ["string", "null"]
+              },
+              "speech": {
+                "type": ["string", "null"]
+              },
+              "characters": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "pose": { "type": "string" },
+                    "mood": { "type": "string" },
+                    "outfit": { "type": "string" },
+                    "outfit_color": { "type": ["string", "null"] },
+                    "hair": { "type": "string" },
+                    "hair_color": { "type": ["string", "null"] },
+                    "skin_tone": { "type": ["string", "null"] },
+                    "hand_prop": { "type": "string" },
+                    "x": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+                    "dir": { "type": "integer", "enum": [-1, 1] },
+                    "scale": { "type": "number" },
+                    "talking": { "type": "boolean" },
+                    "speech": { "type": ["string", "null"] }
+                  }
+                }
               },
               "action": {
                 "type": "string"
@@ -198,7 +302,12 @@
                   "happy",
                   "flat",
                   "deadpan",
-                  "sad"
+                  "sad",
+                  "angry",
+                  "shocked",
+                  "laughing",
+                  "focused",
+                  "singing"
                 ],
                 "description": "Face mood. If omitted the renderer guesses it from `expression`."
               },

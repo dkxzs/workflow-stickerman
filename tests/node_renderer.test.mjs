@@ -6,6 +6,8 @@ import sharp from 'sharp';
 import { renderSceneFrameSVG, esc, POSE_RIGS, easeOutBack } from '../engine/vector_scene_renderer.mjs';
 import { iconSVG } from '../engine/icons.mjs';
 
+const stripDataUris = (svg) => svg.replace(/data:image\/[^"']+/g, 'DATA_URI');
+
 const examplePath = path.resolve('templates/storyboard-example.json');
 const exampleStoryboard = JSON.parse(fs.readFileSync(examplePath, 'utf-8'));
 
@@ -134,10 +136,11 @@ test('header renders only from visual.header and 110-char caption fits <= 2 line
 });
 
 test('POSE_RIGS: idle vs idea_lightbulb differ, f=0 equals prev pose, f=12 equals current, no NaN', () => {
-  assert.deepEqual(
-    Object.keys(POSE_RIGS).sort(),
-    ['celebrate_win', 'idea_lightbulb', 'idle_neutral', 'pointing_target', 'running_hurry', 'shocked_fall', 'stressed_headache', 'thinking'].sort()
-  );
+  const corePoses = ['celebrate_win', 'idea_lightbulb', 'idle_neutral', 'pointing_target', 'running_hurry', 'shocked_fall', 'stressed_headache', 'thinking'];
+  for (const p of corePoses) {
+    assert.ok(p in POSE_RIGS, `POSE_RIGS should include core pose "${p}"`);
+  }
+  assert.ok(Object.keys(POSE_RIGS).length >= 18, 'POSE_RIGS should include Stickman 2.0 expressive poses');
 
   const mk = (pose) => {
     const s = structuredClone(exampleStoryboard.scenes[1]);
@@ -176,7 +179,7 @@ test('POSE_RIGS: idle vs idea_lightbulb differ, f=0 equals prev pose, f=12 equal
         const s = mk(pose);
         s.visual.position.x = x;
         const svg = renderSceneFrameSVG(s, f, 90, 30, idle);
-        assert.ok(!/NaN|undefined|Infinity/.test(svg), `NaN/undefined in SVG for ${pose} f=${f} x=${x}`);
+        assert.ok(!/NaN|undefined|Infinity/.test(stripDataUris(svg)), `NaN/undefined in SVG for ${pose} f=${f} x=${x}`);
       }
     }
   }
@@ -234,7 +237,7 @@ test('camera, mood (all 6), slide-in, card easeOutBack, and talking head nod', (
     const ms = structuredClone(s);
     ms.visual.mood = mood;
     const svgM = renderSceneFrameSVG(ms, 65, 70, 30, ms);
-    assert.ok(!/NaN|undefined/.test(svgM), `Mood ${mood} should not produce NaN`);
+    assert.ok(!/NaN|undefined/.test(stripDataUris(svgM)), `Mood ${mood} should not produce NaN`);
     faces[mood] = svgM.match(/<circle cx="[\d.]+" cy="[\d.]+" r="66"[\s\S]*?<\/g>/)[0];
   }
   assert.notEqual(faces.happy, faces.deadpan);
@@ -251,4 +254,25 @@ test('camera, mood (all 6), slide-in, card easeOutBack, and talking head nod', (
   const cs0 = parseFloat(svgSlide0.match(/id="info_card" transform="[^"]*scale\(([\d.]+)\)"/)[1]);
   assert.ok(cs0 < 0.2, `Card should start small at f=0 (got ${cs0})`);
   assert.ok(!svgSlide12.includes('id="info_card" transform="translate(1382.4, 480) scale('), 'Card settles at scale 1 by f=12');
+});
+
+test('Stickman 2.0: outfits, hair, hand props, colorful image bg, multi-character dialogue, and closeup layout render cleanly', async () => {
+  const s = structuredClone(exampleStoryboard.scenes[0]);
+  s.visual.layout = 'dialogue';
+  s.visual.background = 'city_street';
+  delete s.visual.card;
+  s.visual.characters = [
+    { pose: 'singing_mic', mood: 'laughing', outfit: 'jacket', hair: 'spiky', hand_prop: 'mic', x: 0.30, dir: 1, speech: 'HEY!' },
+    { pose: 'lifting_weight', mood: 'angry', outfit: 'tank_top', hair: 'none', hand_prop: 'dumbbell', x: 0.70, dir: -1 },
+  ];
+
+  const svg = renderSceneFrameSVG(s, 12, 60, 30, s);
+  assert.ok(svg.includes('id="stickman_character"'), 'First character should render');
+  assert.ok(svg.includes('id="stickman_character_2"'), 'Second character should render');
+  assert.ok(svg.includes('HEY!'), 'Speech bubble should render');
+  assert.ok(svg.includes('id="image_background"'), 'Colorful image background should load from assets/backgrounds/');
+  assert.ok(!/NaN|undefined|Infinity/.test(stripDataUris(svg)), 'Dialogue SVG should have no NaN/undefined');
+
+  const png = await sharp(Buffer.from(svg)).png().toBuffer();
+  assert.ok(png.length > 50_000, 'Rendered PNG with colorful image background should be rich and valid');
 });

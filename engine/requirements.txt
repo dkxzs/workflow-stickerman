@@ -1,25 +1,15 @@
-# ==============================================================================
-# YouTube Content Engine - Dependencies
-#
-# LƯU Ý QUAN TRỌNG:
-# 1. Các thư viện dưới đây CHƯA ĐƯỢC CÀI ĐẶT.
-# 2. Đây chỉ là danh sách dự kiến tham khảo phục vụ giai đoạn phát triển Engine tiếp theo.
-# ==============================================================================
+# YouTube Content Engine (Stickman Pipeline) — Python Dependencies
+# Install: pip install -r engine/requirements.txt
 
-# -- Text-to-Speech (Dự kiến) --
-# edge-tts>=6.1.0
-# gTTS>=2.5.0
+# Text-to-Speech (Step 05)
+edge-tts>=6.1.0
 
-# -- Xử lý âm thanh & Video (Dự kiến) --
-# moviepy>=1.0.3
-# pydub>=0.25.1
-# numpy>=1.24.0
+# Storyboard validation & testing (Gate 4)
+jsonschema>=4.20.0
+pytest>=8.0.0
 
-# -- Xử lý đồ họa & Vector (Dự kiến) --
-# Pillow>=10.0.0
-# svgwrite>=1.4.3
-# cairoSVG>=2.7.0
-
-# -- Tiện ích & Xác thực (Dự kiến) --
-# jsonschema>=4.20.0
-# python-dotenv>=1.0.0
+# Contact sheet & legacy Python renderer / audio utilities
+Pillow>=10.0.0
+numpy>=1.24.0
+imageio>=2.34.0
+imageio-ffmpeg>=0.5.1
