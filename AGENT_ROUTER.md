@@ -1,5 +1,14 @@
 # AGENT ROUTER — YOUTUBE CONTENT ENGINE
 
+## 0. PRE-PRODUCTION GATE — TOPIC & STYLE (`content-strategist`)
+
+When the user asks for video ideas, topic discovery, or a new video **without an approved script/SRT**:
+- Run `.agent/skills/content-strategist/SKILL.md` first to vet open-niche US English topics through the **4-Gate Pass/Fail evidence check** (Demand, Supply Gap, Unique Angle, Visual Fit) and produce `projects/<project_id>/content-brief.md` for user approval.
+- Only after `content-brief.md` is approved, hand off to `stickman-video` (`Simply Stickman` — maps into `01_research.md` / `## Approved Concept` and proceeds to Step 03 Script) or `whiteboard-video` (`Simply Ink` — feeds directly into Step 0a `script.md`).
+- Never modify engine code in `engine/` or `engines/whiteboard/`.
+
+---
+
 ## 1. VIDEO TYPE ROUTING (MANDATORY FIRST STEP)
 
 This repository contains **2 completely isolated video production engines**. Determine the requested type before starting any task:

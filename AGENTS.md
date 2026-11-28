@@ -2,6 +2,13 @@
 
 Hướng dẫn cho mọi AI coding agent (Antigravity, Codex, Claude Code, Cursor, GitHub Copilot, Gemini CLI…) làm việc trong `youtube-content-engine`.
 
+## [BƯỚC 0: CHỌN CHỦ ĐỀ & ĐỊNH HÌNH KỊCH BẢN] (Bắt buộc khi chưa có kịch bản chốt)
+
+Khi người dùng yêu cầu tìm ý tưởng, chọn chủ đề, hoặc lên kế hoạch video mới (chưa có kịch bản/SRT chốt sẵn):
+- **BẮT BUỘC** chạy skill `.agent/skills/content-strategist/SKILL.md` (hoặc `.agents/skills/content-strategist/SKILL.md`) trước để kiểm chứng web theo cổng 4 chốt Pass/Fail và xuất `projects/<project_id>/content-brief.md` cho người dùng duyệt.
+- Chỉ sau khi người dùng duyệt `content-brief.md`, mới bàn giao sang `stickman-video` (`Simply Stickman`) hoặc `whiteboard-video` (`Simply Ink`) để viết kịch bản chi tiết và render.
+- Tuyệt đối không sửa code trong `engine/` và `engines/whiteboard/`.
+
 ## Định tuyến loại video (Bắt buộc)
 
 Dự án có **2 luồng dựng video độc lập, cô lập 100%**. Khi người dùng yêu cầu làm video, chọn đúng luồng ngay từ đầu:
@@ -20,5 +27,6 @@ Dự án có **2 luồng dựng video độc lập, cô lập 100%**. Khi ngư�
 ## Tài liệu tham chiếu
 
 - Điều phối tổng thể & bảng phân vai chi tiết: [`AGENT_ROUTER.md`](AGENT_ROUTER.md)
-- Skill người que: [`.agent/skills/stickman-video/SKILL.md`](.agent/skills/stickman-video/SKILL.md) / [`.agents/skills/stickman-video/SKILL.md`](.agents/skills/stickman-video/SKILL.md)
-- Skill vẽ tay: [`.agent/skills/whiteboard-video/SKILL.md`](.agent/skills/whiteboard-video/SKILL.md) / [`.agents/skills/whiteboard-video/SKILL.md`](.agents/skills/whiteboard-video/SKILL.md)
+- Skill tiền kỳ (Bước 0): [`.agent/skills/content-strategist/SKILL.md`](.agent/skills/content-strategist/SKILL.md) / [`.agents/skills/content-strategist/SKILL.md`](.agents/skills/content-strategist/SKILL.md)
+- Skill người que (`Simply Stickman`): [`.agent/skills/stickman-video/SKILL.md`](.agent/skills/stickman-video/SKILL.md) / [`.agents/skills/stickman-video/SKILL.md`](.agents/skills/stickman-video/SKILL.md)
+- Skill vẽ tay (`Simply Ink`): [`.agent/skills/whiteboard-video/SKILL.md`](.agent/skills/whiteboard-video/SKILL.md) / [`.agents/skills/whiteboard-video/SKILL.md`](.agents/skills/whiteboard-video/SKILL.md)
